@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!-- Cash register 自动存储数据，刷新不丢失 -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
@@ -17,23 +18,35 @@
 </head>
 
 <body>
+    <!-- 页面加载做个进度条动画 -->
+    <!-- 改变各模块颜色input，只有chrome支持，作罢 -->
     <div class="container text-center bg-dark">
         <div class="tab-bar row justify-content-center">
-            <a class="tab-roman d-flex col-md-3 bg-info mt-5 justify-content-center" href="" data-toggle="collapse" data-target=".main-roman">
+            <a class="tab-roman d-flex col-md-3 bg-info mt-5 justify-content-center text-nowrap text-decoration-none" href="" data-toggle="collapse"
+                data-target=".main-roman" draggable="false">
                 <!-- my-auto not working in ie -->
                 <h5 class="my-auto">Roman Converter</h5>
             </a>
-            <a class="tab-cash d-flex col-md-3 bg-warning mt-5 justify-content-center" href="" data-toggle="collapse" data-target=".main-cash">
+            <a class="tab-cash d-flex col-md-3 bg-warning mt-5 justify-content-center text-nowrap text-decoration-none" href="" data-toggle="collapse"
+                data-target=".main-cash" draggable="false">
                 <h5 class="my-auto">Cash Register</h5>
             </a>
 
         </div>
         <div class="main row flex-column align-items-center">
-            <!-- invisible here!!!!!!!!!!!!!!!! -->
+            <!-- 正式页面中开始显示的是info页面，tab不可用 -->
             <div class="main-info col-md-6 d-none">index</div>
+            <!-- 
+                1. info页面点击按钮
+                2. 按钮文字变为loading，显示进度动画
+                3. 进度满后按钮文字变为start from either，按钮无效，tab高亮，两个main显示
+                4. 点击tab后info隐藏，取消高亮
+            -->
             <div class="main-roman col-md-6 bg-primary collapse" data-parent=".container">
+                <!-- 一个输入框可输入数字或字母，数字1-3999，字母只能输入罗马数字的字母，并且不能输入无效字母，给一个罗马数字介绍链接or写一个框框里面备注写法 -->
                 <h6>Please input numbers</h6>
-                aaa</div>
+
+            </div>
             <div class="main-cash col-md-6 bg-success collapse" data-parent=".container">bbb</div>
         </div>
     </div>

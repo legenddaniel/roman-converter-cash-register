@@ -2,8 +2,17 @@
     height: 40rem;
 }
 
+a {
+    /* text-decoration: none !important; */
+}
+
 .tab-roman, .tab-cash {
     height: 3rem;
     /* margin-top: 5rem; */
-    
+    /* white-space: nowrap; */
+}
+
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
 }
