@@ -1,3 +1,9 @@
+// 写成一个类，输入字段为实例，有两种方法，判断输入类型自动选择方法
+
+// 正则控制输入字段
+
+// 添加复制按钮
+
 const convertToRoman = num => {
 
     const converter = [
