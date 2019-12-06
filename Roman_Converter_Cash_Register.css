@@ -16,3 +16,31 @@ a {
     -webkit-transition: none;
     transition: none;
 }
+
+.input-container::before {
+    content: "Roman numerals e.g. 'CD'";
+    color: aqua;
+    font-size: 0.8rem;
+}
+.input-container::after {
+    content: "Arabic numerals 1 - 3999";
+    color: bisque;
+    font-size: 0.8rem;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+:-moz-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+::-webkit-input-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+::-moz-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
