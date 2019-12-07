@@ -19,45 +19,120 @@
 
 <body>
     <!-- 页面加载做个进度条动画 -->
-    <!-- 改变各模块颜色input，只有chrome支持，作罢 -->
-    
-    <!-- 考虑nav-tabs或nav-tabs+card做 -->
-    <div class="container text-center bg-dark">
-        <div class="tab-bar row justify-content-center">
-            <a class="tab-roman d-flex col-md-3 bg-info mt-5 justify-content-center text-nowrap text-decoration-none"
-                href="" data-toggle="collapse" data-target=".main-roman" draggable="false">
-                <!-- my-auto not working in ie -->
-                <h5 class="my-auto">Roman Converter</h5>
-            </a>
-            <a class="tab-cash d-flex col-md-3 bg-warning mt-5 justify-content-center text-nowrap text-decoration-none"
-                href="" data-toggle="collapse" data-target=".main-cash" draggable="false">
-                <h5 class="my-auto">Cash Register</h5>
-            </a>
 
-        </div>
-        <div class="main row flex-column align-items-center">
-            <!-- 
-                正式页面中开始显示的是info页面，两个tab不可用，下方出现进度条动画
-                进度100%后3s进度条文字变为点击任意tab开始，两个tab可用并高亮，info-tab消失，点击任意tab后取消高亮
+    <!-- aria -->
+
+    <!-- 
+                正式页面中开始显示的是about页面，两个tab不可用，下方出现进度条动画
+                进度100%后3s进度条文字变为点击任意tab开始，两个tab可用并高亮，about-tab消失，点击任意tab后取消高亮
             -->
-            <div class="main-info col-md-8 d-none">index</div>
-            <div class="main-roman col-md-8 bg-primary collapse" data-parent=".container">
-                <!-- 一个输入框可输入数字或字母，数字1-3999，字母只能输入罗马数字的字母，并且不能输入无效字母，给一个罗马数字介绍链接or写一个框框里面备注写法 -->
-                <h6 class="my-3">Please input numbers</h6>
-                <!-- input pattern not working well -->
-                <!-- 输入内容后显示按钮，之后显示在空白input中，设置readonly，js添加内容，可参考类似网页 -->
-                <div class="input-container row justify-content-around align-items-center">
-                    <input type="text" class="text-center" name="content" placeholder="Roman or Arabic numerals"
-                        required>
+
+    <!-- 一个输入框可输入数字或字母，数字1-3999，字母只能输入罗马数字的字母，并且不能输入无效字母 -->
+
+    <!-- 点击按钮后placeholder显示无效输入，value显示有效输入 -->
+
+    <div class="container-fluid text-center bg-info">
+        <ul class="nav nav-pills">
+            <li class="nav-items">
+                <a class="nav-link" href="#tab-about" data-toggle="pill">About</a>
+            </li>
+            <li class="nav-items">
+                <a class="nav-link active" href="#tab-roman" data-toggle="pill">Roman Converter</a>
+            </li>
+            <li class="nav-items">
+                <a class="nav-link" href="#tab-cash" data-toggle="pill">Cash Register</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane" id="tab-about">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-10">
+                        <div class="card card-body">
+                            <p class="card-text">Oslo is the economic and governmental centre of Norway. The city is
+                                also a
+                                hub of Norwegian trade, banking and industry.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="main-cash col-md-8 bg-success collapse" data-parent=".container">bbb</div>
-        </div>
-        <!-- 结果显示框下做一个card，做个简单介绍，给一个介绍链接 -->
-    </div>
-    <div class="container bg-primary">
-        <div class="row">
-            
+            <div class="tab-pane active" id="tab-roman">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-10">
+                        <div class="card card-body">
+                            <p class="card-text">Please input numbers</p>
+                            <div class="input-container form-row justify-content-around align-items-center">
+                                <div class="input-group col-md-6">
+                                    <input type="text" class="form-control text-center" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">→</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-inline">
+                                <label for="roman-output" class="col-md-4">点击按钮之前隐藏，JS控制输出，输出有效时显示</label>
+                                <input type="text" id="roman-output" placeholder="click '→' to get the result"
+                                    class="col-md-4 form-control-plaintext" readonly value="">
+                                <!-- js输出value -->
+                            </div>
+                            <a href="#roman-more" class="card-link" data-toggle="collapse" draggable="false">》No idea
+                                about roman numerals?《</a>
+                            <div class="collapse" id="roman-more">
+                                <div class="card card-body">
+                                    <blockquote
+                                        cite="https://en.wikipedia.org/wiki/Roman_numerals#%22Standard%22_forms">
+                                        Roman numerals are a numeral system that originated in ancient Rome and remained
+                                        the usual way of writing numbers throughout Europe well into the Late Middle
+                                        Ages. Numbers in this system are represented by combinations of letters from the
+                                        Latin alphabet. Modern usage employs seven symbols, each with a fixed integer
+                                        value:
+                                    </blockquote>
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">Symbol</th>
+                                                    <td>I</td>
+                                                    <td>V</td>
+                                                    <td>X</td>
+                                                    <td>L</td>
+                                                    <td>C</td>
+                                                    <td>D</td>
+                                                    <td>M</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Value</th>
+                                                    <td>1</td>
+                                                    <td>5</td>
+                                                    <td>10</td>
+                                                    <td>50</td>
+                                                    <td>100</td>
+                                                    <td>500</td>
+                                                    <td>1000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p>Still confused? <a
+                                            href="https://en.wikipedia.org/wiki/Roman_numerals#%22Standard%22_forms"
+                                            target="_blank" class="card-link text-danger">Read more</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="tab-cash">
+                <div class="row">
+                    <div class="col-lg-8 col-sm-10">
+                        <div class="card card-body">
+                            <p class="card-text">Oslo is the economic and governmental centre of Norway. The city is
+                                also a
+                                hub of Norwegian trade, banking and industry.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

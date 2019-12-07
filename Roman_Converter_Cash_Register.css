@@ -1,21 +1,15 @@
 .container {
-    height: 40rem;
+    height: max-content;
 }
 
 a {
-    /* text-decoration: none !important; */
+    text-decoration: none;
 }
 
-.tab-roman, .tab-cash {
-    height: 3rem;
-    /* margin-top: 5rem; */
-    /* white-space: nowrap; */
-}
-
-.collapsing {
+/* .collapsing {
     -webkit-transition: none;
     transition: none;
-}
+} */
 
 .input-container::before {
     content: "Roman numerals e.g. 'CD'";
