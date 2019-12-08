@@ -6,6 +6,7 @@
 
 const convertToRoman = num => {
 
+    // Map is more convenient for iteration but slower, and String.replace() works better on an Object
     const converter = [
         { 'M': 1000 },
         { 'D': 500 },
@@ -18,13 +19,14 @@ const convertToRoman = num => {
 
     let cacheNum = num;
     const cacheRoman = [];
-    let converterValue;
+    let reference;
 
+    // Iterate and decompose the numbers and convert them to roman numerals
     for (let i = 0, l = converter.length; i < l; i++) {
-        converterValue = Object.values(converter[i])[0];
-        if (cacheNum >= converterValue) {
+        reference = Object.values(converter[i])[0];
+        if (cacheNum >= reference) {
             cacheRoman.push(Object.keys(converter[i])[0]);
-            cacheNum -= converterValue;
+            cacheNum -= reference;
             i--;
         }
     }
@@ -66,6 +68,7 @@ const convertToNum = roman => {
         'DCD': 'CM'
     };
 
+    // reverseReplace: swap the keys and values of replace {}
     const reverseReplace = Object.keys(replace).reduce((reverseReplace, key) => {
         reverseReplace[replace[key]] = key;
         return reverseReplace;

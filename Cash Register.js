@@ -24,17 +24,15 @@ const checkCashRegister = (price, cash, cid) => {
 
     for (let unit = 0; unit < cid.length; unit++) {
         change.push(cid[unit]);
+        // need: how much we need for this face value of cash
         let need = currency[change[unit][0]] * Math.floor(changeDue / currency[change[unit][0]]);
+        // take all/part of a specific face value of cash out of the cid and set it as the change
         change[unit][1] = (need <= cid[unit][1]) ? need : cid[unit][1];
-        // need <= cid[unit][1] ? change[unit][1] = need : change[unit][1] = cid[unit][1];
-        // if (need <= cid[unit][1]) {
-        //     change[unit][1] = need;
-        // } else {
-        //     change[unit][1] = cid[unit][1];
-        // }
+        // how much left for the next face value of cash, *100/100 for rounding issue
         changeDue = Math.round((changeDue - change[unit][1]) * 100) / 100;
     }
 
+    // remove the face value which is not used
     for (let unit = 0; unit < change.length; unit++) {
         if (!(change[unit][1])) {
             change.splice(unit, 1);
@@ -43,13 +41,14 @@ const checkCashRegister = (price, cash, cid) => {
     }
 
     if (!changeDue && cashCal(change) === cachCal(cid)) {
-        status = "CLOSED";
+        status = "CLOSED"; // the change is exactly the same as the cid balance
         change = cid.reverse();
     } else if (changeDue) {
-        status = "INSUFFICIENT_FUNDS";
+        status = "INSUFFICIENT_FUNDS"; // cid balance not enough for the change
         change = [];
     } else {
         status = "OPEN";
+        // how much left in the cid after changing
         for (let unit = 0; unit < change.length; unit++) {
             if (!(change[unit][1])) {
                 change.splice(unit, 1);
