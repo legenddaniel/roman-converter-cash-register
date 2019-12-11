@@ -19,15 +19,13 @@ const convertToRoman = num => {
 
     let cacheNum = num;
     const cacheRoman = [];
-    let reference;
 
     // Iterate and decompose the numbers and convert them to roman numerals
-    for (let i = 0, l = converter.length; i < l; i++) {
-        reference = Object.values(converter[i])[0];
-        if (cacheNum >= reference) {
-            cacheRoman.push(Object.keys(converter[i])[0]);
+    for (let i of converter) {
+        const reference = Object.values(i)[0];
+        while (cacheNum >= reference) {
+            cacheRoman.push(Object.keys(i)[0]);
             cacheNum -= reference;
-            i--;
         }
     }
 
