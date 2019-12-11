@@ -12,49 +12,32 @@ const checkCashRegister = (price, cash, cid) => {
         'ONE HUNDRED': 100
     }
 
-    let change = [];
-    let status;
-    let changeDue = cash - price;
+    let [cacheChange, status, changeDue, change] = [cid, '', cash - price, []];
     const cashCal = money => money.flat().filter(a => typeof a === 'number').reduce((a, b) => a + b);
+    const balance = cashCal(cid);
     cid.reverse();
 
-    if (changeDue > cashCal(cid)) {
-        status = "INSUFFICIENT_FUNDS";
-    }
-
     for (let unit = 0; unit < cid.length; unit++) {
-        change.push(cid[unit]);
         // need: how much we need for this face value of cash
-        let need = currency[change[unit][0]] * Math.floor(changeDue / currency[change[unit][0]]);
+        const need = currency[cid[unit][0]] * Math.floor(changeDue / currency[cid[unit][0]]);
         // take all/part of a specific face value of cash out of the cid and set it as the change
-        change[unit][1] = (need <= cid[unit][1]) ? need : cid[unit][1];
-        // how much left for the next face value of cash, *100/100 for rounding issue
-        changeDue = Math.round((changeDue - change[unit][1]) * 100) / 100;
+        cacheChange[unit][1] = (need <= cid[unit][1]) ? need : cid[unit][1];
+        // how much left for the calculation of next face value of cash, *100/100 for rounding issue
+        changeDue = Math.round((changeDue - cid[unit][1]) * 100) / 100;
     }
 
-    // remove the face value which is not used
-    for (let unit = 0; unit < change.length; unit++) {
-        if (!(change[unit][1])) {
-            change.splice(unit, 1);
-            unit--;
-        }
-    }
-
-    if (!changeDue && cashCal(change) === cachCal(cid)) {
-        status = "CLOSED"; // the change is exactly the same as the cid balance
+    if (!changeDue && cashCal(cacheChange) === balance) {
+        // number of change is exactly the same as the balance in the cash register
+        status = "CLOSED";
         change = cid.reverse();
     } else if (changeDue) {
-        status = "INSUFFICIENT_FUNDS"; // cid balance not enough for the change
+        // This "insufficient funds" means either we don't have enough money or we only have cash whose face value is greater than the change
+        status = "INSUFFICIENT_FUNDS";
         change = [];
     } else {
         status = "OPEN";
-        // how much left in the cid after changing
-        for (let unit = 0; unit < change.length; unit++) {
-            if (!(change[unit][1])) {
-                change.splice(unit, 1);
-                unit--;
-            }
-        }
+        // remove the face value which is not used
+        change = cacheChange.filter(unit => unit[1] !== 0);
     }
 
     return { 'status': status, 'change': change };
