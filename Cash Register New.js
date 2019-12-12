@@ -56,5 +56,5 @@ const checkCashRegister = (price, cash, cid) => {
     return { 'status': status, 'change': change };
 }
 
-
+// Numbers in the cid mean amount of each face value of coin/cash
 console.log(checkCashRegister(19.5, 20, [["PENNY", 5], ["NICKEL", 5], ["DIME", 5], ["QUARTER", 5], ["LOONIE", 1], ["TOONIE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["FIFTY", 0]]));
