@@ -21,7 +21,7 @@ const checkCashRegister = (price, cash, cid) => {
     for (let unit = 0; unit < cid.length; unit++) {
         const need = currency[cid[unit][0]] * Math.floor(changeDue / currency[cid[unit][0]]);
         cacheChange[unit][1] = (need <= cid[unit][1]) ? need : cid[unit][1];
-        changeDue = Math.round((changeDue - cid[unit][1]) * 100) / 100;
+        changeDue = Math.round((changeDue - cacheChange[unit][1]) * 100) / 100;
     }
 
     // "CLOSED": number of change is exactly the same as the balance in the cash register
