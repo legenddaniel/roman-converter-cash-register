@@ -31,7 +31,7 @@
 
     <!-- 点击按钮后placeholder显示无效输入，value显示有效输入 -->
 
-    <!-- 加元硬币精灵图，悬浮背景变暗显示面额 -->
+    <!-- 加元硬币精灵图，悬浮背景变暗显示面额，显示在一个table中，左纸币又硬币 -->
     <!-- random一个钱柜和总金额，输入纸币数，钱柜钱数范围写在js里 -->
     <!-- 可否通过递归优化循环？ -->
 
@@ -63,7 +63,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
-                            <p class="card-text">Please input numbers</p>
+                            <p class="card-text">Please input numbers ↓</p>
                             <div class="input-container form-row justify-content-around align-items-center">
                                 <div class="input-group col-md-6">
                                     <input type="text" class="form-control text-center" required>
@@ -94,7 +94,7 @@
                                         <table class="table table-borderless">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Symbol</th>
+                                                    <th scope="row" class="table-info">Symbol</th>
                                                     <td>I</td>
                                                     <td>V</td>
                                                     <td>X</td>
@@ -104,7 +104,7 @@
                                                     <td>M</td>
                                                 </tr>
                                                 <tr>
-                                                    <th scope="row">Value</th>
+                                                    <th scope="row" class="table-info">Value</th>
                                                     <td>1</td>
                                                     <td>5</td>
                                                     <td>10</td>
@@ -116,9 +116,9 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <p>Still confused? <a
+                                    <p>Still confused? Read more on <a
                                             href="https://en.wikipedia.org/wiki/Roman_numerals#%22Standard%22_forms"
-                                            target="_blank" class="card-link text-danger">Read more</a>
+                                            target="_blank" class="card-link text-danger">Wikipedia</a>
                                     </p>
                                 </div>
                             </div>
@@ -133,6 +133,14 @@
                             <p class="card-text">Oslo is the economic and governmental centre of Norway. The city is
                                 also a
                                 hub of Norwegian trade, banking and industry.</p>
+                                <!-- Cash
+                                    X: 0 185 90 + 275
+                                    Y: 0 86 190 
+                                -->
+                                <!-- coins
+                                    X: 14 331 352 685 693 1013
+                                    Y: 15 333 353 671 
+                                -->
                         </div>
                     </div>
                 </div>

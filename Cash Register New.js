@@ -1,7 +1,7 @@
 const checkCashRegister = (price, cash, cid) => {
 
     const currency = {
-        // For simpler calculation we bring penny which is rarely used to here
+        // For simpler calculation we bring penny which has been discontinued back here
         'PENNY': 0.01,
         'NICKEL': 0.05,
         'DIME': 0.1,
