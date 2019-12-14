@@ -16,6 +16,7 @@ a {
     color: aqua;
     font-size: 0.8rem;
 }
+
 .input-container::after {
     content: "Arabic numerals 1 - 3999";
     color: bisque;
@@ -26,15 +27,78 @@ a {
     text-align: center;
     font-size: 0.8rem;
 }
+
 :-moz-placeholder {
     text-align: center;
     font-size: 0.8rem;
 }
+
 ::-webkit-input-placeholder {
     text-align: center;
     font-size: 0.8rem;
 }
+
 ::-moz-placeholder {
     text-align: center;
     font-size: 0.8rem;
+}
+
+.ul-banknotes span, .ul-coins span {
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: transparent;
+}
+
+.ul-banknotes span:hover, .ul-coins span:hover {
+    /* Bootstrap predefines overlap styles for <img> only */
+    opacity: 0.5;
+    color: #000;
+}
+.ul-banknotes span {
+    width: 3rem;
+    height: 3rem;
+    background: url(img/banknotes.png) center bottom / 500% no-repeat;
+    border-radius: 50%;
+    line-height: 3rem;
+}
+
+.ul-banknotes li:nth-child(2) span {
+    background-position: right center;
+}
+
+.ul-banknotes li:nth-child(3) span {
+    background-position: left center;
+}
+
+.ul-banknotes li:nth-child(4) span {
+    background-position: right top;
+}
+
+.ul-coins span {
+    width: 3rem;
+    height: 3rem;
+    background: url(img/coins.jpg) left top / 300% no-repeat;
+    border-radius: 50%;
+    line-height: 3rem;
+}
+
+.ul-coins li:nth-child(2) span {
+    background-position: center top;
+}
+
+.ul-coins li:nth-child(3) span {
+    background-position: right top;
+}
+
+.ul-coins li:nth-child(4) span {
+    background-position: left bottom;
+}
+
+.ul-coins li:nth-child(5) span {
+    background-position: center bottom;
+}
+
+.ul-coins li:nth-child(6) span {
+    background-position: right bottom;
 }

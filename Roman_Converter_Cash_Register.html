@@ -41,10 +41,10 @@
                 <a class="nav-link" href="#tab-about" data-toggle="pill">About</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link active" href="#tab-roman" data-toggle="pill">Roman Converter</a>
+                <a class="nav-link" href="#tab-roman" data-toggle="pill">Roman Converter</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link" href="#tab-cash" data-toggle="pill">Cash Register</a>
+                <a class="nav-link active" href="#tab-cash" data-toggle="pill">Cash Register</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane active" id="tab-roman">
+            <div class="tab-pane" id="tab-roman">
                 <div class="row">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -126,21 +126,34 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="tab-cash">
+            <div class="tab-pane active" id="tab-cash">
                 <div class="row">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
-                            <p class="card-text">Oslo is the economic and governmental centre of Norway. The city is
-                                also a
-                                hub of Norwegian trade, banking and industry.</p>
-                                <!-- Cash
-                                    X: 0 185 90 + 275
-                                    Y: 0 86 190 
-                                -->
-                                <!-- coins
-                                    X: 14 331 352 685 693 1013
-                                    Y: 15 333 353 671 
-                                -->
+                            <p class="card-text text-left jumbotron">This module is designed as a game mode: <br><br>The numbers right after the cash/coin imgs are the amount of cash/coin remaining in the cash register. <br><br>Click the button to randomly draw a total and received amount. Calculate the change and check if we can make it or not. <br><br>The result will be shown as Bootstrap Badges right after the balance for each face value of cash/coin. <br><br><strong>P.S. If no more cash with a face value less than the change we take it as a failure <br><em>e.g. the change due is $1.03 but we got only loonies and nickels. </em><br>This is why we introduced the discontinued penny "1¢" here which is for a simplification purpose.</strong></p>
+                            <!-- 若状态open，每个li后面显示>0的找零个数（badge），若金额不足置顶显示 -->
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p class="card-text">Banknotes</p>
+                                    <ul class="ul-banknotes list-unstyled">
+                                        <li class="bg-warning"><span>	$5</span>$1</li>
+                                        <li class="bg-warning"><span>	$10</span></li>
+                                        <li class="bg-warning"><span>	$20</span></li>
+                                        <li class="bg-warning"><span>	$50</span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p class="card-text">Coins</p>
+                                    <ul class="ul-coins list-unstyled">
+                                        <li class="bg-warning"><span>	1¢</span>$1</li>
+                                        <li class="bg-warning"><span>	5¢</span></li>
+                                        <li class="bg-warning"><span>	10¢</span></li>
+                                        <li class="bg-warning"><span>	25¢</span></li>
+                                        <li class="bg-warning"><span>$1</span></li>
+                                        <li class="bg-warning"><span>$2</span></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
