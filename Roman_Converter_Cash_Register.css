@@ -1,4 +1,6 @@
 .container {
+    height: -webkit-max-content;
+    height: -moz-max-content;
     height: max-content;
 }
 
@@ -43,62 +45,68 @@ a {
     font-size: 0.8rem;
 }
 
-.ul-banknotes span, .ul-coins span {
-    display: inline-block;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: transparent;
+button[disabled] {
+    opacity: 1 !important;
 }
 
-.ul-banknotes span:hover, .ul-coins span:hover {
+.icon-banknote, .icon-coin  {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 50%;
+    line-height: 3rem;
+    color: transparent;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.icon-banknote:hover, .icon-coin:hover {
     /* Bootstrap predefines overlap styles for <img> only */
     opacity: 0.5;
     color: #000;
 }
-.ul-banknotes span {
-    width: 3rem;
-    height: 3rem;
-    background: url(img/banknotes.png) center bottom / 500% no-repeat;
-    border-radius: 50%;
-    line-height: 3rem;
+.icon-banknote {
+    background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
 }
 
-.ul-banknotes li:nth-child(2) span {
-    background-position: right center;
+li:nth-of-type(2) .icon-banknote {
+    background-position: 70% 52%;
 }
 
-.ul-banknotes li:nth-child(3) span {
-    background-position: left center;
+li:nth-of-type(3) .icon-banknote {
+    background-position: 5% 52%;
 }
 
-.ul-banknotes li:nth-child(4) span {
-    background-position: right top;
+li:nth-of-type(4) .icon-banknote {
+    background-position: 70% 5%;
 }
 
-.ul-coins span {
-    width: 3rem;
-    height: 3rem;
-    background: url(img/coins.jpg) left top / 300% no-repeat;
-    border-radius: 50%;
-    line-height: 3rem;
+.icon-coin {
+    background: url(img/sprite-coins.jpg) right bottom / 300% no-repeat;
 }
 
-.ul-coins li:nth-child(2) span {
-    background-position: center top;
-}
-
-.ul-coins li:nth-child(3) span {
-    background-position: right top;
-}
-
-.ul-coins li:nth-child(4) span {
-    background-position: left bottom;
-}
-
-.ul-coins li:nth-child(5) span {
+li:nth-of-type(2) .icon-coin {
     background-position: center bottom;
 }
 
-.ul-coins li:nth-child(6) span {
-    background-position: right bottom;
+li:nth-of-type(3) .icon-coin {
+    background-position: left bottom;
+}
+
+li:nth-of-type(4) .icon-coin {
+    background-position: right top;
+}
+
+li:nth-of-type(5) .icon-coin {
+    background-position: center top;
+}
+
+li:nth-of-type(6) .icon-coin {
+    background-position: left top;
+}
+
+.answer::before {
+    content: "Do you think we can make this?";
 }

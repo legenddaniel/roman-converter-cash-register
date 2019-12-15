@@ -18,6 +18,8 @@
 </head>
 
 <body>
+    <!-- IE10以上兼容 -->
+
     <!-- 页面加载做个进度条动画 -->
 
     <!-- aria -->
@@ -31,9 +33,12 @@
 
     <!-- 点击按钮后placeholder显示无效输入，value显示有效输入 -->
 
-    <!-- 加元硬币精灵图，悬浮背景变暗显示面额，显示在一个table中，左纸币又硬币 -->
+    <!-- Read more modal -->
+
     <!-- random一个钱柜和总金额，输入纸币数，钱柜钱数范围写在js里 -->
     <!-- 可否通过递归优化循环？ -->
+
+    <!-- 点击answer按钮后下方新建绿色/红色alert，若错误显示我们缺那种面值，上方cid内badge显示找零个数 -->
 
     <div class="container-fluid text-center bg-info">
         <ul class="nav nav-pills">
@@ -130,29 +135,75 @@
                 <div class="row">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
-                            <p class="card-text text-left jumbotron">This module is designed as a game mode: <br><br>The numbers right after the cash/coin imgs are the amount of cash/coin remaining in the cash register. <br><br>Click the button to randomly draw a total and received amount. Calculate the change and check if we can make it or not. <br><br>The result will be shown as Bootstrap Badges right after the balance for each face value of cash/coin. <br><br><strong>P.S. If no more cash with a face value less than the change we take it as a failure <br><em>e.g. the change due is $1.03 but we got only loonies and nickels. </em><br>This is why we introduced the discontinued penny "1¢" here which is for a simplification purpose.</strong></p>
+                            <p class="card-text text-left jumbotron">This module is designed as a game mode: <br><br>The
+                                numbers right after the cash/coin imgs are the amount of cash/coin remaining in the cash
+                                register. <br><br>Click the button to randomly draw a total and received amount.
+                                Calculate the change and check if we can make it or not. <br><br>The result will be
+                                shown as Bootstrap Badges right after the balance for each face value of cash/coin.
+                                <br><br><strong>P.S. If no more cash with a face value less than the change we take it
+                                    as a failure <br><em>e.g. the change due is $1.03 but we got only loonies and
+                                        nickels. </em><br>This is why we introduced the discontinued penny "1¢" here
+                                    which is for a simplification purpose.</strong></p>
                             <!-- 若状态open，每个li后面显示>0的找零个数（badge），若金额不足置顶显示 -->
-                            <div class="row">
-                                <div class="col-lg-4">
+                            <p>Click <button type="button" class="btn btn-sm btn-success" disabled>set</button> to set
+                                the value:</p>
+                            <div class="form-group form-inline justify-content-center">
+                                <label for="total"
+                                    class="col-lg-2 col-sm-4 bg-warning d-inline-block text-right">Total:</label>
+                                <input type="text" id="total" class="col-lg-2 col-sm-4 form-control-plaintext bg-info"
+                                    readonly value="js">
+                                <label for="received"
+                                    class="col-lg-2 col-sm-4 bg-warning d-inline-block text-right">Received:</label>
+                                <input type="text" id="received"
+                                    class="col-lg-2 col-sm-4 form-control-plaintext bg-info" readonly value="js">
+                                <button type="button" class="btn btn-lg btn-success">set</button>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-4 col-sm-6">
                                     <p class="card-text">Banknotes</p>
                                     <ul class="ul-banknotes list-unstyled">
-                                        <li class="bg-warning"><span>	$5</span>$1</li>
-                                        <li class="bg-warning"><span>	$10</span></li>
-                                        <li class="bg-warning"><span>	$20</span></li>
-                                        <li class="bg-warning"><span>	$50</span></li>
+                                        <li class="bg-warning"><span class="icon-banknote">$5</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-banknote">$10</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-banknote">$20</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-banknote">$50</span>js<span
+                                                class="badge badge-light">js</span></li>
                                     </ul>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4 col-sm-6">
                                     <p class="card-text">Coins</p>
                                     <ul class="ul-coins list-unstyled">
-                                        <li class="bg-warning"><span>	1¢</span>$1</li>
-                                        <li class="bg-warning"><span>	5¢</span></li>
-                                        <li class="bg-warning"><span>	10¢</span></li>
-                                        <li class="bg-warning"><span>	25¢</span></li>
-                                        <li class="bg-warning"><span>$1</span></li>
-                                        <li class="bg-warning"><span>$2</span></li>
+                                        <li class="bg-warning"><span class="icon-coin">1¢</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-coin">5¢</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-coin">10¢</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-coin">25¢</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-coin">$1</span>js<span
+                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning"><span class="icon-coin">$2</span>js<span
+                                                class="badge badge-light">js</span></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="answer form-inline justify-content-center">
+                                <div class="custom-control custom-switch ml-3 mr-5">
+                                    <input type="checkbox" class="custom-control-input" id="answer">
+                                    <label class="custom-control-label text-nowrap" for="answer">No</label>
+                                </div><button type="button" class="btn btn-primary">See the answer</button>
+                            </div>
+                            <!-- alert默认隐藏，js调出 -->
+                            <div class="alert alert-success alert-dismissable col-lg-4 col-6 mx-auto">
+                                You got it!
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                            <div class="alert alert-danger alert-dismissable col-lg-4 col-6 mx-auto">
+                                Goose egg!
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
                             </div>
                         </div>
                     </div>
