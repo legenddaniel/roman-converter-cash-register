@@ -1,17 +1,78 @@
-.container {
-    height: -webkit-max-content;
-    height: -moz-max-content;
-    height: max-content;
+.container-fluid {
+    background: radial-gradient(circle, rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1));
+    /* -webkit-animation: wave 5s;
+    animation: wave .5s linear infinite; */
+}
+
+@-webkit-keyframes wave {
+    0% {
+        background: radial-gradient(circle, rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1));
+    }
+    14.29% {
+        background: radial-gradient(circle, rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1));
+    }
+    28.57% {
+        background: radial-gradient(circle, rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1));
+    }
+    42.86% {
+        background: radial-gradient(circle, rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1));
+    }
+    57.14% {
+        background: radial-gradient(circle, rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1));
+    }
+    71.43% {
+        background: radial-gradient(circle, rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1));
+    }
+    85.71% {
+        background: radial-gradient(circle, rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1));
+    }
+    100% {
+        background: radial-gradient(circle, rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1));
+    }
+}
+
+@keyframes wave {
+    0% {
+        background: radial-gradient(circle, rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1));
+    }
+    14.29% {
+        background: radial-gradient(circle, rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1));
+    }
+    28.57% {
+        background: radial-gradient(circle, rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1));
+    }
+    42.86% {
+        background: radial-gradient(circle, rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1));
+    }
+    57.14% {
+        background: radial-gradient(circle, rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1));
+    }
+    71.43% {
+        background: radial-gradient(circle, rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1), rgba(254,234,217,1));
+    }
+    85.71% {
+        background: radial-gradient(circle, rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1), rgba(255,215,215,1));
+    }
+    100% {
+        background: radial-gradient(circle, rgba(255,215,215,1), rgba(254,234,217,1), rgba(252,255,219,1), rgba(236,253,236,1), rgba(218,251,255,1), rgba(226,236,255,1), rgba(233,221,255,1));
+    }
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 /* .collapsing {
     -webkit-transition: none;
     transition: none;
 } */
+
+.eye {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    transform: scale(1.2);
+}
 
 .input-container::before {
     content: "Roman numerals e.g. 'CD'";
@@ -49,7 +110,7 @@ button[disabled] {
     opacity: 1 !important;
 }
 
-.icon-banknote, .icon-coin  {
+.icon-banknote, .icon-coin {
     display: inline-block;
     width: 3rem;
     height: 3rem;
@@ -67,6 +128,7 @@ button[disabled] {
     opacity: 0.5;
     color: #000;
 }
+
 .icon-banknote {
     background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
 }
