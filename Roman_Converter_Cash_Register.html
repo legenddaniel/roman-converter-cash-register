@@ -27,6 +27,7 @@
 
     <!-- 
                 正式页面中开始显示的是about页面，两个tab不可用，下方出现进度条动画
+                进度条随机时间内（0.5-2s）走随机进度（10-20%）
                 进度100%后3s进度条文字变为点击任意tab开始，两个tab可用并高亮，about-tab消失，点击任意tab后取消高亮
             -->
 
@@ -75,9 +76,9 @@
         </div>
     </div>
     <div class="container-fluid text-center h-100 min-vh-100">
-        <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1">
+        <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1 pt-5">
             <li class="nav-items">
-                <a class="nav-link active" href=".tab-about" data-toggle="pill">About</a>
+                <a class="nav-link active" href=".tab-about" data-toggle="pill" onclick="move()">About</a>
             </li>
             <li class="nav-items">
                 <a class="nav-link" href=".tab-roman" data-toggle="pill">Roman Converter</a>
@@ -89,14 +90,20 @@
         <div class="eye">
             <!-- 点击互相切换，并绑定背景动画 -->
             <i class="fas fa-eye-slash text-danger" data-toggle="tooltip" data-placement="left"
-                title="Click to protect vision"></i>
-            <i class="far fa-eye text-success" data-toggle="tooltip" data-placement="left" title="Click to restore"></i>
+                title="bg-animation"></i>
+            <i class="far fa-eye text-success" data-toggle="tooltip" data-placement="left" title="bg-animation"></i>
         </div>
         <div class="tab-content">
             <div class="tab-pane tab-about active">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-info"></div>
+                                <span>0%</span>
+                            </div>
+                            <!-- 此处有脚本 -->
+                            <script src="About.js"></script>
                             <p class="card-text">
                                 This page has two modules: a roman numerals converter and a cash register simulation.
                                 Both are small projects from my self-learning tutorial.
