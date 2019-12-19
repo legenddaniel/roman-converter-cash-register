@@ -8,12 +8,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
     <meta name="description" content="small project from online code camp">
-    <meta name="keywords" content="Roman converter, cash register">
+    <meta name="keywords" content="roman converter, cash register">
     <title>Roman Converter & Cash Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.css">
-    <link rel="stylesheet" href="Roman_Converter_Cash_Register.css">
+    <link rel="stylesheet" href="roman-converter-cash-register.css">
 </head>
 
 <body>
@@ -21,14 +21,15 @@
 
     <!-- 背景做个动画？设置开关 -->
 
-    <!-- 页面加载做个进度条动画 -->
+    <!-- 页面刷新数据不丢失 -->
 
     <!-- aria -->
 
+    <!-- $('.eye').toggle切换两个眼睛？ -->
+
     <!-- 
-                正式页面中开始显示的是about页面，两个tab不可用，下方出现进度条动画
-                进度条随机时间内（0.5-2s）走随机进度（10-20%）
-                进度100%后3s进度条文字变为点击任意tab开始，两个tab可用并高亮，about-tab消失，点击任意tab后取消高亮
+                
+                点击任意tab后取消高亮，about变为windows icon，.progress span消失，移除.nav-link，点击icon刷新页面
             -->
 
     <!-- 一个输入框可输入数字或字母，数字1-3999，字母只能输入罗马数字的字母，并且不能输入无效字母 -->
@@ -78,17 +79,16 @@
     <div class="container-fluid text-center h-100 min-vh-100">
         <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1 pt-5">
             <li class="nav-items">
-                <a class="nav-link active" href=".tab-about" data-toggle="pill" onclick="move()">About</a>
+                <a class="nav-link navbar-brand active" href=".tab-about" data-toggle="pill">About</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link" href=".tab-roman" data-toggle="pill">Roman Converter</a>
+                <a class="nav-link disabled" href=".tab-roman" data-toggle="pill">Roman Converter</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link" href=".tab-cash" data-toggle="pill">Cash Register</a>
+                <a class="nav-link disabled" href=".tab-cash" data-toggle="pill">Cash Register</a>
             </li>
         </ul>
         <div class="eye">
-            <!-- 点击互相切换，并绑定背景动画 -->
             <i class="fas fa-eye-slash text-danger" data-toggle="tooltip" data-placement="left"
                 title="bg-animation"></i>
             <i class="far fa-eye text-success" data-toggle="tooltip" data-placement="left" title="bg-animation"></i>
@@ -102,7 +102,6 @@
                                 <div class="progress-bar bg-info"></div>
                                 <span class="text-nowrap">0%</span>
                             </div>
-                            <!-- 此处有脚本 -->
                             <p class="card-text">
                                 This page has two modules: a roman numerals converter and a cash register simulation.
                                 Both are small projects from my self-learning tutorial.
@@ -280,7 +279,10 @@
     <script>
         $('[data-toggle="tooltip"]').tooltip();
     </script>
-    <script src="About.js"></script>
+    <script src="progress-bar.js"></script>
+    <script>
+        $('.nav-link').on('click', () =>                 $('.nav-link').not('.navbar-brand').css('animation', 'none'));
+    </script>
 </body>
 
 </html>

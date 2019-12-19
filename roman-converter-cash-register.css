@@ -1,0 +1,197 @@
+.container-fluid {
+    background: radial-gradient(circle, rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255));
+    /* -webkit-animation: wave 5s;
+    animation: wave .5s linear infinite; */
+}
+
+@-webkit-keyframes wave {
+    0% {
+        background: radial-gradient(circle, rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255));
+    }
+    14.29% {
+        background: radial-gradient(circle, rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255));
+    }
+    28.57% {
+        background: radial-gradient(circle, rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255));
+    }
+    42.86% {
+        background: radial-gradient(circle, rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236));
+    }
+    57.14% {
+        background: radial-gradient(circle, rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219));
+    }
+    71.43% {
+        background: radial-gradient(circle, rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217));
+    }
+    85.71% {
+        background: radial-gradient(circle, rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215));
+    }
+    100% {
+        background: radial-gradient(circle, rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255));
+    }
+}
+
+@keyframes wave {
+    0% {
+        background: radial-gradient(circle, rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255));
+    }
+    14.29% {
+        background: radial-gradient(circle, rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255));
+    }
+    28.57% {
+        background: radial-gradient(circle, rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255));
+    }
+    42.86% {
+        background: radial-gradient(circle, rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236));
+    }
+    57.14% {
+        background: radial-gradient(circle, rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219));
+    }
+    71.43% {
+        background: radial-gradient(circle, rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215), rgba(254, 234, 217));
+    }
+    85.71% {
+        background: radial-gradient(circle, rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255), rgba(255, 215, 215));
+    }
+    100% {
+        background: radial-gradient(circle, rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255));
+    }
+}
+
+a {
+    text-decoration: none !important;
+}
+
+/* .collapsing {
+    -webkit-transition: none;
+    transition: none;
+} */
+
+.eye {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.nav-link:hover {
+    background-color: lightslategray;
+}
+
+@keyframes fade {
+    to {
+        background-color: transparent;
+        color: transparent;
+    }
+}
+
+.progress {
+    position: relative;
+    height: 1px;
+    overflow: visible;
+}
+.progress span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.input-container::before {
+    content: "Roman numerals e.g. 'CD'";
+    color: aqua;
+    font-size: 0.8rem;
+}
+
+.input-container::after {
+    content: "Arabic numerals 1 - 3999";
+    color: bisque;
+    font-size: 0.8rem;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+:-moz-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+::-moz-placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+button[disabled] {
+    opacity: 1 !important;
+}
+
+.icon-banknote, .icon-coin {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 50%;
+    line-height: 3rem;
+    color: transparent;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.icon-banknote:hover, .icon-coin:hover {
+    /* Bootstrap predefines overlap styles for <img> only */
+    opacity: 0.5;
+    color: #000;
+}
+
+.icon-banknote {
+    background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
+}
+
+li:nth-of-type(2) .icon-banknote {
+    background-position: 70% 52%;
+}
+
+li:nth-of-type(3) .icon-banknote {
+    background-position: 5% 52%;
+}
+
+li:nth-of-type(4) .icon-banknote {
+    background-position: 70% 5%;
+}
+
+.icon-coin {
+    background: url(img/sprite-coins.jpg) right bottom / 300% no-repeat;
+}
+
+li:nth-of-type(2) .icon-coin {
+    background-position: center bottom;
+}
+
+li:nth-of-type(3) .icon-coin {
+    background-position: left bottom;
+}
+
+li:nth-of-type(4) .icon-coin {
+    background-position: right top;
+}
+
+li:nth-of-type(5) .icon-coin {
+    background-position: center top;
+}
+
+li:nth-of-type(6) .icon-coin {
+    background-position: left top;
+}
+
+.answer::before {
+    content: "Do you think we can make this?";
+}
