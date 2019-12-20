@@ -19,18 +19,9 @@
 <body>
     <!-- IE10以上兼容 -->
 
-    <!-- 背景做个动画？设置开关 -->
-
     <!-- 页面刷新数据不丢失 -->
 
     <!-- aria -->
-
-    <!-- $('.eye').toggle切换两个眼睛？ -->
-
-    <!-- 
-                
-                点击任意tab后取消高亮，about变为windows icon，.progress span消失，移除.nav-link，点击icon刷新页面
-            -->
 
     <!-- 一个输入框可输入数字或字母，数字1-3999，字母只能输入罗马数字的字母，并且不能输入无效字母 -->
 
@@ -40,6 +31,7 @@
     <!-- 可否通过递归优化循环？ -->
 
     <!-- 点击answer按钮后下方新建绿色/红色alert，若错误显示我们缺那种面值，上方cid内badge显示找零个数 -->
+
     <div class="modal fade github text-center" tab-index="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -88,10 +80,8 @@
                 <a class="nav-link disabled" href=".tab-cash" data-toggle="pill">Cash Register</a>
             </li>
         </ul>
-        <div class="eye">
-            <i class="fas fa-eye-slash text-danger" data-toggle="tooltip" data-placement="left"
-                title="bg-animation"></i>
-            <i class="far fa-eye text-success" data-toggle="tooltip" data-placement="left" title="bg-animation"></i>
+        <div class="eye" data-toggle="tooltip" data-placement="left" title="bg-animation">
+            <i class="fas fa-eye-slash text-danger"></i>
         </div>
         <div class="tab-content">
             <div class="tab-pane tab-about active">
@@ -281,7 +271,36 @@
     </script>
     <script src="progress-bar.js"></script>
     <script>
-        $('.nav-link').on('click', () =>                 $('.nav-link').not('.navbar-brand').css('animation', 'none'));
+        // Only on the first click can DOM be modified
+        let isFirstclick = true;
+        $('.nav-link').not('.navbar-brand').on('click', () => {
+            isFirstclick === true ?
+                (
+                    $('.nav-link').not('.navbar-brand').css({ 'animation': 'none', '-webkit-animation': 'none' }),
+                    $('.navbar-brand')
+                        .html('<i class="fab fa-windows"></i>')
+                        .removeClass('disabled')
+                        .css({ 'animation': 'fade 1.5s reverse', '-webkit-animation': 'fade 1.5s reverse' }),
+                    $('.progress span').text('Loaded')
+                ) :
+                isFirstclick = false;
+        });
+    </script>
+    <script>
+        // Background animation switch
+        const eyeRed = '<i class="fas fa-eye-slash text-danger"></i>';
+        const eyeGreen = '<i class="far fa-eye text-success"></i>'
+        $('.eye').on('click', (e) => {
+            $(e.currentTarget).html() === eyeGreen ?
+                (
+                    $(e.currentTarget).html(eyeRed),
+                    $('.container-fluid').css({ 'animation-play-state': 'running', '-webkit-animation-play-state': 'running' })
+
+                ) : (
+                    $(e.currentTarget).html(eyeGreen),
+                    $('.container-fluid').css({ 'animation-play-state': 'paused', '-webkit-animation-play-state': 'paused' })
+                );
+        })
     </script>
 </body>
 

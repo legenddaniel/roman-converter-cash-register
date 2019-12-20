@@ -26,15 +26,18 @@ $(() => {
             $('.progress span').text('100%');
 
             setTimeout(() => {
-                $('.navbar-brand').css('animation', 'fade 1.5s');
-                $('.navbar-brand').on('animationend', (e) => {
-                    $(e.currentTarget).css('visibility', 'hidden');
-                });
-                $('.nav-link.disabled').removeClass('disabled');
-                $('.nav-link').not('.navbar-brand').css('animation', 'fade 1.5s ease-in-out infinite');
-                $('.progress span').addClass('text-warning bg-info px-2');
-                $('.progress span').css('font-size', '1rem');
-                $('.progress span').text('Click either tab to start');
+                $('.navbar-brand')
+                    .css({ 'animation': 'fade 1.5s forwards', '-webkit-animation': 'fade 1.5s forwards' })
+                    .on('animationend', (e) => {
+                        $(e.currentTarget).addClass('disabled');
+                    });
+                $('.nav-link').not('.navbar-brand')
+                    .removeClass('disabled')
+                    .css({ 'animation': 'fade 1.5s ease-in-out infinite', '-webkit-animation': 'fade 1.5s ease-in-out infinite' });
+                $('.progress span')
+                    .addClass('text-warning bg-info px-2')
+                    .css('font-size', '1rem')
+                    .text('Click either tab to start');
             }, 3000);
         };
 

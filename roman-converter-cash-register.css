@@ -1,7 +1,7 @@
 .container-fluid {
     background: radial-gradient(circle, rgba(255, 215, 215), rgba(254, 234, 217), rgba(252, 255, 219), rgba(236, 253, 236), rgba(218, 251, 255), rgba(226, 236, 255), rgba(233, 221, 255));
-    /* -webkit-animation: wave 5s;
-    animation: wave .5s linear infinite; */
+    -webkit-animation: wave 5s linear infinite;
+    animation: wave .5s linear infinite;
 }
 
 @-webkit-keyframes wave {
@@ -80,6 +80,10 @@ a {
 }
 
 @keyframes fade {
+    from {
+        background-color: #007bff;
+        color: white;
+    }
     to {
         background-color: transparent;
         color: transparent;
