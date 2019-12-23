@@ -2,7 +2,8 @@
 
 // Update: the opacity of the disabled nav tabs, i.e. Roman Converter & Cash Register Tabs, equals the value of the progress
 
-$(() => {
+// Block scope works too but with IIFE we can directly return the function being called
+(() => {
     let progress = 0;
 
     // If .js not loaded properly we can still see the disabled tabs
@@ -43,5 +44,5 @@ $(() => {
 
         progress >= 100 ? fnLoaded() : progress += increment;
     };
-    fnLoading();
-})
+    return fnLoading();
+}) ()

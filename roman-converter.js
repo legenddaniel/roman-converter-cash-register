@@ -2,7 +2,7 @@
 
 // 正则控制输入字段
 
-// 添加复制按钮
+// 添加历史记录
 
 const convertToRoman = num => {
 
@@ -46,7 +46,8 @@ const convertToRoman = num => {
 console.log(convertToRoman(649));
 
 const convertToNum = roman => {
-
+    
+    // The restriction to the input value will be added during DOM manipulation, here we assume the user has input a valid value
     const converter = {
         'M': 1000,
         'D': 500,
@@ -72,7 +73,7 @@ const convertToNum = roman => {
         return reverseReplace;
     }, {})
 
-    const cacheRoman = roman.replace(/IX|XC|CM/g, item => reverseReplace[item]).replace(/IV|XL|CD/g, item => reverseReplace[item]).split('');
+    const cacheRoman = roman.toUpperCase().replace(/IX|XC|CM/g, item => reverseReplace[item]).replace(/IV|XL|CD/g, item => reverseReplace[item]).split('');
 
     const num = cacheRoman.map(digit => converter[digit]).reduce((a, b) => a + b);
 
@@ -80,3 +81,5 @@ const convertToNum = roman => {
 }
 
 console.log(convertToNum('MMMCDXCVI'));
+
+// export {convertToNum, convertToRoman};
