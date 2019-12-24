@@ -314,19 +314,22 @@
         let clickCount = 0;
         const inputVal = $('#input-roman').val();
         const regNum = /^[1-3]\d{0,3}$|^[4-9]\d{0,2}$/; // 1-3999
-        const reg = 
+        const regNotRoman = new RegExp(['[^ivxlcdm]', 'i{4,}|x{4,}|c{4,}|m{4,}', 'v{2,}|l{2,}|d{2,}'].join('|'), 'i'); // Only certain letters with certain occurences are valid
+        const regRoman = /i*v*x*l*c*d*m*/i; //Valid letters must be in order
         $('#get-roman').on('click', () => {
             if (regNum.test(inputVal)) {
                 $('#roman-output').val(convertToRoman(inputVal));
-            } else if (inputVal) {
-                $('#roman-output').val(convertToNum(inputVal));
-            } else {
-                $('#roman-output').attr('placeholder', 'Invalid value, please try again');
-                clickCount++;
-                if (clickCount >= 3) {
-                    $('#roman-output').attr('placeholder', 'Check the link below for help');
-                    clickCount = 0;
+            } else if (regNotRoman.test(inputVal) && !regRoman.test(inputVal)) {
+                if (false) {
+                    $('#roman-output').attr('placeholder', 'Invalid value, please try again');
+                    clickCount++;
+                    if (clickCount >= 3) {
+                        $('#roman-output').attr('placeholder', 'Check the link below for help');
+                        clickCount = 0;
+                    }
                 }
+            } else {
+                $('#roman-output').val(convertToNum(inputVal));
             }
         })
     </script>
