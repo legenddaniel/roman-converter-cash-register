@@ -1,7 +1,5 @@
 // 写成一个类，输入字段为实例，有两种方法，判断输入类型自动选择方法
 
-// 正则控制输入字段
-
 // 添加历史记录
 
 const convertToRoman = num => {
@@ -43,8 +41,6 @@ const convertToRoman = num => {
     return Roman;
 }
 
-console.log(convertToRoman(649));
-
 const convertToNum = roman => {
     
     // The restriction to the input value will be added during DOM manipulation, here we assume the user has input a valid value
@@ -79,7 +75,5 @@ const convertToNum = roman => {
 
     return num;
 }
-
-console.log(convertToNum('MMMCDXCVI'));
 
 // export {convertToNum, convertToRoman};

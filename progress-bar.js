@@ -1,4 +1,4 @@
-//Progress-bar.js is with regard to the implementation of a running progress bar with random increments at random intervals, both changing dynamically
+// Progress-bar.js is with regard to the implementation of a running progress bar with random increments at random intervals, both changing dynamically
 
 // Update: the opacity of the disabled nav tabs, i.e. Roman Converter & Cash Register Tabs, equals the value of the progress
 
