@@ -79,6 +79,17 @@ a {
     background-color: lightslategray;
 }
 
+@-webkit-keyframes fade {
+    from {
+        background-color: #007bff;
+        color: white;
+    }
+    to {
+        background-color: transparent;
+        color: transparent;
+    }
+}
+
 @keyframes fade {
     from {
         background-color: #007bff;
@@ -99,7 +110,8 @@ a {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
 }
 .input-container::before {
     content: "Roman numerals e.g. 'CD'";
@@ -135,6 +147,41 @@ a {
 
 button[disabled] {
     opacity: 1 !important;
+}
+
+@-webkit-keyframes set {
+    15% {
+        -webkit-transform: rotate(-45deg) scale(1.2);
+                transform: rotate(-45deg) scale(1.2);
+    }
+    30% {
+        -webkit-transform: initial;
+                transform: initial;
+    }
+    45% {
+        -webkit-transform: rotate(-45deg) scale(1.2);
+                transform: rotate(-45deg) scale(1.2);
+    }
+}
+
+@keyframes set {
+    15% {
+        -webkit-transform: rotate(-45deg) scale(1.2);
+                transform: rotate(-45deg) scale(1.2);
+    }
+    30% {
+        -webkit-transform: initial;
+                transform: initial;
+    }
+    45% {
+        -webkit-transform: rotate(-45deg) scale(1.2);
+                transform: rotate(-45deg) scale(1.2);
+    }
+}
+
+#btn-set:hover i {
+    -webkit-animation: set 1.5s infinite;
+            animation: set 1.5s infinite;
 }
 
 .icon-banknote, .icon-coin {

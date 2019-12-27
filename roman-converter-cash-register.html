@@ -69,10 +69,10 @@
                 <a class="nav-link navbar-brand" href=".tab-about" data-toggle="pill">About</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link disabled active" href=".tab-roman" data-toggle="pill">Roman Converter</a>
+                <a class="nav-link disabled" href=".tab-roman" data-toggle="pill">Roman Converter</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link disabled" href=".tab-cash" data-toggle="pill">Cash Register</a>
+                <a class="nav-link disabled active" href=".tab-cash" data-toggle="pill">Cash Register</a>
             </li>
         </ul>
         <div class="eye" data-toggle="tooltip" data-placement="left" title="bg-animation">
@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tab-roman active">
+            <div class="tab-pane tab-roman">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tab-cash">
+            <div class="tab-pane tab-cash active">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -186,8 +186,8 @@
                                     which is for a simplification purpose.</strong>
                             </p>
                             <!-- 若状态open，每个li后面显示>0的找零个数（badge），若金额不足置顶显示 -->
-                            <p>Click <button type="button" class="btn btn-sm btn-success" disabled>set</button> to set
-                                the value:</p>
+                            <p>Click <button type="button" class="btn btn-sm btn-success" disabled><i
+                                        class="fas fa-hammer"></i></button> to (re)set the value:</p>
                             <div class="form-group form-inline justify-content-center">
                                 <label for="total"
                                     class="col-lg-2 col-sm-4 bg-warning d-inline-block text-right">Total:</label>
@@ -197,7 +197,8 @@
                                     class="col-lg-2 col-sm-4 bg-warning d-inline-block text-right">Received:</label>
                                 <input type="text" id="received"
                                     class="col-lg-2 col-sm-4 form-control-plaintext bg-info" readonly value="js">
-                                <button type="button" class="btn btn-lg btn-success">set</button>
+                                <button type="button" class="btn btn-lg btn-success" id="btn-set"><i
+                                        class="fas fa-hammer"></i></button>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-sm-6">
@@ -313,21 +314,49 @@
                 const testVal = reg => reg.test(inputVal);
                 const regNum = /^[1-3]\d{0,3}$|^[4-9]\d{0,2}$/; // 1-3999
                 const regRoman = /^m{0,3}(cd|cm|d?c{0,3})(xl|xc|l?x{0,3})(iv|ix|v?i{0,3})$/i;
-                if (testVal(regNum)) {
-                    $('#roman-output').val(convertToRoman(inputVal));
-                    clickCount = 0
-                } else if (testVal(regRoman) && inputVal.length) {
-                    $('#roman-output').val(convertToNum(inputVal));
+                const ifValid = () => {
                     clickCount = 0;
-                } else {
+                    $('#roman-output').addClass('bg-light');
+                }
+                const ifInvalid = () => {
                     $('#roman-output').val('');
+                    $('#roman-output').removeClass('bg-light');
                     $('#roman-output').attr('placeholder', 'Invalid value, please try again');
                     clickCount >= 2 ? $('#roman-output').attr('placeholder', 'Check the link below for help') : clickCount++;
+                }
+                if (testVal(regNum)) {
+                    $('#roman-output').val(convertToRoman(inputVal));
+                    ifValid();
+                } else if (testVal(regRoman) && inputVal.length) {
+                    $('#roman-output').val(convertToNum(inputVal));
+                    ifValid();
+                } else {
+                    ifInvalid();
                 }
             })
         }
     </script>
-    <script src="cash-register-new.js"></script>
+    <!-- <script src="cash-register-new.js"></script> -->
+    <script>
+        const currency = {
+            // For simpler calculation we bring penny which has been discontinued back here
+            'PENNY': 0.01,
+            'NICKEL': 0.05,
+            'DIME': 0.1,
+            'QUARTER': 0.25,
+            'LOONIE': 1,
+            'TOONIE': 2,
+            'FIVE': 5,
+            'TEN': 10,
+            'TWENTY': 20,
+            'FIFTY': 50,
+            'HUNDRED': 100
+        }
+        $('#btn-set').on('click', (e) => {
+            $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2)); // 2-decimal-place number from 0.50 to 100.00
+            $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val())); // For easy calculation we assume the face value of the cash is just greater than the total amount
+        })
+    </script>
 </body>
 
 </html>
