@@ -15,16 +15,16 @@ const checkCashRegister = (price, cash, cid) => {
     }
 
     // const cidAmount = {
-    // 'PENNY': 0 - 200 (0 - 2)
-    // 'NICKEL': 0 - 100 (0 - 5)
-    // 'DIME': 0 - 100 (0 - 10)
-    // 'QUARTER': 0 - 200 (0 - 50)
-    // 'LOONIE': 0 - 200 (0 - 200)
-    // 'TOONIE': 0 - 200 (0 - 400)
-    // 'FIVE': 0 - 100 (0 - 500)
-    // 'TEN': 0 - 200 (0 - 2000)
-    // 'TWENTY': 0 - 100 (0 - 2000)
-    // 'FIFTY': 0 - 50 (0 - 2500)
+    // 'PENNY': 0 - 20 (0 - 0.2)
+    // 'NICKEL': 0 - 10 (0 - 0.5)
+    // 'DIME': 0 - 10 (0 - 1)
+    // 'QUARTER': 0 - 20 (0 - 5)
+    // 'LOONIE': 0 - 20 (0 - 20)
+    // 'TOONIE': 0 - 20 (0 - 40)
+    // 'FIVE': 0 - 10 (0 - 50)
+    // 'TEN': 0 - 20 (0 - 200)
+    // 'TWENTY': 0 - 10 (0 - 200)
+    // 'FIFTY': 0 - 5 (0 - 250)
     // }
 
     let [cacheChange, status, changeDue, change] = [cid, '', cash - price, []];

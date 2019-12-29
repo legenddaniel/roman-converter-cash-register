@@ -204,31 +204,61 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <p class="card-text">Banknotes</p>
                                     <ul class="ul-banknotes list-unstyled">
-                                        <li class="bg-warning"><span class="icon-banknote">$5</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-banknote">$10</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-banknote">$20</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-banknote">$50</span>js<span
-                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning">
+                                            <span class="icon-banknote">$5</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-banknote">$10</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-banknote">$20</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-banknote">$50</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-4 col-sm-6">
                                     <p class="card-text">Coins</p>
                                     <ul class="ul-coins list-unstyled">
-                                        <li class="bg-warning"><span class="icon-coin">1¢</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-coin">5¢</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-coin">10¢</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-coin">25¢</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-coin">$1</span>js<span
-                                                class="badge badge-light">js</span></li>
-                                        <li class="bg-warning"><span class="icon-coin">$2</span>js<span
-                                                class="badge badge-light">js</span></li>
+                                        <li class="bg-warning">
+                                            <span class="icon-coin">1¢</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-coin">5¢</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-coin">10¢</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-coin">25¢</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-coin">$1</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
+                                        <li class="bg-warning">
+                                            <span class="icon-coin">$2</span>
+                                            <span class="qty-denom">js</span>
+                                            <span class="badge badge-light">js</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -340,6 +370,7 @@
     <script>
         const currency = {
             // For simpler calculation we bring penny which has been discontinued back here
+            // 考虑最后换闭包
             'PENNY': 0.01,
             'NICKEL': 0.05,
             'DIME': 0.1,
@@ -353,8 +384,28 @@
             'HUNDRED': 100
         }
         $('#btn-set').on('click', (e) => {
-            $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2)); // 2-decimal-place number from 0.50 to 100.00
-            $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val())); // For easy calculation we assume the face value of the cash is just greater than the total amount
+            $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
+            // For easy calculation we assume the face value of the cash is just greater than the total amount
+            $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()));
+            let qty = [];
+            const generator = (...setAmt) => {
+                // Generates random amount of cash, be cautious that the order of the denomination (setAmt) is per the order of icons (i.e. starting from $5) on the webpage rather than of the Object 'currency' above
+                setAmt.forEach(i => qty.push(Math.floor(Math.random() * (i + 1))));
+                qty = [qty.slice(0, 4), qty.slice(4)];
+            };
+            generator(10, 20, 10, 5, 20, 10, 10, 20, 20, 20);
+            // console.log(qty);
+            const setDenom = () => {
+                for (let i = 0; i < qty[0].length; i++) {
+                    $('.ul-banknotes li:eq(' + i + ') span:eq(1)').text(qty[0][i]);
+                }
+                for (let i = 0; i < qty[1].length; i++) {
+                    $('.ul-coins li:eq(' + i + ') span:eq(1)').text(qty[1][i]);
+                }
+            };
+            setDenom();
+            // console.log($('.ul-banknotes li:eq(0) span:eq(1)').text());
+            // console.log(qty);
         })
     </script>
 </body>

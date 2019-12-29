@@ -243,6 +243,14 @@ li:nth-of-type(6) .icon-coin {
     background-position: left top;
 }
 
+.ul-banknotes li, .ul-coins li {
+    margin: .5rem 0;
+}
+.qty-denom {
+    display: inline-block;
+    width: 30%;
+}
+
 .answer::before {
     content: "Do you think we can make this?";
 }
