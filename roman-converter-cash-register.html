@@ -382,7 +382,7 @@
         // The variable 'currency' in cash-register-new.js is global
 
         $('#btn-set').on('click', () => {
-            
+
             // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
             $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
             $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()) || 100);
@@ -404,11 +404,8 @@
             };
             setDenom();
             // console.log(qty);
-            return getQty = () => {
-                [qty[0], qty[1]] = [qty[1], qty[0]];
-                // console.log(qty);
-                return qty.flat(); // Re-order the array
-            };
+            return getQty = () => [...qty[1], ...qty[0]]; // Re-order the array
+            // console.log(qty);
         })
     </script>
     <script>
@@ -427,7 +424,11 @@
             });
             $('.answer button').on('click', () => {
                 // console.log(getQty());
-                console.log(checkCashRegister($('#total').val(), $('#received').val(), setCid()));
+                const cacheResult = checkCashRegister($('#total').val(), $('#received').val(), setCid());
+                const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)]; // The order of the denomination is the same as on the webpage
+                // console.log(result);
+                // 下一步，按顺序为innertext赋值，replace(0, '')
+
             })
         }
     </script>
