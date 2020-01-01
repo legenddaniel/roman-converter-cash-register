@@ -22,11 +22,6 @@
 
     <!-- aria -->
 
-    <!-- random一个钱柜和总金额，输入纸币数，钱柜钱数范围写在js里 -->
-    <!-- 可否通过递归优化循环？ -->
-
-    <!-- 点击answer按钮后下方新建绿色/红色alert，若错误显示我们缺那种面值，上方cid内badge显示找零个数 -->
-
     <div class="modal fade github text-center" tab-index="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -66,20 +61,20 @@
     <div class="container-fluid text-center h-100 min-vh-100">
         <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1 pt-5">
             <li class="nav-items">
-                <a class="nav-link navbar-brand" href=".tab-about" data-toggle="pill">About</a>
+                <a class="nav-link navbar-brand active" href=".tab-about" data-toggle="pill">About</a>
             </li>
             <li class="nav-items">
                 <a class="nav-link disabled" href=".tab-roman" data-toggle="pill">Roman Converter</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link disabled active" href=".tab-cash" data-toggle="pill">Cash Register</a>
+                <a class="nav-link disabled" href=".tab-cash" data-toggle="pill">Cash Register</a>
             </li>
         </ul>
         <div class="eye" data-toggle="tooltip" data-placement="left" title="bg-animation">
             <i class="fas fa-eye-slash text-danger"></i>
         </div>
         <div class="tab-content">
-            <div class="tab-pane tab-about">
+            <div class="tab-pane tab-about active">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -116,7 +111,6 @@
                                 <label for="roman-output" class="col-md-4">Output:</label>
                                 <input type="text" id="roman-output" placeholder="click '→' to get the result"
                                     class="col-md-4 form-control-plaintext text-center" readonly>
-                                <!-- js输出value -->
                             </div>
                             <a href="#roman-more" class="card-link" data-toggle="collapse" draggable="false">No idea
                                 about roman numerals?</a>
@@ -165,7 +159,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tab-cash active">
+            <div class="tab-pane tab-cash">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -185,7 +179,6 @@
                                     <br>This is why we introduced the discontinued penny "1¢" here
                                     which is for a simplification purpose.</strong>
                             </p>
-                            <!-- 若状态open，每个li后面显示>0的找零个数（badge），若金额不足置顶显示 -->
                             <p>Click <button type="button" class="btn btn-sm btn-success" disabled><i
                                         class="fas fa-hammer"></i></button> to (re)set the value:</p>
                             <div class="form-group form-inline justify-content-center">
@@ -208,25 +201,25 @@
                                             <span class="icon-banknote">$5</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-banknote">$10</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-banknote">$20</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-banknote">$50</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -237,37 +230,37 @@
                                             <span class="icon-coin">1¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-coin">5¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-coin">10¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-coin">25¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-coin">$1</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                         <li class="bg-warning">
                                             <span class="icon-coin">$2</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
-                                            <span class="badge badge-light">js</span>
+                                            <span class="badge badge-light"> </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -279,13 +272,8 @@
                                 </div>
                                 <button type="button" class="btn btn-primary">See the answer</button>
                             </div>
-                            <!-- alert默认隐藏，js调出 -->
-                            <div class="alert alert-success alert-dismissable col-lg-4 col-6 mx-auto">
-                                You got it!
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            </div>
-                            <div class="alert alert-danger alert-dismissable col-lg-4 col-6 mx-auto">
-                                Goose egg!
+                            <div class="alert alert-dismissable col-lg-4 col-6 mx-auto">
+                                <span></span>
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                             </div>
                         </div>
@@ -293,6 +281,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -345,7 +334,6 @@
             })
         }
     </script>
-    <!-- <script type="module" src="roman-converter.js"></script> -->
     <script src="roman-converter.js"></script>
     <script>
         {
@@ -383,6 +371,9 @@
 
         $('#btn-set').on('click', () => {
 
+            $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
+            $('.alert').removeClass('alert-danger alert-success').css('visibility', 'hidden');
+
             // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
             $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
             $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()) || 100);
@@ -396,16 +387,14 @@
             generator(10, 20, 10, 5, 20, 10, 10, 20, 20, 20);
             const setDenom = () => {
                 for (let i = 0; i < qty[0].length; i++) {
-                    $('.ul-banknotes li:eq(' + i + ') span:eq(2)').text(qty[0][i]);
+                    $(`.ul-banknotes li:eq(${i}) span:eq(2)`).text(qty[0][i]);
                 }
                 for (let i = 0; i < qty[1].length; i++) {
-                    $('.ul-coins li:eq(' + i + ') span:eq(2)').text(qty[1][i]);
+                    $(`.ul-coins li:eq(${i}) span:eq(2)`).text(qty[1][i]);
                 }
             };
             setDenom();
-            // console.log(qty);
             return getQty = () => [...qty[1], ...qty[0]]; // Re-order the array
-            // console.log(qty);
         })
     </script>
     <script>
@@ -419,16 +408,43 @@
                 }
                 return cid;
             }
-            $('#answer').on('change', e => {
-                $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
-            });
-            $('.answer button').on('click', () => {
-                // console.log(getQty());
-                const cacheResult = checkCashRegister($('#total').val(), $('#received').val(), setCid());
-                const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)]; // The order of the denomination is the same as on the webpage
-                // console.log(result);
-                // 下一步，按顺序为innertext赋值，replace(0, '')
 
+            let isChecked = false;
+            $('#answer').on('change', e => {
+                if ($(e.currentTarget).is(':checked')) {
+                    $('.answer label').text('Yes');
+                    isChecked = true;
+                } else {
+                    $('.answer label').text('No');
+                    isChecked = false;
+                }
+            });
+
+            $('.answer button').on('click', () => {
+                
+                const cacheResult = checkCashRegister($('#total').val(), $('#received').val(), setCid());
+                
+                // The order of the denomination is the same as on the webpage
+                const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)];
+
+                const setResult = () => {
+                    for (let i = 0; i < result.length; i++) {
+                        $(`.qty-denom:eq(${i}) + span`).text(result[i]);
+                    }
+                    $('.qty-denom + span').not(':contains(0)').css('visibility', 'visible');
+                };
+                if (result.some(i => i > 0)) {
+                    setResult();
+                }
+                
+                isCorrect = result.some(i => i > 0) && isChecked || !result.some(i => i > 0) && !isChecked ? true : false;
+                if (isCorrect) {
+                    $('.alert span').text('You got it!');
+                    $('.alert').removeClass('alert-danger').addClass('alert-success').css('visibility', 'visible');
+                } else {
+                    $('.alert span').text('Goose egg!');
+                    $('.alert').removeClass('alert-success').addClass('alert-danger').css('visibility', 'visible');
+                }
             })
         }
     </script>
