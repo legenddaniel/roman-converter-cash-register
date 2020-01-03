@@ -106,13 +106,15 @@ a {
     height: 1px;
     overflow: visible;
 }
+
 .progress span {
     position: absolute;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
+
 .input-container::before {
     content: "Roman numerals e.g. 'CD'";
     color: aqua;
@@ -152,36 +154,58 @@ button[disabled] {
 @-webkit-keyframes set {
     15% {
         -webkit-transform: rotate(-45deg) scale(1.2);
-                transform: rotate(-45deg) scale(1.2);
+        transform: rotate(-45deg) scale(1.2);
     }
     30% {
         -webkit-transform: initial;
-                transform: initial;
+        transform: initial;
     }
     45% {
         -webkit-transform: rotate(-45deg) scale(1.2);
-                transform: rotate(-45deg) scale(1.2);
+        transform: rotate(-45deg) scale(1.2);
     }
 }
 
 @keyframes set {
     15% {
         -webkit-transform: rotate(-45deg) scale(1.2);
-                transform: rotate(-45deg) scale(1.2);
+        transform: rotate(-45deg) scale(1.2);
     }
     30% {
         -webkit-transform: initial;
-                transform: initial;
+        transform: initial;
     }
     45% {
         -webkit-transform: rotate(-45deg) scale(1.2);
-                transform: rotate(-45deg) scale(1.2);
+        transform: rotate(-45deg) scale(1.2);
     }
 }
 
 #btn-set:hover i {
     -webkit-animation: set 1.5s infinite;
-            animation: set 1.5s infinite;
+    animation: set 1.5s infinite;
+}
+
+
+.ul-banknotes li, .ul-coins li {
+    padding-top: .5rem;
+    /* display: inline-block; */
+}
+
+.ul-banknotes li {
+    height: 6rem;
+}
+
+.ul-coins li {
+    height: 4rem;
+}
+
+.ul-banknotes li:nth-of-type(odd), .ul-coins li:nth-of-type(odd) {
+    background-color: lavenderblush;
+}
+
+.ul-banknotes li:nth-of-type(even), .ul-coins li:nth-of-type(even) {
+    background-color: ivory;
 }
 
 .icon-banknote, .icon-coin {
@@ -205,6 +229,7 @@ button[disabled] {
 
 .icon-banknote {
     background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
+    margin: 1rem 0;
 }
 
 li:nth-of-type(2) .icon-banknote {
@@ -243,11 +268,6 @@ li:nth-of-type(6) .icon-coin {
     background-position: left top;
 }
 
-.ul-banknotes li, .ul-coins li {
-    margin: .5rem 0;
-    /* display: inline-block; */
-}
-
 .qty-denom, .icon-mtp {
     display: inline-block;
     width: 10%;
@@ -257,13 +277,13 @@ li:nth-of-type(6) .icon-coin {
     margin-right: 1rem;
 }
 
-.qty-denom + span {
+.qty-denom+span {
     width: 1rem;
     visibility: hidden;
 }
 
 .answer::before {
-    content: "Do you think we can make this?";
+    content: attr(data-text);
 }
 
 .answer label {

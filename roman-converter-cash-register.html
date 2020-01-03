@@ -182,14 +182,13 @@
                             <p>Click <button type="button" class="btn btn-sm btn-success" disabled><i
                                         class="fas fa-hammer"></i></button> to (re)set the value:</p>
                             <div class="form-group form-inline justify-content-center">
-                                <label for="total"
-                                    class="col-lg-2 col-sm-4 bg-warning d-inline-block text-right">Total:</label>
-                                <input type="text" id="total" class="col-lg-2 col-sm-4 form-control-plaintext bg-info"
-                                    readonly value="js">
+                                <label for="total" class="col-lg-2 col-sm-4 d-inline-block text-right">Total:</label>
+                                <input type="text" id="total"
+                                    class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
                                 <label for="received"
-                                    class="col-lg-2 col-sm-4 bg-warning d-inline-block text-right">Received:</label>
+                                    class="col-lg-2 col-sm-4 d-inline-block text-right">Received:</label>
                                 <input type="text" id="received"
-                                    class="col-lg-2 col-sm-4 form-control-plaintext bg-info" readonly value="js">
+                                    class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
                                 <button type="button" class="btn btn-lg btn-success" id="btn-set"><i
                                         class="fas fa-hammer"></i></button>
                             </div>
@@ -197,25 +196,25 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <p class="card-text">Banknotes</p>
                                     <ul class="ul-banknotes list-unstyled">
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-banknote">$5</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-banknote">$10</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-banknote">$20</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-banknote">$50</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
@@ -226,37 +225,37 @@
                                 <div class="col-lg-4 col-sm-6">
                                     <p class="card-text">Coins</p>
                                     <ul class="ul-coins list-unstyled">
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-coin">1¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-coin">5¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-coin">10¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-coin">25¢</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-coin">$1</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
                                             <span class="badge badge-light"> </span>
                                         </li>
-                                        <li class="bg-warning">
+                                        <li>
                                             <span class="icon-coin">$2</span>
                                             <span class="icon-mtp">*</span>
                                             <span class="qty-denom"></span>
@@ -265,7 +264,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="answer form-inline justify-content-center mb-3">
+                            <div class="answer form-inline justify-content-center mb-3" data-text="Do you think we can make this?">
                                 <div class="custom-control custom-switch ml-3 mr-5">
                                     <input type="checkbox" class="custom-control-input" id="answer">
                                     <label class="custom-control-label text-nowrap" for="answer">No</label>
@@ -373,6 +372,7 @@
 
             $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
             $('.alert').removeClass('alert-danger alert-success').css('visibility', 'hidden');
+            $('.answer').attr('data-text', 'Do you think we can make this?');
 
             // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
             $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
@@ -385,6 +385,7 @@
                 qty = [qty.slice(0, 4), qty.slice(4)];
             };
             generator(10, 20, 10, 5, 20, 10, 10, 20, 20, 20);
+            // 太简单了，调整一下最大数量
             const setDenom = () => {
                 for (let i = 0; i < qty[0].length; i++) {
                     $(`.ul-banknotes li:eq(${i}) span:eq(2)`).text(qty[0][i]);
@@ -421,9 +422,9 @@
             });
 
             $('.answer button').on('click', () => {
-                
+
                 const cacheResult = checkCashRegister($('#total').val(), $('#received').val(), setCid());
-                
+
                 // The order of the denomination is the same as on the webpage
                 const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)];
 
@@ -436,7 +437,7 @@
                 if (result.some(i => i > 0)) {
                     setResult();
                 }
-                
+
                 isCorrect = result.some(i => i > 0) && isChecked || !result.some(i => i > 0) && !isChecked ? true : false;
                 if (isCorrect) {
                     $('.alert span').text('You got it!');
@@ -445,6 +446,9 @@
                     $('.alert span').text('Goose egg!');
                     $('.alert').removeClass('alert-success').addClass('alert-danger').css('visibility', 'visible');
                 }
+
+                $('.answer').attr('data-text', '(Re)set the values to continue');
+                // 找零fn运行后点击see the answer 伪元素内容变化
             })
         }
     </script>
