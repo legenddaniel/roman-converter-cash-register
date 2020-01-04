@@ -186,6 +186,9 @@ button[disabled] {
     animation: set 1.5s infinite;
 }
 
+#btn-set, #btn-history {
+    margin-left: .5rem;
+}
 
 .ul-banknotes li, .ul-coins li {
     padding-top: .5rem;
@@ -277,7 +280,7 @@ li:nth-of-type(6) .icon-coin {
     margin-right: 1rem;
 }
 
-.qty-denom+span {
+.qty-denom+span.badge {
     width: 1rem;
     visibility: hidden;
 }
