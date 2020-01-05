@@ -1,3 +1,7 @@
+.modal thead th {
+    vertical-align: middle;
+}
+
 .container-fluid {
     background: radial-gradient(circle, rgb(255, 215, 215), rgb(254, 234, 217), rgb(252, 255, 219), rgb(236, 253, 236), rgb(218, 251, 255), rgb(226, 236, 255), rgb(233, 221, 255));
     -webkit-animation: wave 5s linear infinite;
@@ -58,7 +62,7 @@
     }
 }
 
-a {
+a, .btn-link {
     text-decoration: none !important;
 }
 
@@ -113,6 +117,10 @@ a {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+
+.tab-roman .btn-history {
+    margin: 0 -9rem 0 5rem;
 }
 
 .input-container::before {
@@ -181,12 +189,12 @@ button[disabled] {
     }
 }
 
-#btn-set:hover i {
+.btn-set:hover i {
     -webkit-animation: set 1.5s infinite;
     animation: set 1.5s infinite;
 }
 
-#btn-set, #btn-history {
+.btn-set, .tab-cash .btn-history {
     margin-left: .5rem;
 }
 
