@@ -543,6 +543,9 @@
         // Roman coverter history in localStorage
         {
             let cacheHistoryRoman = JSON.parse(localStorage.getItem('historyRoman')) || { "input": [], "output": [] };
+            const noHistory = () => {
+                $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>')
+            };
 
             $('.get-roman').on('click', () => {
                 if (getValid() && $('.input-roman').val() !== [...cacheHistoryRoman['input']].pop()) {
@@ -554,7 +557,7 @@
 
             $('button[data-target=".history-roman"]').on('click', () => {
                 if (!cacheHistoryRoman['input'].length) {
-                    $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>');
+                    noHistory();
                 } else {
                     $('.history-roman tbody').html('');
                     for (let i = 0; i < cacheHistoryRoman['input'].length; i++) {
@@ -568,11 +571,7 @@
             })
 
             $('.history-roman .clear-history').on('click', () => {
-                $('.history-roman tbody').html(
-                    `<tr>
-                    <td colspan="2" class="text-center">No history</td>
-                </tr>`
-                );
+                noHistory();
                 localStorage.removeItem('historyRoman');
                 cacheHistoryRoman = { "input": [], "output": [] };
             })
