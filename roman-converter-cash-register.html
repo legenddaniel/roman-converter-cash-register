@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <meta name="description" content="small project from online code camp">
+    <meta name="description" content="visualization of small project from online code camp">
     <meta name="keywords" content="roman converter, cash register">
     <title>Roman Converter & Cash Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -17,8 +17,6 @@
 
 <body>
     <!-- IE10以上兼容 -->
-
-    <!-- 页面刷新数据不丢失 -->
 
     <!-- aria -->
 
@@ -484,15 +482,8 @@
                 return cid;
             }
 
-            let isChecked = false;
             $('#answer').on('change', e => {
-                if ($(e.currentTarget).is(':checked')) {
-                    $('.answer label').text('Yes');
-                    isChecked = true;
-                } else {
-                    $('.answer label').text('No');
-                    isChecked = false;
-                }
+                $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
             });
 
             $('.answer button').on('click', () => {
@@ -501,20 +492,21 @@
 
                 // The order of the denomination is the same as on the webpage
                 const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)];
-
+                const isChecked = $('#answer').prop('checked');
+                const isSth = result.some(i => i > 0);
                 const setResult = () => {
                     for (let i = 0; i < result.length; i++) {
                         $(`.qty-denom:eq(${i}) + span.badge`).text(result[i]);
                     }
                     $('.qty-denom + span').not(':contains(0)').css('visibility', 'visible');
                 };
-                if (result.some(i => i > 0)) {
+                
+                if (isSth) {
                     setResult();
                 }
 
-                isCorrect = result.some(i => i > 0) && isChecked || !result.some(i => i > 0) && !isChecked ? true : false;
                 if ($('.answer').attr('data-text') === 'Do you think we can make this?') {
-                    if (isCorrect) {
+                    if (!!isChecked === !!isSth) {
                         $('.alert span').text('You got it!');
                         $('.alert')
                             .removeClass('alert-danger alert-warning')
@@ -559,7 +551,7 @@
                 if (!cacheHistoryRoman['input'].length) {
                     noHistory();
                 } else {
-                    $('.history-roman tbody').html('');
+                    $('.history-roman tbody').empty();
                     for (let i = 0; i < cacheHistoryRoman['input'].length; i++) {
                         $('.history-roman tbody').append('<tr></tr>');
                         $('.history-roman tbody tr').eq(i).append(
