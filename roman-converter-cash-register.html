@@ -359,6 +359,23 @@
 
     <script>
         $('[data-toggle="tooltip"]').tooltip();
+        $('.clear-history').popover({
+            placement: 'bottom',
+            container: '.history-roman .modal-footer',
+            html: true,
+            title: 'You are cleaning the history',
+            content: `
+                <span>All records will be removed</span>
+                <a href="#" class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
+                <a href="#" class="btn btn-sm btn-link">No</a>
+            `
+        })
+        $('.history-roman').on('shown.bs.popover', () => {
+            $('.history-roman .popover-body a').on('click', () => {
+                $('.clear-history').popover('hide');
+            })
+        })
+
     </script>
     <script src="progress-bar.js"></script>
     <script>
@@ -500,7 +517,7 @@
                     }
                     $('.qty-denom + span').not(':contains(0)').css('visibility', 'visible');
                 };
-                
+
                 if (isSth) {
                     setResult();
                 }
@@ -562,11 +579,15 @@
                 }
             })
 
-            $('.history-roman .clear-history').on('click', () => {
-                noHistory();
-                localStorage.removeItem('historyRoman');
-                cacheHistoryRoman = { "input": [], "output": [] };
-            })
+            $('.clear-history').on('shown.bs.popover', () => {
+                $('.history-roman .confirm-clear-history').on('click', () => {
+                    noHistory();
+                    localStorage.removeItem('historyRoman');
+                    cacheHistoryRoman = { "input": [], "output": [] };
+                })
+            });
+
+
         }
     </script>
 </body>
