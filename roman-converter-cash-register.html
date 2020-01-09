@@ -107,7 +107,7 @@
                     </table>
                 </div>
                 <div class="modal-footer text-nowrap">
-                    <button type="button" class="clear history btn btn-link">Clear history</button>
+                    <button type="button" class="clear-history btn btn-link">Clear history</button>
                 </div>
             </div>
         </div>
@@ -359,19 +359,28 @@
 
     <script>
         $('[data-toggle="tooltip"]').tooltip();
-        $('.clear-history').popover({
+        $('.history-roman .clear-history').popover({
             placement: 'bottom',
-            container: '.history-roman .modal-footer',
             html: true,
             title: 'You are cleaning the history',
             content: `
                 <span>All records will be removed</span>
-                <a href="#" class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
+                <a href="#" class="confirm-roman btn btn-sm btn-danger">Yes</a>
                 <a href="#" class="btn btn-sm btn-link">No</a>
             `
         })
-        $('.history-roman').on('shown.bs.popover', () => {
-            $('.history-roman .popover-body a').on('click', () => {
+        $('.history-cash .clear-history').popover({
+            placement: 'bottom',
+            html: true,
+            title: 'You are cleaning the history',
+            content: `
+                <span>All records will be removed</span>
+                <a href="#" class="confirm-cash btn btn-sm btn-danger">Yes</a>
+                <a href="#" class="btn btn-sm btn-link">No</a>
+            `
+        })
+        $('body').on('shown.bs.popover', () => {
+            $('.popover-body a').on('click', () => {
                 $('.clear-history').popover('hide');
             })
         })
@@ -563,7 +572,6 @@
                     localStorage.setItem('historyRoman', JSON.stringify(cacheHistoryRoman));
                 }
             })
-
             $('button[data-target=".history-roman"]').on('click', () => {
                 if (!cacheHistoryRoman['input'].length) {
                     noHistory();
@@ -573,22 +581,22 @@
                         $('.history-roman tbody').append('<tr></tr>');
                         $('.history-roman tbody tr').eq(i).append(
                             `<td>${cacheHistoryRoman['input'][i]}</td>
-                        <td>${cacheHistoryRoman['output'][i]}</td>`
+                            <td>${cacheHistoryRoman['output'][i]}</td>`
                         );
                     }
                 }
             })
-
-            $('.clear-history').on('shown.bs.popover', () => {
-                $('.history-roman .confirm-clear-history').on('click', () => {
+            $('body').on('shown.bs.popover', () => {
+                $('.confirm-roman').on('click', () => {
                     noHistory();
                     localStorage.removeItem('historyRoman');
                     cacheHistoryRoman = { "input": [], "output": [] };
                 })
             });
-
-
         }
+    </script>
+    <script>
+        let cacheHistoryCash = JSON.parse(localStorage.getItem('historyCash')) || {}
     </script>
 </body>
 
