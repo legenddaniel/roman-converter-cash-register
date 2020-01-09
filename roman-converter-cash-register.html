@@ -80,7 +80,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade history-cash text-center" tab-index="-1">
+    <!-- <div class="modal fade history-cash text-center" tab-index="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,24 +111,24 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="container-fluid text-center h-100 min-vh-100">
         <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1 pt-5">
             <li class="nav-items">
-                <a class="nav-link navbar-brand active" href=".tab-about" data-toggle="pill">About</a>
+                <a class="nav-link navbar-brand" href=".tab-about" data-toggle="pill">About</a>
             </li>
             <li class="nav-items">
                 <a class="nav-link disabled" href=".tab-roman" data-toggle="pill">Roman Converter</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link disabled" href=".tab-cash" data-toggle="pill">Cash Register</a>
+                <a class="nav-link disabled active" href=".tab-cash" data-toggle="pill">Cash Register</a>
             </li>
         </ul>
         <div class="eye" data-toggle="tooltip" data-placement="left" title="bg-animation">
             <i class="fas fa-eye-slash text-danger"></i>
         </div>
         <div class="tab-content">
-            <div class="tab-pane tab-about active">
+            <div class="tab-pane tab-about">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -218,7 +218,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tab-cash">
+            <div class="tab-pane tab-cash active">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -240,8 +240,8 @@
                             </p>
                             <p>Click <button type="button" class="btn btn-sm btn-success" disabled><i
                                         class="fas fa-hammer"></i></button> to (re)set the value, click <button
-                                    type="button" class="btn btn-sm btn-info" disabled><i
-                                        class="fas fa-history"></i></button> to see the history</p>
+                                    type="button" class="btn btn-sm btn-info" disabled>&times;</button> to clear the
+                                score</p>
                             <div class="form-group form-inline justify-content-center">
                                 <label for="total" class="col-lg-2 col-sm-4 d-inline-block text-right">Total:</label>
                                 <input type="text" id="total"
@@ -252,8 +252,7 @@
                                     class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
                                 <button type="button" class="btn-set btn btn-lg btn-success"><i
                                         class="fas fa-hammer"></i></button>
-                                <button type="button" class="btn btn-history btn-lg btn-info" data-toggle="modal"
-                                    data-target=".history-cash"><i class="fas fa-history"></i></button>
+                                <button type="button" class="btn btn-score btn-lg btn-info"><span>Score: 87</span></button>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-sm-6">
@@ -359,23 +358,13 @@
 
     <script>
         $('[data-toggle="tooltip"]').tooltip();
-        $('.history-roman .clear-history').popover({
+        $('.clear-history').popover({
             placement: 'bottom',
             html: true,
             title: 'You are cleaning the history',
             content: `
                 <span>All records will be removed</span>
-                <a href="#" class="confirm-roman btn btn-sm btn-danger">Yes</a>
-                <a href="#" class="btn btn-sm btn-link">No</a>
-            `
-        })
-        $('.history-cash .clear-history').popover({
-            placement: 'bottom',
-            html: true,
-            title: 'You are cleaning the history',
-            content: `
-                <span>All records will be removed</span>
-                <a href="#" class="confirm-cash btn btn-sm btn-danger">Yes</a>
+                <a href="#" class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
                 <a href="#" class="btn btn-sm btn-link">No</a>
             `
         })
@@ -587,7 +576,7 @@
                 }
             })
             $('body').on('shown.bs.popover', () => {
-                $('.confirm-roman').on('click', () => {
+                $('.confirm-clear-history').on('click', () => {
                     noHistory();
                     localStorage.removeItem('historyRoman');
                     cacheHistoryRoman = { "input": [], "output": [] };

@@ -194,8 +194,21 @@ button[disabled] {
     animation: set 1.5s infinite;
 }
 
-.btn-set, .tab-cash .btn-history {
+.btn-set, .btn-score {
     margin-left: .5rem;
+}
+
+.btn-score {
+    width: 7rem;
+    height: 3rem;
+    white-space: nowrap;
+}
+
+.btn-score:hover span {
+    display: none;
+}
+.btn-score:hover::before {
+    content: '\d7';
 }
 
 .ul-banknotes li, .ul-coins li {
