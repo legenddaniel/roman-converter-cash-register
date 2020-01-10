@@ -460,8 +460,8 @@
                     $('#output-roman')
                         .val('')
                         .removeClass('bg-light')
-                        .attr('placeholder', 'Invalid value, please try again');
-                    clickCount >= 2 ? $('#output-roman').attr('placeholder', 'Check the link below for help') : clickCount++;
+                        .prop('placeholder', 'Invalid value, please try again');
+                    clickCount >= 2 ? $('#output-roman').prop('placeholder', 'Check the link below for help') : clickCount++;
                 }
 
                 if (testVal(regNum)) {
@@ -488,6 +488,7 @@
 
             $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
             $('.alert').css('visibility', 'hidden');
+            $('#answer').removeAttr('disabled');
             $('.answer').attr('data-text', 'Do you think we can make this?');
 
             // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
@@ -587,7 +588,12 @@
                 localStorage.setItem('scoreCash', JSON.stringify(cacheScoreCash));
 
                 $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
+                $('#answer').prop('disabled', true);
                 $('.answer').attr('data-text', '(Re)set the values to continue');
+            })
+
+            $('.tab-cash .alert .close').on('click', e => {
+                $(e.currentTarget).parent().css('visibility', 'hidden');
             })
         }
     </script>
