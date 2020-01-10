@@ -16,7 +16,9 @@
 </head>
 
 <body>
-    <!-- IE10以上兼容 -->
+    <!-- IE10以上兼容，检测版本号 -->
+
+    <!-- localStorage在IE8以下及隐私模式中不可用 -->
 
     <!-- aria -->
 
@@ -252,7 +254,7 @@
                                     class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
                                 <button type="button" class="btn-set btn btn-lg btn-success"><i
                                         class="fas fa-hammer"></i></button>
-                                <button type="button" class="btn btn-score btn-lg btn-info"><span>Score: 87</span></button>
+                                <button type="button" class="btn btn-score btn-lg btn-info"><span></span></button>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-sm-6">
@@ -357,23 +359,50 @@
         crossorigin="anonymous"></script>
 
     <script>
-        $('[data-toggle="tooltip"]').tooltip();
-        $('.clear-history').popover({
-            placement: 'bottom',
-            html: true,
-            title: 'You are cleaning the history',
-            content: `
-                <span>All records will be removed</span>
-                <a href="#" class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
-                <a href="#" class="btn btn-sm btn-link">No</a>
+        // Initialization of some html/bootstrap components
+
+        $(() => {
+            if (!localStorage) {
+                alert('It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing');
+            }
+            
+            const scoreDefault = () => {
+                try {
+                    return JSON.parse(localStorage.getItem('scoreCash')).score;
+                } catch {
+                    return 0;
+                }
+            }
+            $('.btn-score span').text(`Score: ${scoreDefault()}%`);
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('.clear-history').popover({
+                placement: 'bottom',
+                html: true,
+                title: 'You are cleaning the history',
+                content: `
+                <span>All records will be removed &nbsp;&nbsp;</span>
+                <a class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
+                <a class="btn btn-sm btn-link">No</a>
             `
-        })
-        $('body').on('shown.bs.popover', () => {
-            $('.popover-body a').on('click', () => {
-                $('.clear-history').popover('hide');
+            })
+            $('.btn-score').popover({
+                placement: 'bottom',
+                html: true,
+                title: 'You are resetting the score',
+                content: `
+                <span>Score will be restored to 0 &nbsp;&nbsp;</span>
+                <a class="confirm-clear-score btn btn-sm btn-danger">Yes</a>
+                <a class="btn btn-sm btn-link">No</a>
+            `
+            })
+            $('body').on('shown.bs.popover', () => {
+                $('.popover-body a').on('click', () => {
+                    $('.clear-history, .btn-score').popover('hide');
+                })
             })
         })
-
     </script>
     <script src="progress-bar.js"></script>
     <script>
@@ -483,6 +512,14 @@
             setDenom();
             return getQty = () => [...qty[1], ...qty[0]]; // Re-order the array
         })
+
+        $('body').on('shown.bs.popover', () => {
+            $('.confirm-clear-score').on('click', () => {
+                localStorage.removeItem('scoreCash');
+                $('.btn-score span').text('Score: 0%');
+            })
+        })
+
     </script>
     <script>
         //Cash register answer part
@@ -496,6 +533,8 @@
                 }
                 return cid;
             }
+
+            let cacheScoreCash = JSON.parse(localStorage.getItem('scoreCash')) || { "correct": 0, "total": 0 };
 
             $('#answer').on('change', e => {
                 $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
@@ -522,6 +561,7 @@
 
                 if ($('.answer').attr('data-text') === 'Do you think we can make this?') {
                     if (!!isChecked === !!isSth) {
+                        cacheScoreCash.correct++;
                         $('.alert span').text('You got it!');
                         $('.alert')
                             .removeClass('alert-danger alert-warning')
@@ -534,6 +574,8 @@
                             .addClass('alert-danger')
                             .css('visibility', 'visible');
                     }
+                    cacheScoreCash.total++;
+                    cacheScoreCash.score = Math.round(100 * cacheScoreCash.correct / cacheScoreCash.total);
                 } else {
                     $('.alert span').text("Let's move on to the next!");
                     $('.alert')
@@ -542,12 +584,15 @@
                         .css('visibility', 'visible');
                 }
 
+                localStorage.setItem('scoreCash', JSON.stringify(cacheScoreCash));
+
+                $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
                 $('.answer').attr('data-text', '(Re)set the values to continue');
             })
         }
     </script>
     <script>
-        // Roman coverter history in localStorage
+        // Roman coverter history
         {
             let cacheHistoryRoman = JSON.parse(localStorage.getItem('historyRoman')) || { "input": [], "output": [] };
             const noHistory = () => {
@@ -583,9 +628,6 @@
                 })
             });
         }
-    </script>
-    <script>
-        let cacheHistoryCash = JSON.parse(localStorage.getItem('historyCash')) || {}
     </script>
 </body>
 

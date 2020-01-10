@@ -2,6 +2,23 @@
     vertical-align: middle;
 }
 
+.popover-body {
+    display: flex;
+    align-items: baseline;
+}
+
+.popover-body a {
+    cursor: pointer;
+}
+
+.confirm-clear-history, .confirm-clear-score {
+    color: #fff !important;
+}
+
+.btn-link {
+    color: #007bff !important;
+}
+
 .container-fluid {
     background: radial-gradient(circle, rgb(255, 215, 215), rgb(254, 234, 217), rgb(252, 255, 219), rgb(236, 253, 236), rgb(218, 251, 255), rgb(226, 236, 255), rgb(233, 221, 255));
     -webkit-animation: wave 5s linear infinite;
@@ -199,7 +216,7 @@ button[disabled] {
 }
 
 .btn-score {
-    width: 7rem;
+    width: 8rem;
     height: 3rem;
     white-space: nowrap;
 }
@@ -207,6 +224,7 @@ button[disabled] {
 .btn-score:hover span {
     display: none;
 }
+
 .btn-score:hover::before {
     content: '\d7';
 }
