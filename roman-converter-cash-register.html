@@ -82,38 +82,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="modal fade history-cash text-center" tab-index="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">History</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-hover">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Total</th>
-                                <th scope="col">Received</th>
-                                <th scope="col">Cid</th>
-                                <th scope="col">Your Answer</th>
-                                <th scope="col">Right Answer</th>
-                                <th scope="col">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="6" class="text-center">No history</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer text-nowrap">
-                    <button type="button" class="clear-history btn btn-link">Clear history</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="container-fluid text-center h-100 min-vh-100">
         <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1 pt-5">
             <li class="nav-items">
@@ -156,8 +124,8 @@
                         <div class="card card-body">
                             <div class="d-inline-flex justify-content-center align-items-end mb-1">
                                 <p class="card-text">Please input numbers ↓ </p>
-                                <button type="button" class="btn btn-history btn-lg btn-info" data-toggle="modal"
-                                    data-target=".history-roman"><i class="fas fa-history"></i></button>
+                                <button type="button" class="btn btn-history btn-lg btn-info" data-toggle="modal tooltip"
+                                    data-target=".history-roman" data-placement="top" title="History"><i class="fas fa-history"></i></button>
                             </div>
                             <div class="input-container form-row justify-content-around align-items-center">
                                 <div class="input-group col-md-6">
@@ -254,7 +222,7 @@
                                     class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
                                 <button type="button" class="btn-set btn btn-lg btn-success"><i
                                         class="fas fa-hammer"></i></button>
-                                <button type="button" class="btn btn-score btn-lg btn-info"><span></span></button>
+                                <button type="button" class="btn-score btn btn-lg btn-info"><span></span></button>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-lg-4 col-sm-6">
@@ -365,7 +333,7 @@
             if (!localStorage) {
                 alert('It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing');
             }
-            
+
             const scoreDefault = () => {
                 try {
                     return JSON.parse(localStorage.getItem('scoreCash')).score;
@@ -375,7 +343,7 @@
             }
             $('.btn-score span').text(`Score: ${scoreDefault()}%`);
 
-            $('[data-toggle="tooltip"]').tooltip();
+            $('.eye, .btn-history').tooltip();
 
             $('.clear-history').popover({
                 placement: 'bottom',
@@ -486,6 +454,7 @@
 
         $('.btn-set').on('click', () => {
 
+            $('.qty-denom').css('visibility', 'visible');
             $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
             $('.alert').css('visibility', 'hidden');
             $('#answer').removeAttr('disabled');
@@ -518,6 +487,7 @@
             $('.confirm-clear-score').on('click', () => {
                 localStorage.removeItem('scoreCash');
                 $('.btn-score span').text('Score: 0%');
+                $('.qty-denom, .qty-denom + .badge').css('visibility', 'hidden');
             })
         })
 
@@ -551,7 +521,7 @@
                 const isSth = result.some(i => i > 0);
                 const setResult = () => {
                     for (let i = 0; i < result.length; i++) {
-                        $(`.qty-denom:eq(${i}) + span.badge`).text(result[i]);
+                        $(`.qty-denom:eq(${i}) + .badge`).text(result[i]);
                     }
                     $('.qty-denom + span').not(':contains(0)').css('visibility', 'visible');
                 };

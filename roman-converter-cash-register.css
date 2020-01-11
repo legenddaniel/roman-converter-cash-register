@@ -3,7 +3,11 @@
 }
 
 .popover-body {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
     align-items: baseline;
 }
 
@@ -330,6 +334,10 @@ li:nth-of-type(6) .icon-coin {
 
 .answer label {
     width: 1.5rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .alert {
