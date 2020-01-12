@@ -16,9 +16,6 @@
 </head>
 
 <body>
-    <!-- IE10以上兼容，检测版本号 -->
-
-    <!-- localStorage在IE8以下及隐私模式中不可用 -->
 
     <!-- aria -->
 
@@ -107,6 +104,10 @@
                                 <span class="text-nowrap">0%</span>
                             </div>
                             <p class="card-text">
+                                <strong><span class="ms bg-warning">Are you using browsers from Microsoft? Try the
+                                        latest version
+                                        of Chrome/Firefox/Safari/Opera. No offense but IE/Edge has bad support on ES6+
+                                        features.</span></strong><br><br>
                                 This page has two modules: a roman numerals converter and a cash register simulation.
                                 Both are small projects from my self-learning tutorial. <br><br>You can click <button
                                     type="button" class="btn btn-sm btn-info" disabled><i
@@ -123,9 +124,11 @@
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
                             <div class="d-inline-flex justify-content-center align-items-end mb-1">
-                                <p class="card-text">Please input numbers ↓ </p>
-                                <button type="button" class="btn btn-history btn-lg btn-info" data-toggle="modal tooltip"
-                                    data-target=".history-roman" data-placement="top" title="History"><i class="fas fa-history"></i></button>
+                                <p class="card-text">Please input ↓ </p>
+                                <span class="btn-history" data-toggle="modal" data-target=".history-roman">
+                                    <button type="button" class="btn btn-lg btn-info" data-toggle="tooltip"
+                                        data-placement="top" title="History"><i class="fas fa-history"></i></button>
+                                </span>
                             </div>
                             <div class="input-container form-row justify-content-around align-items-center">
                                 <div class="input-group col-md-6">
@@ -200,6 +203,8 @@
                                 Calculate the change and check if we can make it or not.
                                 <br><br>The result will be
                                 shown as Bootstrap Badges right after the balance for each face value of cash/coin.
+                                <br><br>You can reset your score, which is retained even after you close this page, to 0
+                                by clicking the score button at any time.
                                 <br><br>
                                 <strong>P.S. If no more cash with a face value less than the change we take it as a
                                     failure
@@ -314,7 +319,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -330,9 +334,6 @@
         // Initialization of some html/bootstrap components
 
         $(() => {
-            if (!localStorage) {
-                alert('It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing');
-            }
 
             const scoreDefault = () => {
                 try {
@@ -343,7 +344,7 @@
             }
             $('.btn-score span').text(`Score: ${scoreDefault()}%`);
 
-            $('.eye, .btn-history').tooltip();
+            $('.eye, .btn-history button').tooltip();
 
             $('.clear-history').popover({
                 placement: 'bottom',
@@ -373,6 +374,33 @@
         })
     </script>
     <script src="progress-bar.js"></script>
+    <script>
+        // Browser functioning detection
+
+        $(() => {
+            const version = navigator.userAgent;
+            const regAndroid = /Android\s\d{1,2}/;
+            const regMS = /Trident|Edge/;
+            const text = {
+                'android': 'Are you using old version of Android browser? Try the latest version of Android browser to see how strong the new Bootstrap 4 is!',
+
+                'others': "Your browser looks cool. Let's kick it off!",
+
+                'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.<br><br>'
+            };
+
+            if (version.match(regAndroid) < 'Android 5') {
+                $('.ms').text(text.android);
+            } else if (!!regAndroid.test(version) === !!regMS.test(version)) {
+                if (localStorage) {
+                    $('.ms').text(text.others).toggleClass('bg-warning bg-success');
+                } else {
+                    $('.ms').text(text.localstorage);
+                }
+            }
+        })
+
+    </script>
     <script>
         // Tabs show and hide on the index
         // Only on the first click can DOM be modified
@@ -470,7 +498,7 @@
                 setAmt.forEach(i => qty.push(Math.floor(Math.random() * (i + 1))));
                 qty = [qty.slice(0, 4), qty.slice(4)];
             };
-            generator(1, 4, 2, 2, 5, 2, 5, 4, 5, 2);
+            generator(2, 5, 3, 1, 8, 2, 8, 6, 8, 4);
             const setDenom = () => {
                 for (let i = 0; i < qty[0].length; i++) {
                     $(`.ul-banknotes li:eq(${i}) span.qty-denom`).text(qty[0][i]);
@@ -486,8 +514,8 @@
         $('body').on('shown.bs.popover', () => {
             $('.confirm-clear-score').on('click', () => {
                 localStorage.removeItem('scoreCash');
+                resetScoreCash();
                 $('.btn-score span').text('Score: 0%');
-                $('.qty-denom, .qty-denom + .badge').css('visibility', 'hidden');
             })
         })
 
@@ -505,7 +533,13 @@
                 return cid;
             }
 
-            let cacheScoreCash = JSON.parse(localStorage.getItem('scoreCash')) || { "correct": 0, "total": 0 };
+            const setScoreCash = () => {
+                return resetScoreCash = () => {
+                    cacheScoreCash = { "correct": 0, "total": 0, "score": 0 };
+                }
+            }
+
+            let cacheScoreCash = JSON.parse(localStorage.getItem('scoreCash')) || { "correct": 0, "total": 0, "score": 0 };
 
             $('#answer').on('change', e => {
                 $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
@@ -565,6 +599,8 @@
             $('.tab-cash .alert .close').on('click', e => {
                 $(e.currentTarget).parent().css('visibility', 'hidden');
             })
+
+            setScoreCash();
         }
     </script>
     <script>
@@ -582,7 +618,7 @@
                     localStorage.setItem('historyRoman', JSON.stringify(cacheHistoryRoman));
                 }
             })
-            $('button[data-target=".history-roman"]').on('click', () => {
+            $('.btn-history button').on('click', () => {
                 if (!cacheHistoryRoman['input'].length) {
                     noHistory();
                 } else {

@@ -2,7 +2,7 @@
     vertical-align: middle;
 }
 
-.popover-body {
+.popover-body{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
