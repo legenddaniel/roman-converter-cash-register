@@ -336,13 +336,21 @@
         $(() => {
 
             const scoreDefault = () => {
-                try {
-                    return JSON.parse(localStorage.getItem('scoreCash')).score;
-                } catch {
-                    return 0;
-                }
+                return setScoreDefault = () => {
+                    try {
+                        return [
+                            JSON.parse(localStorage.getItem('scoreCash')).correct,
+                            JSON.parse(localStorage.getItem('scoreCash')).total,
+                            JSON.parse(localStorage.getItem('scoreCash')).score
+                        ];
+                    } catch {
+                        return [0, 0, 0];
+                    }
+                };
             }
-            $('.btn-score span').text(`Score: ${scoreDefault()}%`);
+            scoreDefault();
+
+            $('.btn-score span').text(`Score: ${setScoreDefault()[2]}%`);
 
             $('.eye, .btn-history button').tooltip();
 
@@ -351,20 +359,29 @@
                 html: true,
                 title: 'You are cleaning the history',
                 content: `
-                <span>All records will be removed &nbsp;&nbsp;</span>
-                <a class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
-                <a class="btn btn-sm btn-link">No</a>
+                <div>
+                    <span>All records will be removed &nbsp;&nbsp;</span>
+                    <a class="confirm-clear-history btn btn-sm btn-danger">Yes</a>
+                    <a class="btn btn-sm btn-link">No</a>
+                </div>
             `
             })
             $('.btn-score').popover({
                 placement: 'bottom',
                 html: true,
                 title: 'You are resetting the score',
-                content: `
-                <span>Score will be restored to 0 &nbsp;&nbsp;</span>
-                <a class="confirm-clear-score btn btn-sm btn-danger">Yes</a>
-                <a class="btn btn-sm btn-link">No</a>
-            `
+                content: () => {
+                    return (`
+                <div>
+                    <span>Score will be restored to 0 &nbsp;&nbsp;</span>
+                    <a class="confirm-clear-score btn btn-sm btn-danger">Yes</a>
+                    <a class="btn btn-sm btn-link">No</a>
+                </div>
+                <p class="current-score">Current:<br>
+                    { "correct": ${setScoreDefault()[0]}, "total": ${setScoreDefault()[1]}, "score": ${setScoreDefault()[2]}%}
+                </p>
+            `)
+                }
             })
             $('body').on('shown.bs.popover', () => {
                 $('.popover-body a').on('click', () => {
@@ -378,6 +395,8 @@
         // Browser functioning detection
 
         $(() => {
+            
+            // So far all good for userAgent but I will try to avoid it in the future
             const version = navigator.userAgent;
             const regAndroid = /Android\s\d{1,2}/;
             const regMS = /Trident|Edge/;
@@ -386,7 +405,7 @@
 
                 'others': "Your browser looks cool. Let's kick it off!",
 
-                'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.<br><br>'
+                'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.'
             };
 
             if (version.match(regAndroid) < 'Android 5') {
@@ -476,48 +495,49 @@
     </script>
     <script src="cash-register-new.js"></script>
     <script>
-        // Cash register question part
+        {
+            // Cash register question part
 
-        // The variable 'currency' in cash-register-new.js is global since we have to use it for the next part
+            // The variable 'currency' in cash-register-new.js is global since we have to use it for the next part
+            $('.btn-set').on('click', () => {
 
-        $('.btn-set').on('click', () => {
+                $('.qty-denom').css('visibility', 'visible');
+                $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
+                $('.alert').css('visibility', 'hidden');
+                $('#answer').removeAttr('disabled');
+                $('.answer').attr('data-text', 'Do you think we can make this?');
 
-            $('.qty-denom').css('visibility', 'visible');
-            $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
-            $('.alert').css('visibility', 'hidden');
-            $('#answer').removeAttr('disabled');
-            $('.answer').attr('data-text', 'Do you think we can make this?');
+                // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
+                $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
+                $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()) || 100);
 
-            // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
-            $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
-            $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()) || 100);
-
-            let qty = [];
-            const generator = (...setAmt) => {
-                // Generates random amount of cash, be cautious that the order of the denomination (setAmt) is per the order of icons (i.e. starting from $5) on the webpage rather than of the Object 'currency' above
-                setAmt.forEach(i => qty.push(Math.floor(Math.random() * (i + 1))));
-                qty = [qty.slice(0, 4), qty.slice(4)];
-            };
-            generator(2, 5, 3, 1, 8, 2, 8, 6, 8, 4);
-            const setDenom = () => {
-                for (let i = 0; i < qty[0].length; i++) {
-                    $(`.ul-banknotes li:eq(${i}) span.qty-denom`).text(qty[0][i]);
-                }
-                for (let i = 0; i < qty[1].length; i++) {
-                    $(`.ul-coins li:eq(${i}) span.qty-denom`).text(qty[1][i]);
-                }
-            };
-            setDenom();
-            return getQty = () => [...qty[1], ...qty[0]]; // Re-order the array
-        })
-
-        $('body').on('shown.bs.popover', () => {
-            $('.confirm-clear-score').on('click', () => {
-                localStorage.removeItem('scoreCash');
-                resetScoreCash();
-                $('.btn-score span').text('Score: 0%');
+                let qty = [];
+                const generator = (...setAmt) => {
+                    // Generates random amount of cash, be cautious that the order of the denomination (setAmt) is per the order of icons (i.e. starting from $5) on the webpage rather than of the Object 'currency' above
+                    setAmt.forEach(i => qty.push(Math.floor(Math.random() * (i + 1))));
+                    qty = [qty.slice(0, 4), qty.slice(4)];
+                };
+                generator(2, 5, 3, 1, 8, 2, 8, 6, 8, 4);
+                const setDenom = () => {
+                    for (let i = 0; i < qty[0].length; i++) {
+                        $(`.ul-banknotes li:eq(${i}) span.qty-denom`).text(qty[0][i]);
+                    }
+                    for (let i = 0; i < qty[1].length; i++) {
+                        $(`.ul-coins li:eq(${i}) span.qty-denom`).text(qty[1][i]);
+                    }
+                };
+                setDenom();
+                return getQty = () => [...qty[1], ...qty[0]]; // Re-order the array
             })
-        })
+
+            $('body').on('shown.bs.popover', () => {
+                $('.confirm-clear-score').on('click', () => {
+                    localStorage.removeItem('scoreCash');
+                    resetScoreCash();
+                    $('.btn-score span').text('Score: 0%');
+                })
+            })
+        }
 
     </script>
     <script>
@@ -594,6 +614,8 @@
                 $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
                 $('#answer').prop('disabled', true);
                 $('.answer').attr('data-text', '(Re)set the values to continue');
+                $('.current-score').html(`Current:<br>
+                    { "correct": ${setScoreDefault()[0]}, "total": ${setScoreDefault()[1]}, "score": ${setScoreDefault()[2]}%}`);
             })
 
             $('.tab-cash .alert .close').on('click', e => {
