@@ -87,11 +87,6 @@ a, .btn-link {
     text-decoration: none !important;
 }
 
-/* .collapsing {
-    -webkit-transition: none;
-    transition: none;
-} */
-
 .eye {
     position: fixed;
     top: 1rem;
@@ -140,8 +135,13 @@ a, .btn-link {
     transform: translate(-50%, -50%);
 }
 
-.tab-roman .btn-history {
-    margin: 0 -9rem 0 5rem;
+.tab-roman .card-text {
+    -webkit-transform: translateX(27px);
+    transform: translateX(27px);
+}
+
+.btn-history {
+    z-index: 1;
 }
 
 .input-container::before {
@@ -215,13 +215,10 @@ button[disabled] {
     animation: set 1.5s infinite;
 }
 
-.btn-set, .btn-score {
-    margin-left: .5rem;
-}
-
 .btn-score {
     width: 8rem;
     height: 3rem;
+    margin-left: .5rem;
     white-space: nowrap;
 }
 
@@ -342,4 +339,13 @@ li:nth-of-type(6) .icon-coin {
 
 .alert {
     visibility: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .input-container {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
 }

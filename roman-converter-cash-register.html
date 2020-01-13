@@ -19,7 +19,11 @@
 
     <!-- aria -->
 
-    <div class="modal fade github text-center" tab-index="-1">
+    <!-- 更多浏览器 -->
+
+    <!-- 手机菜单适配 -->
+
+    <div class="modal fade github text-center" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -37,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade wiki text-center" tab-index="-1">
+    <div class="modal fade wiki text-center" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade history-roman text-center" tab-index="-1">
+    <div class="modal fade history-roman text-center" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -82,20 +86,20 @@
     <div class="container-fluid text-center h-100 min-vh-100">
         <ul class="nav nav-pills offset-lg-3 offset-sm-2 offset-1 pt-5">
             <li class="nav-items">
-                <a class="nav-link navbar-brand" href=".tab-about" data-toggle="pill">About</a>
+                <a class="nav-link navbar-brand active" href=".tab-about" data-toggle="pill">About</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link disabled" href=".tab-roman" data-toggle="pill">Roman Converter</a>
+                <a class="nav-link disabled" href=".tab-roman" data-toggle="pill" tabindex="-1">Roman Converter</a>
             </li>
             <li class="nav-items">
-                <a class="nav-link disabled active" href=".tab-cash" data-toggle="pill">Cash Register</a>
+                <a class="nav-link disabled" href=".tab-cash" data-toggle="pill" tabindex="-1">Cash Register</a>
             </li>
         </ul>
         <div class="eye" data-toggle="tooltip" data-placement="left" title="bg-animation">
             <i class="fas fa-eye-slash text-danger"></i>
         </div>
         <div class="tab-content">
-            <div class="tab-pane tab-about">
+            <div class="tab-pane tab-about active">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -110,7 +114,7 @@
                                         features.</span></strong><br><br>
                                 This page has two modules: a roman numerals converter and a cash register simulation.
                                 Both are small projects from my self-learning tutorial. <br><br>You can click <button
-                                    type="button" class="btn btn-sm btn-info" disabled><i
+                                    type="button" class="btn btn-sm btn-info" disabled tabindex="-1"><i
                                         class="fas fa-history"></i></button> to see the history for each component.
                                 <br><br>More info is on my <a data-toggle="modal" href=".github"
                                     class="text-danger">Github</a>
@@ -124,14 +128,14 @@
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
                             <div class="d-inline-flex justify-content-center align-items-end mb-1">
-                                <p class="card-text">Please input ↓ </p>
+                                <p class="card-text flex-grow-1">Please input ↓ </p>
                                 <span class="btn-history" data-toggle="modal" data-target=".history-roman">
                                     <button type="button" class="btn btn-lg btn-info" data-toggle="tooltip"
                                         data-placement="top" title="History"><i class="fas fa-history"></i></button>
                                 </span>
                             </div>
                             <div class="input-container form-row justify-content-around align-items-center">
-                                <div class="input-group col-md-6">
+                                <div class="input-group col-sm-8 col-md-6">
                                     <input type="search" class="input-roman form-control text-center"
                                         title="Roman or Arabic numerals" placeholder="case-insensitive">
                                     <div class="input-group-append">
@@ -191,7 +195,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane tab-cash active">
+            <div class="tab-pane tab-cash">
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-sm-10">
                         <div class="card card-body">
@@ -213,18 +217,21 @@
                                     <br>This is why we introduced the discontinued penny "1¢" here
                                     which is for a simplification purpose.</strong>
                             </p>
-                            <p>Click <button type="button" class="btn btn-sm btn-success" disabled><i
+                            <p>Click <button type="button" class="btn btn-sm btn-success" disabled tabindex="-1"><i
                                         class="fas fa-hammer"></i></button> to (re)set the value, click <button
-                                    type="button" class="btn btn-sm btn-info" disabled>&times;</button> to clear the
+                                    type="button" class="btn btn-sm btn-info" disabled tabindex="-1">&times;</button> to
+                                clear the
                                 score</p>
-                            <div class="form-group form-inline justify-content-center">
-                                <label for="total" class="col-lg-2 col-sm-4 d-inline-block text-right">Total:</label>
-                                <input type="text" id="total"
-                                    class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
-                                <label for="received"
-                                    class="col-lg-2 col-sm-4 d-inline-block text-right">Received:</label>
-                                <input type="text" id="received"
-                                    class="col-lg-2 col-sm-4 form-control-plaintext text-center" readonly>
+                            <div class="form-group form-inline justify-content-center align-items-center">
+                                <div class="col-md-3 col-sm-6 d-flex align-items-center">
+                                    <label for="total">Total:</label>
+                                    <input type="text" id="total" class="form-control-plaintext text-center bg-light" readonly>
+                                </div>
+                                <div class="col-md-3 col-sm-6 d-flex align-items-center">
+                                    <label for="received">Received:</label>
+                                    <input type="text" id="received" class="form-control-plaintext text-center bg-light"
+                                        readonly>
+                                </div>
                                 <button type="button" class="btn-set btn btn-lg btn-success"><i
                                         class="fas fa-hammer"></i></button>
                                 <button type="button" class="btn-score btn btn-lg btn-info"><span></span></button>
@@ -395,7 +402,7 @@
         // Browser functioning detection
 
         $(() => {
-            
+
             // So far all good for userAgent but I will try to avoid it in the future
             const version = navigator.userAgent;
             const regAndroid = /Android\s\d{1,2}/;
@@ -432,6 +439,7 @@
                         $('.navbar-brand')
                             .html('<i class="fab fa-windows"></i>')
                             .removeClass('disabled')
+                            .prop('tabindex', '0')
                             .css({ 'animation': 'fade 1.5s reverse', '-webkit-animation': 'fade 1.5s reverse' }),
                         $('.progress span').text('Loaded')
                     ) :
@@ -498,13 +506,12 @@
         {
             // Cash register question part
 
-            // The variable 'currency' in cash-register-new.js is global since we have to use it for the next part
             $('.btn-set').on('click', () => {
 
                 $('.qty-denom').css('visibility', 'visible');
                 $('.qty-denom + span').not(':contains(0)').css('visibility', 'hidden');
                 $('.alert').css('visibility', 'hidden');
-                $('#answer').removeAttr('disabled');
+                $('#answer').prop({ 'disabled': false, 'tabindex': '0' });
                 $('.answer').attr('data-text', 'Do you think we can make this?');
 
                 // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
@@ -612,7 +619,7 @@
                 localStorage.setItem('scoreCash', JSON.stringify(cacheScoreCash));
 
                 $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
-                $('#answer').prop('disabled', true);
+                $('#answer').prop({ 'disabled': true, 'tabindex': '-1' });
                 $('.answer').attr('data-text', '(Re)set the values to continue');
                 $('.current-score').html(`Current:<br>
                     { "correct": ${setScoreDefault()[0]}, "total": ${setScoreDefault()[1]}, "score": ${setScoreDefault()[2]}%}`);
