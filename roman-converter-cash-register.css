@@ -83,8 +83,13 @@
     }
 }
 
+.mobile {
+    font-size: 1.5rem;
+}
+
 a, .btn-link {
     text-decoration: none !important;
+    outline: none;
 }
 
 .eye {
