@@ -2,7 +2,6 @@
 
 // Update: the opacity of the disabled nav tabs, i.e. Roman Converter & Cash Register Tabs, equals the value of the progress
 
-// Block scope works too but with IIFE we can directly return the function being called
 (() => {
     let progress = 0;
 
@@ -27,11 +26,13 @@
             $('.progress span').text('100%');
 
             setTimeout(() => {
-                $('.navbar-brand')
-                    .css({ 'animation': 'fade 1.5s forwards', '-webkit-animation': 'fade 1.5s forwards' })
-                    .on('animationend', (e) => {
-                        $(e.currentTarget).addClass('disabled');
-                    });
+                if ($(window).width() >= 576) {
+                    $('.navbar-brand')
+                        .css({ 'animation': 'fade 1.5s forwards', '-webkit-animation': 'fade 1.5s forwards' })
+                        .one('animationend', (e) => {
+                            $(e.currentTarget).addClass('disabled');
+                        });
+                }
                 $('.nav-link').not('.navbar-brand')
                     .removeClass('disabled')
                     .css({ 'animation': 'fade 1.5s ease-in-out infinite', '-webkit-animation': 'fade 1.5s ease-in-out infinite' });
@@ -45,4 +46,4 @@
         progress >= 100 ? fnLoaded() : progress += increment;
     };
     return fnLoading();
-}) ()
+})()

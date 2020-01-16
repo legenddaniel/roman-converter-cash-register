@@ -373,11 +373,12 @@
                         .removeClass('offset-lg-3 offset-sm-2 offset-1')
                         .addClass('flex-column bg-light')
                         .css({
+                            'display': 'none',
                             'position': 'absolute',
                             'top': '5rem',
                             'left': '15px',
                             'z-index': 1,
-                            'visibility': 'hidden'
+                            // 'visibility': 'hidden'
                         });
                     $('nav li').on('hover', e => {
                         $(e.currentTarget).css('background-color', 'steelblue');
@@ -390,6 +391,7 @@
                         .removeClass('flex-column bg-light')
                         .addClass('offset-lg-3 offset-sm-2 offset-1')
                         .css({
+                            'display': '',
                             'position': '',
                             'top': '',
                             'left': '',
@@ -446,7 +448,8 @@
             $(window).on('resize', ifMobile);
             $('.mobile').on('click', () => {
                 const visibility = $('nav ul').css('visibility');
-                visibility === 'visible' ? $('nav ul').css('visibility', 'hidden') : $('nav ul').css('visibility', 'visible');
+                // visibility === 'visible' ? $('nav ul').css('visibility', 'hidden') : $('nav ul').css('visibility', 'visible');
+                $('nav ul').toggle();
             })
         })
     </script>
@@ -485,18 +488,26 @@
         // Only on the first click can DOM be modified
         {
             let isFirstclick = true;
+            const fade = () => {
+                if ($(window).width() >= 576) {
+                    $('.navbar-brand').css({ 'animation': 'fade 1.5s reverse', '-webkit-animation': 'fade 1.5s reverse' });
+                } else {
+                    $('.navbar-brand').css({ 'animation': '', '-webkit-animation': '' });
+                }
+            }
             $('.nav-link').not('.navbar-brand').on('click', () => {
-                isFirstclick === true ?
-                    (
-                        $('.nav-link').not('.navbar-brand').css({ 'animation': 'none', '-webkit-animation': 'none' }),
-                        $('.navbar-brand')
-                            .html('<i class="fab fa-windows"></i>')
-                            .removeClass('disabled')
-                            .prop('tabindex', '0')
-                            .css({ 'animation': 'fade 1.5s reverse', '-webkit-animation': 'fade 1.5s reverse' }),
-                        $('.progress span').text('Loaded')
-                    ) :
+                if (isFirstclick) {
+                    $('.nav-link').not('.navbar-brand').css({ 'animation': 'none', '-webkit-animation': 'none' });
+                    $('.navbar-brand')
+                        .html('<i class="fab fa-windows"></i>')
+                        .removeClass('disabled')
+                        .prop('tabindex', '0');
+                    $('.progress span').text('Loaded');
+                    fade();
+                    $(window).on('resize', fade);
+                } else {
                     isFirstclick = false;
+                }
             });
         }
     </script>
