@@ -21,6 +21,8 @@
 
     <!-- 更多浏览器 -->
 
+    <!-- off()没用解决办法，解决后可应用于body click和window resize -->
+
     <div class="modal fade github text-center" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -489,9 +491,8 @@
     </script>
     <script>
         // Tabs show and hide on the index
-        // Only on the first click can DOM be modified
+
         {
-            let isFirstclick = true;
             const fade = () => {
                 if ($(window).width() >= 576) {
                     $('.navbar-brand').css({ 'animation': 'fade 1.5s reverse', '-webkit-animation': 'fade 1.5s reverse' });
@@ -500,18 +501,14 @@
                 }
             }
             $('.nav-link').not('.navbar-brand').on('click', () => {
-                if (isFirstclick) {
-                    $('.nav-link').not('.navbar-brand').css({ 'animation': 'none', '-webkit-animation': 'none' });
-                    $('.navbar-brand')
-                        .html('<i class="fab fa-windows"></i>')
-                        .removeClass('disabled')
-                        .prop('tabindex', '0');
-                    $('.progress span').text('Loaded');
-                    fade();
-                    $(window).on('resize', fade);
-                } else {
-                    isFirstclick = false;
-                }
+                $('.nav-link').not('.navbar-brand').css({ 'animation': 'none', '-webkit-animation': 'none' });
+                $('.navbar-brand')
+                    .html('<i class="fab fa-windows"></i>')
+                    .removeClass('disabled')
+                    .prop('tabindex', '0');
+                $('.progress span').text('Loaded');
+                fade();
+                $(window).on('resize', fade);
             });
         }
     </script>
