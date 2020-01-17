@@ -98,6 +98,7 @@ a, .btn-link {
     right: 1rem;
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
+    z-index: 1;
 }
 
 .nav-link:hover {

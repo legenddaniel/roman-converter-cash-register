@@ -21,7 +21,7 @@
 
     <!-- 更多浏览器 -->
 
-    <!-- 手机菜单适配 -->
+    <!-- 手机菜单动画，考虑bootstrap dropdown -->
 
     <!-- 写个footer -->
 
@@ -366,6 +366,7 @@
             }
 
             const ifMobile = () => {
+
                 if ($(window).width() < 576) {
                     $('.mobile').show();
                     $('nav').addClass('flex-column align-items-start');
@@ -380,9 +381,16 @@
                             'z-index': 1,
                             // 'visibility': 'hidden'
                         });
+                    $('.mobile').on('click', e => {
+                        e.stopPropagation();
+                    });
                     $('nav li').on('hover', e => {
                         $(e.currentTarget).css('background-color', 'steelblue');
                     });
+                    $('body').on('click', () => {
+                        $('nav ul').hide();
+                    });
+
                     $('.navbar-brand').css('margin-right', 0);
                 } else {
                     $('.mobile').hide();
@@ -399,6 +407,7 @@
                             'z-index': '',
                             'visibility': 'visible'
                         });
+                    $('body').off('click');
                     $('.navbar-brand').css('margin-right', '1rem');
                 }
             };
@@ -582,13 +591,12 @@
                 $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
                 $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()) || 100);
 
-                let qty = [];
                 const generator = (...setAmt) => {
                     // Generates random amount of cash, be cautious that the order of the denomination (setAmt) is per the order of icons (i.e. starting from $5) on the webpage rather than of the Object 'currency' above
-                    setAmt.forEach(i => qty.push(Math.floor(Math.random() * (i + 1))));
-                    qty = [qty.slice(0, 4), qty.slice(4)];
+                    const qty = setAmt.map(i => Math.floor(Math.random() * (i + 1)));
+                    return [qty.slice(0, 4), qty.slice(4)];
                 };
-                generator(2, 5, 3, 1, 8, 2, 8, 6, 8, 4);
+                const qty = generator(2, 5, 3, 1, 8, 2, 8, 6, 8, 4);
                 const setDenom = () => {
                     for (let i = 0; i < qty[0].length; i++) {
                         $(`.ul-banknotes li:eq(${i}) span.qty-denom`).text(qty[0][i]);
