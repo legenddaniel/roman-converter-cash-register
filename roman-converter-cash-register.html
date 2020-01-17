@@ -367,6 +367,10 @@
 
             const ifMobile = () => {
 
+                const hide = () => {
+                    $('nav ul').hide();
+                }
+
                 if ($(window).width() < 576) {
                     $('.mobile').show();
                     $('nav').addClass('flex-column align-items-start');
@@ -379,7 +383,6 @@
                             'top': '5rem',
                             'left': '15px',
                             'z-index': 1,
-                            // 'visibility': 'hidden'
                         });
                     $('.mobile').on('click', e => {
                         e.stopPropagation();
@@ -387,9 +390,7 @@
                     $('nav li').on('hover', e => {
                         $(e.currentTarget).css('background-color', 'steelblue');
                     });
-                    $('body').on('click', () => {
-                        $('nav ul').hide();
-                    });
+                    $('body').on('click', hide);
 
                     $('.navbar-brand').css('margin-right', 0);
                 } else {
@@ -405,7 +406,7 @@
                             'left': '',
                             'transform': '',
                             'z-index': '',
-                            'visibility': 'visible'
+                            // 'visibility': 'visible'
                         });
                     $('body').off('click');
                     $('.navbar-brand').css('margin-right', '1rem');
@@ -456,8 +457,6 @@
             ifMobile();
             $(window).on('resize', ifMobile);
             $('.mobile').on('click', () => {
-                const visibility = $('nav ul').css('visibility');
-                // visibility === 'visible' ? $('nav ul').css('visibility', 'hidden') : $('nav ul').css('visibility', 'visible');
                 $('nav ul').toggle();
             })
         })
