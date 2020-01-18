@@ -114,7 +114,7 @@
                                 <span class="text-nowrap">0%</span>
                             </div>
                             <p class="card-text">
-                                <strong><span class="ms bg-warning">Are you using browsers from Microsoft? Try the
+                                <strong><span class="browser bg-warning">Are you using browsers from Microsoft? Try the
                                         latest version
                                         of Chrome/Firefox/Safari/Opera. No offense but IE/Edge has bad support on ES6+
                                         features.</span></strong><br><br>
@@ -380,7 +380,7 @@
                             'position': 'absolute',
                             'top': '5rem',
                             'left': '15px',
-                            'z-index': 1,
+                            'z-index': 1
                         });
                     $('.mobile').on('click', e => {
                         e.stopPropagation();
@@ -389,7 +389,6 @@
                         $(e.currentTarget).css('background-color', 'steelblue');
                     });
                     $('body').on('click', hide);
-
                     $('.navbar-brand').css('margin-right', 0);
                 } else {
                     $('.mobile').hide();
@@ -403,8 +402,7 @@
                             'top': '',
                             'left': '',
                             'transform': '',
-                            'z-index': '',
-                            // 'visibility': 'visible'
+                            'z-index': ''
                         });
                     $('body').off('click');
                     $('.navbar-brand').css('margin-right', '1rem');
@@ -467,24 +465,53 @@
 
             // So far all good for userAgent but I will try to avoid it in the future
             const version = navigator.userAgent;
-            const regAndroid = /Android\s\d{1,2}/;
+            const regBrowser = {
+                'android': /Android\s\d{1,2}/,
+                'safari': /Mac.*Version\/(\d{1,2})|iPhone.*Version\/(\d{1,2})/,
+                'chrome': /(?<=Chrome\/)\d{1,2}|(?<=CriOS\/)\d{1,2}/,
+                'firefox': /(?<=Firefox\/)\d{1,2}|(?<=FxiOS\/)d\{1,2}/,
+                'opera': /(?<=OPR\/)\d{1,2}/
+            };
             const regMS = /Trident|Edge/;
+            const safari = () => {
+                try {
+                    return version.match(regBrowser.safari)[1] >= 9 || version.match(regBrowser.safari)[2] >= 9
+                } catch {
+                    return false;
+                }
+            }
+            const compatibleBrowser = {
+                'android': version.match(regBrowser.android) >= '4.4',
+                'safari': safari(),
+                'chrome': version.match(regBrowser.chrome) >= 45,
+                'firefox': version.match(regBrowser.firefox) >= 38,
+                'opera': version.match(regBrowser.opera) >= 30
+            }
             const text = {
-                'android': 'Are you using old version of Android browser? Try the latest version of Android browser to see how strong the new Bootstrap 4 is!',
+                'incompatible': 'Try the latest version of your browser to see how strong the new Bootstrap 4 is!',
 
-                'others': "Your browser looks cool. Let's kick it off!",
+                'compatible': "Your browser looks cool. Let's kick it off!",
 
                 'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.'
             };
 
-            if (version.match(regAndroid) < 'Android 5') {
-                $('.ms').text(text.android);
-            } else if (!!regAndroid.test(version) === !!regMS.test(version)) {
-                if (localStorage) {
-                    $('.ms').text(text.others).toggleClass('bg-warning bg-success');
-                } else {
-                    $('.ms').text(text.localstorage);
+            if (localStorage) {
+                if (Object.values(compatibleBrowser).some(i => i === true)) {
+                    $('.browser')
+                        .text(text.compatible)
+                        .removeClass('bg-warning')
+                        .addClass('bg-success');
+                } else if (Object.values(compatibleBrowser).every(i => i === false) && !regMS.test(version)) {
+                    $('.browser')
+                        .text(text.incompatible)
+                        .removeClass('bg-success')
+                        .addClass('bg-warning');
                 }
+            } else {
+                $('.browser')
+                    .text(text.localstorage)
+                    .removeClass('bg-success')
+                    .addClass('bg-warning');
             }
         })
 
