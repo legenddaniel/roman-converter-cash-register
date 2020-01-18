@@ -378,9 +378,6 @@
                             'left': '15px',
                             'z-index': 1
                         });
-                    $('.mobile').on('click', e => {
-                        e.stopPropagation();
-                    });
                     $('nav li').on('hover', e => {
                         $(e.currentTarget).css('background-color', 'steelblue');
                     });
@@ -448,8 +445,9 @@
 
             ifMobile();
             $(window).on('resize', ifMobile);
-            $('.mobile').on('click', () => {
+            $('.mobile').on('click', e => {
                 $('nav ul').toggle();
+                e.stopPropagation();
             })
         })
     </script>
