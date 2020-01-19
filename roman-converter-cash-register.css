@@ -182,7 +182,7 @@ a, .btn-link {
     font-size: 0.8rem;
 }
 
-button[disabled] {
+button:disabled {
     opacity: 1 !important;
 }
 
