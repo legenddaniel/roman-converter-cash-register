@@ -4,10 +4,8 @@
 
 .popover-body div {
     display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-align: baseline;
-    -ms-flex-align: baseline;
     align-items: baseline;
 }
 
@@ -351,7 +349,6 @@ li:nth-of-type(6) .icon-coin {
     .input-container {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-        -ms-flex-direction: column;
         flex-direction: column;
     }
 }
