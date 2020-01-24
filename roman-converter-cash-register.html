@@ -19,6 +19,8 @@
 
     <!-- off()没用解决办法，解决后可应用于body click和window resize -->
 
+    <!-- 不会搭本地服务器所以用不了module -->
+
     <div class="modal fade github text-center" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -339,17 +341,51 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script>
+        // Public methods
 
+        const method1 = {
+
+            getProp: (item, prop = '') => {
+                try {
+                    const cacheProp = JSON.parse(localStorage.getItem(item))[prop];
+                    if (prop && cacheProp) {
+                        return cacheProp;
+                    } else if (!prop) {
+                        return JSON.parse(localStorage.getItem(item));
+                    }
+                    return 0;
+                } catch {
+                    return 0;
+                };
+            },
+
+            setProp: (item, val) => {
+                return localStorage.setItem(item, JSON.stringify(val));
+            },
+
+            clearProp: item => {
+                if (item === 'historyRoman') {
+                    // cacheHistoryRoman = { "input": [], "output": [] };
+                } else if (item === 'scoreCash') {
+                    // cacheScoreCash = { "correct": 0, "total": 0, "score": 0 };
+                    // noScore();
+                }
+                localStorage.removeItem(item);
+            }
+        };
+    </script>
     <script>
         // Initialization of some html/bootstrap components
 
         $(() => {
 
+            /* 
             const scoreDefault = () => {
-                return setScoreDefault = () => {
+                return setPropDefault = () => {
                     try {
                         return [
-                            JSON.parse(localStorage.getItem('scoreCash')).correct,
+                            score.getProp('scoreCash', 'correct'),
                             JSON.parse(localStorage.getItem('scoreCash')).total,
                             JSON.parse(localStorage.getItem('scoreCash')).score
                         ];
@@ -357,7 +393,8 @@
                         return [0, 0, 0];
                     }
                 };
-            }
+            } 
+            */
 
             const ifMobile = () => {
 
@@ -402,9 +439,9 @@
                 }
             };
 
-            scoreDefault();
+            // scoreDefault();
 
-            $('.btn-score span').text(`Score: ${setScoreDefault()[2]}%`);
+            $('.btn-score span').text(`Score: ${method1.getProp('scoreCash', 'score')}%`);
 
             $('.eye, .btn-history button').tooltip();
 
@@ -432,7 +469,7 @@
                     <a class="btn btn-sm btn-link">No</a>
                 </div>
                 <p class="current-score">Current:<br>
-                    { "correct": ${setScoreDefault()[0]}, "total": ${setScoreDefault()[1]}, "score": ${setScoreDefault()[2]}%}
+                    { "correct": ${method1.getProp('scoreCash', 'correct')}, "total": ${method1.getProp('scoreCash', 'total')}, "score": ${method1.getProp('scoreCash', 'score')}% }
                 </p>
             `)
                 }
@@ -606,8 +643,8 @@
 
                 const generator = (...setAmt) => {
                     // Generates random amount of cash, be cautious that the order of the denomination (setAmt) is per the order of icons (i.e. starting from $5) on the webpage rather than of the Object 'currency' above
-                    const qty = setAmt.map(i => Math.floor(Math.random() * (i + 1)));
-                    return [qty.slice(0, 4), qty.slice(4)];
+                    const cacheQty = setAmt.map(i => Math.floor(Math.random() * (i + 1)));
+                    return [cacheQty.slice(0, 4), cacheQty.slice(4)];
                 };
                 const qty = generator(2, 5, 3, 1, 8, 2, 8, 6, 8, 4);
                 const setDenom = () => {
@@ -625,8 +662,7 @@
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-score').on('click', () => {
                     localStorage.removeItem('scoreCash');
-                    resetScoreCash();
-                    $('.btn-score span').text('Score: 0%');
+                    noScore();
                 })
             })
         }
@@ -646,12 +682,13 @@
             }
 
             const setScoreCash = () => {
-                return resetScoreCash = () => {
+                return noScore = () => {
                     cacheScoreCash = { "correct": 0, "total": 0, "score": 0 };
+                    $('.btn-score span').text('Score: 0%');
                 }
             }
 
-            let cacheScoreCash = JSON.parse(localStorage.getItem('scoreCash')) || { "correct": 0, "total": 0, "score": 0 };
+            let cacheScoreCash = method1.getProp('scoreCash') || { "correct": 0, "total": 0, "score": 0 };
 
             $('#answer').on('change', e => {
                 $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
@@ -700,14 +737,13 @@
                         .addClass('alert-warning')
                         .css('visibility', 'visible');
                 }
-
-                localStorage.setItem('scoreCash', JSON.stringify(cacheScoreCash));
+                method1.setProp('scoreCash', cacheScoreCash);
 
                 $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
                 $('#answer').prop({ 'disabled': true, 'tabindex': '-1' });
                 $('.answer').attr('data-text', '(Re)set the values to continue');
                 $('.current-score').html(`Current:<br>
-                    { "correct": ${setScoreDefault()[0]}, "total": ${setScoreDefault()[1]}, "score": ${setScoreDefault()[2]}%}`);
+                { "correct": ${method1.getProp('scoreCash', 'correct')}, "total": ${method1.getProp('scoreCash', 'total')}, "score": ${method1.getProp('scoreCash', 'score')}% }`);
             })
 
             $('.tab-cash .alert .close').on('click', e => {
@@ -720,7 +756,7 @@
     <script>
         // Roman coverter history
         {
-            let cacheHistoryRoman = JSON.parse(localStorage.getItem('historyRoman')) || { "input": [], "output": [] };
+            const cacheHistoryRoman = method1.getProp('historyRoman') || { "input": [], "output": [] };
             const noHistory = () => {
                 $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>')
             };
@@ -729,7 +765,7 @@
                 if (getValid() && $('.input-roman').val() !== [...cacheHistoryRoman['input']].pop()) {
                     cacheHistoryRoman['input'].push($('.input-roman').val());
                     cacheHistoryRoman['output'].push($('#output-roman').val());
-                    localStorage.setItem('historyRoman', JSON.stringify(cacheHistoryRoman));
+                    method1.setProp('historyRoman', cacheHistoryRoman);
                 }
             })
             $('.btn-history button').on('click', () => {
@@ -750,7 +786,7 @@
                 $('.confirm-clear-history').on('click', () => {
                     noHistory();
                     localStorage.removeItem('historyRoman');
-                    cacheHistoryRoman = { "input": [], "output": [] };
+                    cacheHistoryRoman.input = cacheHistoryRoman.output = [];
                 })
             });
         }
