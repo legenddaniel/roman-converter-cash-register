@@ -346,7 +346,7 @@
 
         const method1 = {
 
-            getProp: (item, prop = '') => {
+            getProp: (item, prop) => {
                 try {
                     const cacheProp = JSON.parse(localStorage.getItem(item))[prop];
                     if (prop && cacheProp) {
