@@ -661,7 +661,7 @@
 
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-score').on('click', () => {
-                    localStorage.removeItem('scoreCash');
+                    method1.clearProp('scoreCash');
                     noScore();
                 })
             })
@@ -785,7 +785,7 @@
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-history').on('click', () => {
                     noHistory();
-                    localStorage.removeItem('historyRoman');
+                    method1.clearProp('historyRoman');
                     cacheHistoryRoman.input = cacheHistoryRoman.output = [];
                 })
             });
