@@ -396,6 +396,71 @@
             } 
             */
 
+            const isXs = () => $(window).width() < 576;
+            const setMenuDic = {
+                selector: 'nav ul',
+                offset: 'offset-lg-3 offset-sm-2 offset-1',
+                other: 'flex-column bg-light',
+                css1: {
+                    'display': 'none',
+                    'position': 'absolute',
+                    'top': '5rem',
+                    'left': '15px',
+                    'z-index': 1,
+                },
+                css2: {
+                    'display': '',
+                    'position': '',
+                    'top': '',
+                    'left': '',
+                    'transform': '',
+                    'z-index': ''
+                },
+                set: function(selector, remove, add, css) {
+                    $(this[selector]).removeClass(this[remove]).addClass(this[add]).css(this[css]);
+                }
+            }
+            const setMenu = () => {
+                if (isXs()) {
+                    $('.mobile').show();
+                    $('nav').addClass('flex-column align-items-start');
+                    $('body').on('click', hide);
+                    $('nav li').on('hover', e => {
+                        $(e.currentTarget).css('background-color', 'steelblue');
+                    });
+                    setMenuDic
+                    setMenuPublic(
+                        'nav ul',
+                        'offset-lg-3 offset-sm-2 offset-1',
+                        'flex-column bg-light',
+                        {
+                            'display': 'none',
+                            'position': 'absolute',
+                            'top': '5rem',
+                            'left': '15px',
+                            'z-index': 1
+                        }
+                    );
+                } else {
+                    $('.mobile').hide();
+                    $('nav').removeClass('flex-column align-items-start');
+                    $('body').off('click');
+                    setMenuPublic(
+                        'nav ul',
+                        'flex-column bg-light',
+                        'offset-lg-3 offset-sm-2 offset-1',
+                        {
+                            'display': '',
+                            'position': '',
+                            'top': '',
+                            'left': '',
+                            'transform': '',
+                            'z-index': ''
+                        }
+                    )
+                }
+            }
+
             const ifMobile = () => {
 
                 const hide = () => {
@@ -403,38 +468,38 @@
                 }
 
                 if ($(window).width() < 576) {
-                    $('.mobile').show();
-                    $('nav').addClass('flex-column align-items-start');
-                    $('nav ul')
-                        .removeClass('offset-lg-3 offset-sm-2 offset-1')
-                        .addClass('flex-column bg-light')
-                        .css({
-                            'display': 'none',
-                            'position': 'absolute',
-                            'top': '5rem',
-                            'left': '15px',
-                            'z-index': 1
-                        });
-                    $('nav li').on('hover', e => {
-                        $(e.currentTarget).css('background-color', 'steelblue');
-                    });
-                    $('body').on('click', hide);
+                    // $('.mobile').show();
+                    // $('nav').addClass('flex-column align-items-start');
+                    // $('nav ul')
+                    //     .removeClass('offset-lg-3 offset-sm-2 offset-1')
+                    //     .addClass('flex-column bg-light')
+                    //     .css({
+                    //         'display': 'none',
+                    //         'position': 'absolute',
+                    //         'top': '5rem',
+                    //         'left': '15px',
+                    //         'z-index': 1
+                    //     });
+                    // $('nav li').on('hover', e => {
+                    //     $(e.currentTarget).css('background-color', 'steelblue');
+                    // });
+                    // $('body').on('click', hide);
                     $('.navbar-brand').css('margin-right', 0);
                 } else {
-                    $('.mobile').hide();
-                    $('nav').removeClass('flex-column align-items-start');
-                    $('nav ul')
-                        .removeClass('flex-column bg-light')
-                        .addClass('offset-lg-3 offset-sm-2 offset-1')
-                        .css({
-                            'display': '',
-                            'position': '',
-                            'top': '',
-                            'left': '',
-                            'transform': '',
-                            'z-index': ''
-                        });
-                    $('body').off('click');
+                    // $('.mobile').hide();
+                    // $('nav').removeClass('flex-column align-items-start');
+                    // $('nav ul')
+                    //     .removeClass('flex-column bg-light')
+                    //     .addClass('offset-lg-3 offset-sm-2 offset-1')
+                    //     .css({
+                    //         'display': '',
+                    //         'position': '',
+                    //         'top': '',
+                    //         'left': '',
+                    //         'transform': '',
+                    //         'z-index': ''
+                    //     });
+                    // $('body').off('click');
                     $('.navbar-brand').css('margin-right', '1rem');
                 }
             };
