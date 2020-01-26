@@ -758,7 +758,10 @@
         {
             const cacheHistoryRoman = method1.getProp('historyRoman') || { "input": [], "output": [] };
             const noHistory = () => {
-                $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>')
+                $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>');
+                for (let key in cacheHistoryRoman) {
+                    key.length = 0;
+                }
             };
 
             $('.get-roman').on('click', () => {
@@ -786,7 +789,7 @@
                 $('.confirm-clear-history').on('click', () => {
                     noHistory();
                     method1.clearProp('historyRoman');
-                    cacheHistoryRoman.input = cacheHistoryRoman.output = [];
+                    // cacheHistoryRoman.input = cacheHistoryRoman.output = [];
                 })
             });
         }
