@@ -346,6 +346,14 @@
 
         const method1 = {
 
+            initCache: function (item) {
+                if (item === 'historyRoman') {
+                    return this.getProp('historyRoman') || { "input": [], "output": [] };
+                } else if (item === 'scoreCash') {
+                    return this.getProp('scoreCash') || { "correct": 0, "total": 0, "score": 0 }
+                }
+            },
+
             getProp: (item, prop) => {
                 try {
                     const cacheProp = JSON.parse(localStorage.getItem(item))[prop];
@@ -366,13 +374,12 @@
 
             clearProp: item => {
                 if (item === 'historyRoman') {
-                    // cacheHistoryRoman = { "input": [], "output": [] };
+                    ifNoHistory();
                 } else if (item === 'scoreCash') {
-                    // cacheScoreCash = { "correct": 0, "total": 0, "score": 0 };
-                    // noScore();
+                    ifNoScore();
                 }
                 localStorage.removeItem(item);
-            }
+            },
         };
 
         const setMenuDic = {
@@ -659,7 +666,6 @@
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-score').on('click', () => {
                     method1.clearProp('scoreCash');
-                    noScore();
                 })
             })
         }
@@ -679,13 +685,15 @@
             }
 
             const setScoreCash = () => {
-                return noScore = () => {
-                    cacheScoreCash = { "correct": 0, "total": 0, "score": 0 };
+                return ifNoScore = () => {
+                    for (let i in cacheScoreCash) {
+                        cacheScoreCash[i] = 0;
+                    }
                     $('.btn-score span').text('Score: 0%');
-                }
-            }
+                };
+            };
 
-            let cacheScoreCash = method1.getProp('scoreCash') || { "correct": 0, "total": 0, "score": 0 };
+            const cacheScoreCash = method1.initCache('scoreCash');
 
             $('#answer').on('change', e => {
                 $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
@@ -753,13 +761,17 @@
     <script>
         // Roman coverter history
         {
-            const cacheHistoryRoman = method1.getProp('historyRoman') || { "input": [], "output": [] };
-            const noHistory = () => {
-                $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>');
-                for (let key in cacheHistoryRoman) {
-                    key.length = 0;
-                }
+            const cacheHistoryRoman = method1.initCache('historyRoman');
+            const setHistoryRoman = () => {
+                return ifNoHistory = () => {
+                    $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>');
+                    for (let key in cacheHistoryRoman) {
+                        cacheHistoryRoman[key].length = 0;
+                    }
+                };
             };
+
+            setHistoryRoman();
 
             $('.get-roman').on('click', () => {
                 if (getValid() && $('.input-roman').val() !== [...cacheHistoryRoman['input']].pop()) {
@@ -770,7 +782,7 @@
             })
             $('.btn-history button').on('click', () => {
                 if (!cacheHistoryRoman['input'].length) {
-                    noHistory();
+                    ifNoHistory();
                 } else {
                     $('.history-roman tbody').empty();
                     for (let i = 0; i < cacheHistoryRoman['input'].length; i++) {
@@ -784,9 +796,7 @@
             })
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-history').on('click', () => {
-                    noHistory();
                     method1.clearProp('historyRoman');
-                    // cacheHistoryRoman.input = cacheHistoryRoman.output = [];
                 })
             });
         }
