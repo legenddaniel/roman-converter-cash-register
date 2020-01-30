@@ -401,7 +401,7 @@
                 'transform': '',
                 'z-index': ''
             },
-            _navCss: 'flex-column align-items-start',
+            _cssNav: 'flex-column align-items-start',
             isXs: () => $(window).width() < 576,
             setProp: function (selector, remove, add, css) {
                 $(this[selector]).removeClass(this[remove]).addClass(this[add]).css(this[css]);
@@ -414,7 +414,7 @@
                     $('nav ul').hide();
                 };
                 $('.mobile').show();
-                $('nav').addClass(this._navCss);
+                $('nav').addClass(this._cssNav);
                 $('body').on('click', hide);
                 $('nav li').on('hover', e => {
                     $(e.currentTarget).css('background-color', 'steelblue');
@@ -422,7 +422,7 @@
             },
             setUnlessXs: function () {
                 $('.mobile').hide();
-                $('nav').removeClass(this._navCss);
+                $('nav').removeClass(this._cssNav);
                 $('body').off('click');
             },
         };
@@ -499,29 +499,93 @@
         $(() => {
 
             // So far all good for userAgent but I will try to avoid it in the future
-            const version = navigator.userAgent;
-            const regBrowser = {
-                'android': /Android\s\d{1,2}/,
-                'safari': /Mac.*Version\/(\d{1,2})|iPhone.*Version\/(\d{1,2})/,
-                'chrome': /(?<=Chrome\/)\d{1,2}|(?<=CriOS\/)\d{1,2}/,
-                'firefox': /(?<=Firefox\/)\d{1,2}|(?<=FxiOS\/)d\{1,2}/,
-                'opera': /(?<=OPR\/)\d{1,2}/
+            const getVersion = navigator.userAgent;
+            // const regBrowser = {
+            //     'android': /Android\s\d{1,2}/,
+            //     'safari': /(?:Mac|iPhone)(?:.*Version\/)(\d{1,2})/,
+            //     'chrome': /(?<=Chrome\/)\d{1,2}|(?<=CriOS\/)\d{1,2}/,
+            //     'firefox': /(?<=Firefox\/)\d{1,2}|(?<=FxiOS\/)d\{1,2}/,
+            //     'opera': /(?<=OPR\/)\d{1,2}/,
+            // };
+
+            const browsers = {
+                'android': {
+                    regex: /Android\s\d{1,2}/,
+                    version: '4.4',
+                },
+                'safari': {
+                    regex: /(?:Mac|iPhone)(?:.*Version\/)(\d{1,2})/,
+                    version: 9,
+                },
+                'chrome': {
+                    regex: /(?<=Chrome\/)\d{1,2}|(?<=CriOS\/)\d{1,2}/,
+                    version: 45,
+                },
+                'firefox': {
+                    regex: /(?<=Firefox\/)\d{1,2}|(?<=FxiOS\/)d\{1,2}/,
+                    version: 38,
+                },
+                'opera': {
+                    regex: /(?<=OPR\/)\d{1,2}/,
+                    version: 30,
+                },
             };
+            for (let browser in browsers) {
+                Object.defineProperties(browsers[browser], 'compatibility', {
+                    writable: false,
+                    configurable: false,
+                    enumerable: false,
+                    value: () => {
+                        if (browser === 'safari') {
+                            try {
+                                return getVersion.match([browser].regex)[1] >= [browser].version;
+                            } catch {
+                                return false;
+                            }
+                        } else {
+                            return getVersion.match([browser].regex) >= [browser].version;
+                        }
+                    }
+                })
+            }
+
+
+            // class Browser {
+            //     constructor (name, reg, version) {
+            //         this.name = name;
+            //         this.reg = reg;
+            //         this.version = version;
+            //     };
+            //     ifCompatible() {
+
+            //     }
+            // }
             const regMS = /Trident|Edge/;
-            const safari = () => {
-                try {
-                    return version.match(regBrowser.safari)[1] >= 9 || version.match(regBrowser.safari)[2] >= 9
-                } catch {
-                    return false;
-                }
-            }
+            // const safari = () => {
+            //     try {
+            //         return getVersion.match(browser.safari)[1] >= 9;
+            //     } catch {
+            //         return false;
+            //     }
+            // };
             const compatibleBrowser = {
-                'android': version.match(regBrowser.android) >= '4.4',
+                'android': getVersion.match(regBrowser.android) >= '4.4',
                 'safari': safari(),
-                'chrome': version.match(regBrowser.chrome) >= 45,
-                'firefox': version.match(regBrowser.firefox) >= 38,
-                'opera': version.match(regBrowser.opera) >= 30
-            }
+                'chrome': getVersion.match(regBrowser.chrome) >= 45,
+                'firefox': getVersion.match(regBrowser.firefox) >= 38,
+                'opera': getVersion.match(regBrowser.opera) >= 30,
+                // 'ms': false,
+            };
+            // const ifCompatible = (browser, version) => {
+            //     for (browser in regBrowser) {
+            //         if (browser === 'safari') {
+            //             return safari();
+            //         } else {
+            //             return getVersion.match(regBrowser[browser]) >= version;
+            //         }
+
+            //     }
+            // }
             const text = {
                 'incompatible': 'Try the latest version of your browser to see how strong the new Bootstrap 4 is!',
 
@@ -536,7 +600,7 @@
                         .text(text.compatible)
                         .removeClass('bg-warning')
                         .addClass('bg-success');
-                } else if (Object.values(compatibleBrowser).every(i => i === false) && !regMS.test(version)) {
+                } else if (Object.values(compatibleBrowser).every(i => i === false) && !regMS.test(getVersion)) {
                     $('.browser')
                         .text(text.incompatible)
                         .removeClass('bg-success')
