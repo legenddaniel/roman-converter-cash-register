@@ -500,14 +500,6 @@
 
             // So far all good for userAgent but I will try to avoid it in the future
             const getVersion = navigator.userAgent;
-            // const regBrowser = {
-            //     'android': /Android\s\d{1,2}/,
-            //     'safari': /(?:Mac|iPhone)(?:.*Version\/)(\d{1,2})/,
-            //     'chrome': /(?<=Chrome\/)\d{1,2}|(?<=CriOS\/)\d{1,2}/,
-            //     'firefox': /(?<=Firefox\/)\d{1,2}|(?<=FxiOS\/)d\{1,2}/,
-            //     'opera': /(?<=OPR\/)\d{1,2}/,
-            // };
-
             const browsers = {
                 'android': {
                     regex: /Android\s\d{1,2}/,
@@ -530,61 +522,33 @@
                     version: 30,
                 },
             };
+            const regMS = /Trident|Edge/;
             const checkCompatibility = () => {
                 for (let browser in browsers) {
-                    Object.defineProperties(browsers[browser], 'compatibility', {
+                    Object.defineProperty(browsers[browser], 'compatibility', {
                         writable: true,
                         configurable: true,
                         enumerable: false,
                         value: (() => {
                             if (browser === 'safari') {
                                 try {
-                                    return getVersion.match([browser].regex)[1] >= [browser].version;
+                                    return getVersion.match(browsers[browser].regex)[1] >= browsers[browser].version;
                                 } catch {
                                     return false;
                                 }
                             } else {
-                                return getVersion.match([browser].regex) >= [browser].version;
+                                return getVersion.match(browsers[browser].regex) >= browsers[browser].version;
                             }
-                        }) (),
+                        })(),
                     });
                 };
                 for (let browser in browsers) {
-                    if ([browser].compatibility) {
+                    if (browsers[browser].compatibility) {
                         return true;
                     }
                 }
                 return false;
             };
-
-
-
-            // class Browser {
-            //     constructor (name, reg, version) {
-            //         this.name = name;
-            //         this.reg = reg;
-            //         this.version = version;
-            //     };
-            //     ifCompatible() {
-
-            //     }
-            // }
-            const regMS = /Trident|Edge/;
-            // const safari = () => {
-            //     try {
-            //         return getVersion.match(browser.safari)[1] >= 9;
-            //     } catch {
-            //         return false;
-            //     }
-            // };
-            // const compatibleBrowser = {
-            //     'android': getVersion.match(regBrowser.android) >= '4.4',
-            //     'safari': safari(),
-            //     'chrome': getVersion.match(regBrowser.chrome) >= 45,
-            //     'firefox': getVersion.match(regBrowser.firefox) >= 38,
-            //     'opera': getVersion.match(regBrowser.opera) >= 30,
-            // };
-
             const text = {
                 'incompatible': 'Try the latest version of your browser to see how strong the new Bootstrap 4 is!',
 
@@ -599,7 +563,7 @@
                         .text(text.compatible)
                         .removeClass('bg-warning')
                         .addClass('bg-success');
-                } else if (!(checkCompatibility() || regMS.test(getVersion))) {
+                } else if (!checkCompatibility() && !regMS.test(getVersion)) {
                     $('.browser')
                         .text(text.incompatible)
                         .removeClass('bg-success')
