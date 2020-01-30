@@ -530,24 +530,33 @@
                     version: 30,
                 },
             };
-            for (let browser in browsers) {
-                Object.defineProperties(browsers[browser], 'compatibility', {
-                    writable: false,
-                    configurable: false,
-                    enumerable: false,
-                    value: () => {
-                        if (browser === 'safari') {
-                            try {
-                                return getVersion.match([browser].regex)[1] >= [browser].version;
-                            } catch {
-                                return false;
+            const checkCompatibility = () => {
+                for (let browser in browsers) {
+                    Object.defineProperties(browsers[browser], 'compatibility', {
+                        writable: true,
+                        configurable: true,
+                        enumerable: false,
+                        value: (() => {
+                            if (browser === 'safari') {
+                                try {
+                                    return getVersion.match([browser].regex)[1] >= [browser].version;
+                                } catch {
+                                    return false;
+                                }
+                            } else {
+                                return getVersion.match([browser].regex) >= [browser].version;
                             }
-                        } else {
-                            return getVersion.match([browser].regex) >= [browser].version;
-                        }
+                        }) (),
+                    });
+                };
+                for (let browser in browsers) {
+                    if ([browser].compatibility) {
+                        return true;
                     }
-                })
-            }
+                }
+                return false;
+            };
+
 
 
             // class Browser {
@@ -568,24 +577,14 @@
             //         return false;
             //     }
             // };
-            const compatibleBrowser = {
-                'android': getVersion.match(regBrowser.android) >= '4.4',
-                'safari': safari(),
-                'chrome': getVersion.match(regBrowser.chrome) >= 45,
-                'firefox': getVersion.match(regBrowser.firefox) >= 38,
-                'opera': getVersion.match(regBrowser.opera) >= 30,
-                // 'ms': false,
-            };
-            // const ifCompatible = (browser, version) => {
-            //     for (browser in regBrowser) {
-            //         if (browser === 'safari') {
-            //             return safari();
-            //         } else {
-            //             return getVersion.match(regBrowser[browser]) >= version;
-            //         }
+            // const compatibleBrowser = {
+            //     'android': getVersion.match(regBrowser.android) >= '4.4',
+            //     'safari': safari(),
+            //     'chrome': getVersion.match(regBrowser.chrome) >= 45,
+            //     'firefox': getVersion.match(regBrowser.firefox) >= 38,
+            //     'opera': getVersion.match(regBrowser.opera) >= 30,
+            // };
 
-            //     }
-            // }
             const text = {
                 'incompatible': 'Try the latest version of your browser to see how strong the new Bootstrap 4 is!',
 
@@ -595,12 +594,12 @@
             };
 
             if (localStorage) {
-                if (Object.values(compatibleBrowser).some(i => i === true)) {
+                if (checkCompatibility()) {
                     $('.browser')
                         .text(text.compatible)
                         .removeClass('bg-warning')
                         .addClass('bg-success');
-                } else if (Object.values(compatibleBrowser).every(i => i === false) && !regMS.test(getVersion)) {
+                } else if (!(checkCompatibility() || regMS.test(getVersion))) {
                     $('.browser')
                         .text(text.incompatible)
                         .removeClass('bg-success')
