@@ -19,8 +19,6 @@
 
     <!-- off()没用解决办法，解决后可应用于body click和window resize -->
 
-    <!-- 检查hide是否为匿名函数 -->
-
     <!-- 不会搭本地服务器所以用不了module -->
 
     <div class="modal fade github text-center" tabindex="-1">
@@ -346,7 +344,7 @@
     <script>
         // Public methods
 
-        const methodsMain = {
+        const method1 = {
 
             initCache: function (item) {
                 if (item === 'historyRoman') {
@@ -382,18 +380,6 @@
                 }
                 localStorage.removeItem(item);
             },
-
-            setScoreHtml: () => {
-                return (
-                    `Current:<br>
-                    { "correct": ${methodsMain.getProp('scoreCash', 'correct')}, "total": ${methodsMain.getProp('scoreCash', 'total')}, "score": ${methodsMain.getProp('scoreCash', 'score')}% }`
-                );
-            },
-
-            ifResize: fn => {
-                fn();
-                $(window).on('resize', fn);
-            },
         };
 
         const setMenuDic = {
@@ -418,7 +404,7 @@
             _cssNav: 'flex-column align-items-start',
             isXs: () => $(window).width() < 576,
             setProp: function (selector, remove, add, css) {
-                $(selector).removeClass(remove).addClass(add).css(css);
+                $(this[selector]).removeClass(this[remove]).addClass(this[add]).css(this[css]);
             },
             setMr: (selector, mr) => {
                 $(selector).css('margin-right', mr);
@@ -450,16 +436,16 @@
             const setMenu = () => {
                 if (setMenuDic.isXs()) {
                     setMenuDic.setIfXs();
-                    setMenuDic.setProp(this._selector, this._offset, this._other, this._css1);
+                    setMenuDic.setProp('_selector', '_offset', '_other', '_css1');
                     setMenuDic.setMr('.navbar-brand', 0);
                 } else {
                     setMenuDic.setUnlessXs();
-                    setMenuDic.setProp(this._selector, this._other, this._offset, this._css2);
+                    setMenuDic.setProp('_selector', '_other', '_offset', '_css2');
                     setMenuDic.setMr('.navbar-brand', '1rem');
                 }
             };
 
-            $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
+            $('.btn-score span').text(`Score: ${method1.getProp('scoreCash', 'score')}%`);
 
             $('.eye, .btn-history button').tooltip();
 
@@ -480,25 +466,26 @@
                 html: true,
                 title: 'You are resetting the score',
                 content: () => {
-                    return (
-                        `<div>
-                            <span>Score will be restored to 0 &nbsp;&nbsp;</span>
-                            <a class="confirm-clear-score btn btn-sm btn-danger">Yes</a>
-                            <a class="btn btn-sm btn-link">No</a>
-                        </div>
-                        <p class="current-score">${methodsMain.setScoreHtml()}</p>
-                        `
-                    );
-                },
-            });
+                    return (`
+                <div>
+                    <span>Score will be restored to 0 &nbsp;&nbsp;</span>
+                    <a class="confirm-clear-score btn btn-sm btn-danger">Yes</a>
+                    <a class="btn btn-sm btn-link">No</a>
+                </div>
+                <p class="current-score">Current:<br>
+                    { "correct": ${method1.getProp('scoreCash', 'correct')}, "total": ${method1.getProp('scoreCash', 'total')}, "score": ${method1.getProp('scoreCash', 'score')}% }
+                </p>
+            `)
+                }
+            })
             $('body').on('shown.bs.popover', () => {
                 $('.popover-body a').on('click', () => {
                     $('.clear-history, .btn-score').popover('hide');
                 })
             })
 
-            methodsMain.ifResize(setMenu);
-
+            setMenu();
+            $(window).on('resize', setMenu);
             $('.mobile').on('click', e => {
                 $('nav ul').toggle();
                 e.stopPropagation();
@@ -514,35 +501,28 @@
             // So far all good for userAgent but I will try to avoid it in the future
             const getVersion = navigator.userAgent;
             const browsers = {
-                _android: {
+                'android': {
                     regex: /Android\s\d{1,2}/,
                     version: '4.4',
                 },
-                _safari: {
+                'safari': {
                     regex: /(?:Mac|iPhone)(?:.*Version\/)(\d{1,2})/,
                     version: 9,
                 },
-                _chrome: {
+                'chrome': {
                     regex: /(?<=Chrome\/)\d{1,2}|(?<=CriOS\/)\d{1,2}/,
                     version: 45,
                 },
-                _firefox: {
+                'firefox': {
                     regex: /(?<=Firefox\/)\d{1,2}|(?<=FxiOS\/)d\{1,2}/,
                     version: 38,
                 },
-                _opera: {
+                'opera': {
                     regex: /(?<=OPR\/)\d{1,2}/,
                     version: 30,
                 },
             };
             const regMS = /Trident|Edge/;
-            const text = {
-                'incompatible': 'Try the latest version of your browser to see how strong the new Bootstrap 4 is!',
-
-                'compatible': "Your browser looks cool. Let's kick it off!",
-
-                'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.'
-            };
             const checkCompatibility = () => {
                 for (let browser in browsers) {
                     Object.defineProperty(browsers[browser], 'compatibility', {
@@ -550,7 +530,7 @@
                         configurable: true,
                         enumerable: false,
                         value: (() => {
-                            if (browser === '_safari') {
+                            if (browser === 'safari') {
                                 try {
                                     return getVersion.match(browsers[browser].regex)[1] >= browsers[browser].version;
                                 } catch {
@@ -569,20 +549,33 @@
                 }
                 return false;
             };
-            const setAbout = (selector, text, remove, add) => {
-                $(selector).text(text).removeClass(remove).addClass(add);
+            const text = {
+                'incompatible': 'Try the latest version of your browser to see how strong the new Bootstrap 4 is!',
+
+                'compatible': "Your browser looks cool. Let's kick it off!",
+
+                'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.'
             };
 
             if (localStorage) {
                 if (checkCompatibility()) {
-                    setAbout('.browser', text.compatible, 'bg-warning', 'bg-success');
+                    $('.browser')
+                        .text(text.compatible)
+                        .removeClass('bg-warning')
+                        .addClass('bg-success');
                 } else if (!checkCompatibility() && !regMS.test(getVersion)) {
-                    setAbout('.browser', text.incompatible, 'bg-success', 'bg-warning');
+                    $('.browser')
+                        .text(text.incompatible)
+                        .removeClass('bg-success')
+                        .addClass('bg-warning');
                 }
             } else {
-                setAbout('.browser', text.localstorage, 'bg-success', 'bg-warning');
+                $('.browser')
+                    .text(text.localstorage)
+                    .removeClass('bg-success')
+                    .addClass('bg-warning');
             }
-        });
+        })
 
     </script>
     <script>
@@ -595,7 +588,7 @@
                 } else {
                     $('.navbar-brand').css({ 'animation': '', '-webkit-animation': '' });
                 }
-            };
+            }
             $('.nav-link').not('.navbar-brand').on('click', () => {
                 $('.nav-link').not('.navbar-brand').css({ 'animation': 'none', '-webkit-animation': 'none' });
                 $('.navbar-brand')
@@ -603,24 +596,28 @@
                     .removeClass('disabled')
                     .prop('tabindex', '0');
                 $('.progress span').text('Loaded');
-                methodsMain.ifResize(fade);
+                fade();
+                $(window).on('resize', fade);
             });
         }
     </script>
     <script>
         // Background animation switch
-        // Due to the browser prefix for animation, $.toggleClass() now working well
-
-        $('.eye').on('click', e => {
+        {
             const eyeRed = '<i class="fas fa-eye-slash text-danger"></i>';
-            const eyeGreen = '<i class="far fa-eye text-success"></i>';
-            const animationCtrl = (html, status) => {
-                $(e.currentTarget).html(html);
-                $('.container-fluid').css({ 'animation-play-state': status, '-webkit-animation-play-state': status });
-            };
+            const eyeGreen = '<i class="far fa-eye text-success"></i>'
+            $('.eye').on('click', e => {
+                $(e.currentTarget).html() === eyeGreen ?
+                    (
+                        $(e.currentTarget).html(eyeRed),
+                        $('.container-fluid').css({ 'animation-play-state': 'running', '-webkit-animation-play-state': 'running' })
 
-            $(e.currentTarget).html() === eyeGreen ? animationCtrl(eyeRed, 'running') : animationCtrl(eyeGreen, 'paused');
-        });
+                    ) : (
+                        $(e.currentTarget).html(eyeGreen),
+                        $('.container-fluid').css({ 'animation-play-state': 'paused', '-webkit-animation-play-state': 'paused' })
+                    );
+            })
+        }
     </script>
     <script src="roman-converter.js"></script>
     <script>
@@ -695,7 +692,7 @@
 
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-score').on('click', () => {
-                    methodsMain.clearProp('scoreCash');
+                    method1.clearProp('scoreCash');
                 })
             })
         }
@@ -704,17 +701,26 @@
     <script>
         //Cash register answer part
         {
+            const setCid = () => {
+                const cid = [];
+                const qty = getQty();
+                const denom = Object.keys(currency);
+                for (let i = 0; i < qty.length; i++) {
+                    cid.push([denom[i], qty[i]]);
+                }
+                return cid;
+            }
 
-            const setScoreCash = (() => {
+            const setScoreCash = () => {
                 return ifNoScore = () => {
                     for (let i in cacheScoreCash) {
                         cacheScoreCash[i] = 0;
                     }
                     $('.btn-score span').text('Score: 0%');
                 };
-            })();
+            };
 
-            const cacheScoreCash = methodsMain.initCache('scoreCash');
+            const cacheScoreCash = method1.initCache('scoreCash');
 
             $('#answer').on('change', e => {
                 $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
@@ -722,21 +728,12 @@
 
             $('.answer button').on('click', () => {
 
-                const setCid = () => {
-                    const cid = [];
-                    const qty = getQty();
-                    const denom = Object.keys(currency);
-                    for (let i = 0; i < qty.length; i++) {
-                        cid.push([denom[i], qty[i]]);
-                    }
-                    return cid;
-                };
                 const cacheResult = checkCashRegister($('#total').val(), $('#received').val(), setCid());
 
                 // The order of the denomination is the same as on the webpage
                 const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)];
                 const isChecked = $('#answer').prop('checked');
-                const changeDue = result.some(i => i > 0);
+                const isSth = result.some(i => i > 0);
                 const setResult = () => {
                     for (let i = 0; i < result.length; i++) {
                         $(`.qty-denom:eq(${i}) + .badge`).text(result[i]);
@@ -744,57 +741,70 @@
                     $('.qty-denom + span').not(':contains(0)').css('visibility', 'visible');
                 };
 
-                if (changeDue) {
+                if (isSth) {
                     setResult();
                 }
 
-                const setAlert = (text, ...setPropParameters) => {
-                    $('.alert span').text(text);
-                    setMenuDic.setProp('.alert', ...setPropParameters);
-                };
                 if ($('.answer').attr('data-text') === 'Do you think we can make this?') {
-                    if (!(isChecked ^ changeDue)) {
+                    if (!!isChecked === !!isSth) {
                         cacheScoreCash.correct++;
-                        setAlert('You got it!', 'alert-danger alert-warning', 'alert-success', { 'visibility': 'visible' });
+                        $('.alert span').text('You got it!');
+                        $('.alert')
+                            .removeClass('alert-danger alert-warning')
+                            .addClass('alert-success')
+                            .css('visibility', 'visible');
                     } else {
-                        setAlert('Goose egg!', 'alert-success alert-warning', 'alert-danger', { 'visibility': 'visible' });
+                        $('.alert span').text('Goose egg!');
+                        $('.alert')
+                            .removeClass('alert-success alert-warning')
+                            .addClass('alert-danger')
+                            .css('visibility', 'visible');
                     }
                     cacheScoreCash.total++;
                     cacheScoreCash.score = Math.round(100 * cacheScoreCash.correct / cacheScoreCash.total);
                 } else {
-                    setAlert("Let's move on to the next!", 'alert-danger alert-success', 'alert-warning', { 'visibility': 'visible' });
+                    $('.alert span').text("Let's move on to the next!");
+                    $('.alert')
+                        .removeClass('alert-danger alert-success')
+                        .addClass('alert-warning')
+                        .css('visibility', 'visible');
                 }
-                methodsMain.setProp('scoreCash', cacheScoreCash);
+                method1.setProp('scoreCash', cacheScoreCash);
 
                 $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
                 $('#answer').prop({ 'disabled': true, 'tabindex': '-1' });
                 $('.answer').attr('data-text', '(Re)set the values to continue');
-                $('.current-score').html(methodsMain.setScoreHtml());
-            });
+                $('.current-score').html(`Current:<br>
+                { "correct": ${method1.getProp('scoreCash', 'correct')}, "total": ${method1.getProp('scoreCash', 'total')}, "score": ${method1.getProp('scoreCash', 'score')}% }`);
+            })
 
             $('.tab-cash .alert .close').on('click', e => {
                 $(e.currentTarget).parent().css('visibility', 'hidden');
-            });
+            })
+
+            setScoreCash();
         }
     </script>
     <script>
         // Roman coverter history
         {
-            const cacheHistoryRoman = methodsMain.initCache('historyRoman');
-            const setHistoryRoman = (() => {
+            const cacheHistoryRoman = method1.initCache('historyRoman');
+            const setHistoryRoman = () => {
                 return ifNoHistory = () => {
                     $('.history-roman tbody').html('<tr><td colspan="2" class="text-center">No history</td></tr>');
                     for (let key in cacheHistoryRoman) {
                         cacheHistoryRoman[key].length = 0;
                     }
                 };
-            })();
+            };
+
+            setHistoryRoman();
 
             $('.get-roman').on('click', () => {
                 if (getValid() && $('.input-roman').val() !== [...cacheHistoryRoman['input']].pop()) {
                     cacheHistoryRoman['input'].push($('.input-roman').val());
                     cacheHistoryRoman['output'].push($('#output-roman').val());
-                    methodsMain.setProp('historyRoman', cacheHistoryRoman);
+                    method1.setProp('historyRoman', cacheHistoryRoman);
                 }
             })
             $('.btn-history button').on('click', () => {
@@ -813,7 +823,7 @@
             })
             $('body').on('shown.bs.popover', () => {
                 $('.confirm-clear-history').on('click', () => {
-                    methodsMain.clearProp('historyRoman');
+                    method1.clearProp('historyRoman');
                 })
             });
         }
