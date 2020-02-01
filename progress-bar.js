@@ -2,7 +2,7 @@
 
 // Update: the opacity of the disabled nav tabs, i.e. Roman Converter & Cash Register Tabs, equals the value of the progress
 
-(() => {
+$(() => {
     let progress = 0;
 
     // If .js not loaded properly we can still see the disabled tabs
@@ -46,4 +46,4 @@
         progress >= 100 ? fnLoaded() : progress += increment;
     };
     return fnLoading();
-})()
+})
