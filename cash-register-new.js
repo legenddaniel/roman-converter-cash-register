@@ -27,9 +27,9 @@ const currency = {
             changeDue = Math.round((changeDue - cacheChange[unit][1] * currency[cid[unit][0]]) * 100) / 100;
         }
 
-        return (
-            change = changeDue ? [] : cacheChange,
-            change.reverse().flat().filter(i => +i >= 0)
-        );
+        const flatten = arr => arr.join(',').split(',').map(num => +num);
+        change = changeDue ? [] : flatten(cacheChange.reverse());
+
+        return change.filter(i => +i >= 0);
     };
-}) ();
+})();
