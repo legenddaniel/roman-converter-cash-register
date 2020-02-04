@@ -230,13 +230,13 @@
                             <div class="form-group form-inline justify-content-center align-items-center">
                                 <div class="col-md-3 col-sm-6 d-flex align-items-center">
                                     <label for="total">Total:</label>
-                                    <input type="text" id="total" class="form-control-plaintext text-center bg-light w-50"
-                                        readonly>
+                                    <input type="text" id="total"
+                                        class="form-control-plaintext text-center bg-light w-50" readonly>
                                 </div>
                                 <div class="col-md-3 col-sm-6 d-flex align-items-center">
                                     <label for="received">Received:</label>
-                                    <input type="text" id="received" class="form-control-plaintext text-center bg-light w-50"
-                                        readonly>
+                                    <input type="text" id="received"
+                                        class="form-control-plaintext text-center bg-light w-50" readonly>
                                 </div>
                                 <button type="button" class="btn-set btn btn-lg btn-success"><i
                                         class="fas fa-hammer"></i></button>
@@ -364,7 +364,7 @@
                         return JSON.parse(localStorage.getItem(item));
                     }
                     return 0;
-                } catch(e) { // Identifier 'e' only for IE/Edge support
+                } catch (e) { // Identifier 'e' only for IE/Edge support
                     return 0;
                 };
             },
@@ -419,7 +419,7 @@
             setStyle: function (selector, remove, add, css) {
                 try {
                     $(this[selector]).removeClass(this[remove]).addClass(this[add]).css(this[css]);
-                } catch(e) { // Identifier 'e' only for IE/Edge support
+                } catch (e) { // Identifier 'e' only for IE/Edge support
                     $(selector).removeClass(remove).addClass(add).css(css);
                 }
             },
@@ -568,7 +568,7 @@
                         value: (() => {
                             try {
                                 return getVersion.match(browsers[browser].regex)[1] >= browsers[browser].version;
-                            } catch(e) { // Identifier 'e' only for IE/Edge support
+                            } catch (e) { // Identifier 'e' only for IE/Edge support
                                 return false;
                             }
                         })(),
