@@ -1,6 +1,10 @@
+$translate: 50%;
 nav {
     background-color: #fff;
     ul {
         background-color: #000;
+        color: red;
+        -webkit-transform: translateX($translate);
+                transform: translateX($translate);
     }
 }

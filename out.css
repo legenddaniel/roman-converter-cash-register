@@ -3,6 +3,9 @@ nav {
 }
 nav ul {
   background-color: #000;
+  color: red;
+  -webkit-transform: translateX(50%);
+  transform: translateX(50%);
 }
 
 /*# sourceMappingURL=out.css.map */
