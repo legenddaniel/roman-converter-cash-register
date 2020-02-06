@@ -1,11 +1,23 @@
-nav {
-  background-color: #fff;
+.modal thead th {
+  vertical-align: middle;
 }
-nav ul {
-  background-color: #000;
-  color: red;
-  -webkit-transform: translateX(50%);
-  transform: translateX(50%);
+
+.popover-body div {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+.popover-body a {
+  cursor: pointer;
+}
+
+.confirm-clear-score, .confirm-clear-history {
+  color: #fff;
+}
+
+.btn-link {
+  color: #007bff !important;
 }
 
 /*# sourceMappingURL=out.css.map */

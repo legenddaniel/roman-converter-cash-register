@@ -1,0 +1,20 @@
+{
+  "name": "roman-converter-cash-register",
+  "version": "1.0.0",
+  "description": "Containing a simple roman converter and a simple cash register from the online tutorials for my self-learning.",
+  "main": "cash-register-new.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/legenddaniel/Roman-Converter-Cash-Register.git"
+  },
+  "author": "legenddaniel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/legenddaniel/Roman-Converter-Cash-Register/issues"
+  },
+  "homepage": "https://github.com/legenddaniel/Roman-Converter-Cash-Register#readme",
+  "devDependencies": {}
+}
