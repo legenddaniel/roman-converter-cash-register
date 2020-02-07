@@ -1,0 +1,75 @@
+// Prefix will be added in .css
+
+@use 'animation';
+
+$white: #fff;
+$primary: #007bff;
+$clear: transparent;
+
+@keyframes wave {
+    0% {
+        @include animation.wave(0);
+    }
+    14.29% {
+        @include animation.wave(1);
+    }
+    28.57% {
+        @include animation.wave(2);
+    }
+    42.86% {
+        @include animation.wave(3);
+    }
+    57.14% {
+        @include animation.wave(4);
+    }
+    71.43% {
+        @include animation.wave(5);
+    }
+    85.71% {
+        @include animation.wave(6);
+    }
+    100% {
+        @include animation.wave(0);
+    }
+}
+
+@keyframes fade {
+    from {
+        @include animation.fade($primary, $white);
+    }
+    to {
+        @include animation.fade($clear, $clear);
+    }
+}
+
+.modal thead th {
+    vertical-align: middle;
+}
+
+.popover-body {
+    div {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: baseline;
+        align-items: baseline;
+    }
+    a {
+        cursor: pointer;
+    }
+}
+
+%number-clear {
+    color: $white;
+}
+
+.confirm-clear-history {
+    @extend %number-clear;
+}
+
+.confirm-clear-score {
+    @extend %number-clear;
+}
+
+.btn-link {
+    color: $primary !important;
+}

@@ -1,0 +1,25 @@
+@function background($step) {
+    $bg-list: rgb(255, 215, 215), rgb(254, 234, 217), rgb(252, 255, 219), rgb(236, 253, 236), rgb(218, 251, 255),
+        rgb(226, 236, 255), rgb(233, 221, 255);
+    $result: ();
+    @if $step != 0 {
+        @for $i from -$step through -1 {
+            $result: append($result, nth($bg-list, $i));
+        }
+        @for $i from 1 through length($bg-list) - $step {
+            $result: append($result, nth($bg-list, $i));
+        }
+        @return $result;
+    } @else {
+        @return $bg-list;
+    }
+}
+
+@mixin wave($step) {
+    background: radial-gradient(circle, background($step));
+}
+
+@mixin fade($bg-color, $color) {
+    background-color: $bg-color;
+    color: $color;
+}

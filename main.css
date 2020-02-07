@@ -1,0 +1,59 @@
+@keyframes wave {
+  0% {
+    background: radial-gradient(circle, #ffd7d7, #feead9, #fcffdb, #ecfdec, #dafbff, #e2ecff, #e9ddff);
+  }
+  14.29% {
+    background: radial-gradient(circle, #e9ddff #ffd7d7 #feead9 #fcffdb #ecfdec #dafbff #e2ecff);
+  }
+  28.57% {
+    background: radial-gradient(circle, #e2ecff #e9ddff #ffd7d7 #feead9 #fcffdb #ecfdec #dafbff);
+  }
+  42.86% {
+    background: radial-gradient(circle, #dafbff #e2ecff #e9ddff #ffd7d7 #feead9 #fcffdb #ecfdec);
+  }
+  57.14% {
+    background: radial-gradient(circle, #ecfdec #dafbff #e2ecff #e9ddff #ffd7d7 #feead9 #fcffdb);
+  }
+  71.43% {
+    background: radial-gradient(circle, #fcffdb #ecfdec #dafbff #e2ecff #e9ddff #ffd7d7 #feead9);
+  }
+  85.71% {
+    background: radial-gradient(circle, #feead9 #fcffdb #ecfdec #dafbff #e2ecff #e9ddff #ffd7d7);
+  }
+  100% {
+    background: radial-gradient(circle, #ffd7d7, #feead9, #fcffdb, #ecfdec, #dafbff, #e2ecff, #e9ddff);
+  }
+}
+@keyframes fade {
+  from {
+    background-color: #007bff;
+    color: #fff;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+.modal thead th {
+  vertical-align: middle;
+}
+
+.popover-body div {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+.popover-body a {
+  cursor: pointer;
+}
+
+.confirm-clear-score, .confirm-clear-history {
+  color: #fff;
+}
+
+.btn-link {
+  color: #007bff !important;
+}
+
+/*# sourceMappingURL=main.css.map */

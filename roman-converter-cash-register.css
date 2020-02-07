@@ -23,7 +23,7 @@
 
 .container-fluid {
     background: radial-gradient(circle, rgb(255, 215, 215), rgb(254, 234, 217), rgb(252, 255, 219), rgb(236, 253, 236), rgb(218, 251, 255), rgb(226, 236, 255), rgb(233, 221, 255));
-    -webkit-animation: wave 5s linear infinite;
+    -webkit-animation: wave .5s linear infinite;
     animation: wave .5s linear infinite;
 }
 
