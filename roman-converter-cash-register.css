@@ -184,7 +184,7 @@ button:disabled {
     opacity: 1 !important;
 }
 
-@-webkit-keyframes set {
+@-webkit-keyframes set-score {
     15% {
         -webkit-transform: rotate(-45deg) scale(1.2);
         transform: rotate(-45deg) scale(1.2);
@@ -199,7 +199,7 @@ button:disabled {
     }
 }
 
-@keyframes set {
+@keyframes set-score {
     15% {
         -webkit-transform: rotate(-45deg) scale(1.2);
         transform: rotate(-45deg) scale(1.2);
@@ -215,8 +215,8 @@ button:disabled {
 }
 
 .btn-set:hover i {
-    -webkit-animation: set 1.5s infinite;
-    animation: set 1.5s infinite;
+    -webkit-animation: set-score 1.5s infinite;
+    animation: set-score 1.5s infinite;
 }
 
 .btn-score {

@@ -1,3 +1,5 @@
+@use 'sass:list';
+
 @function background($step) {
     $bg-list: rgb(255, 215, 215), rgb(254, 234, 217), rgb(252, 255, 219), rgb(236, 253, 236), rgb(218, 251, 255),
         rgb(226, 236, 255), rgb(233, 221, 255);
@@ -22,4 +24,9 @@
 @mixin fade($bg-color, $color) {
     background-color: $bg-color;
     color: $color;
+}
+
+@mixin set-score($rotate: -45deg, $scale: 1.2) {
+    -webkit-transform: rotate($rotate) scale($scale);
+    transform: rotate($rotate) scale($scale);
 }

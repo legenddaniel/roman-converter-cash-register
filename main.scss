@@ -1,10 +1,71 @@
-// Prefix will be added in .css
-
+@use 'sass:map';
 @use 'animation';
 
-$white: #fff;
-$primary: #007bff;
-$clear: transparent;
+@function color($color) {
+    $color-map: (
+        "primary": #007bff,
+        "a-hover": lightslategray,
+        "roman-input": aqua,
+        "roman-output": bisque
+    );
+    @return map.get($color-map, $color);
+}
+
+@mixin position($position, $vertical, $vertical-val, $horizontal, $horizontal-val, $transform: null, $z-index: null) {
+    position: $position;
+    #{$vertical}: $vertical-val;
+    #{$horizontal}: $horizontal-val;
+    -webkit-transform: $transform;
+    transform: $transform;
+    z-index: $z-index;
+}
+
+@mixin input($content, $color, $font-size) {
+    content: $content;
+    color: $color;
+    font-size: $font-size;
+}
+
+@mixin placeholder {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+%number-clear {
+    color: white;
+}
+
+%no-decoration {
+    text-decoration: none !important;
+    outline: none;
+}
+
+@-webkit-keyframes wave {
+    0% {
+        @include animation.wave(0);
+    }
+    14.29% {
+        @include animation.wave(1);
+    }
+    28.57% {
+        @include animation.wave(2);
+    }
+    42.86% {
+        @include animation.wave(3);
+    }
+    57.14% {
+        @include animation.wave(4);
+    }
+    71.43% {
+        @include animation.wave(5);
+    }
+    85.71% {
+        @include animation.wave(6);
+    }
+    100% {
+        @include animation.wave(0);
+    }
+}
 
 @keyframes wave {
     0% {
@@ -33,12 +94,57 @@ $clear: transparent;
     }
 }
 
-@keyframes fade {
+@-webkit-keyframes fade {
     from {
-        @include animation.fade($primary, $white);
+        @include animation.fade(color("primary"), white);
     }
     to {
-        @include animation.fade($clear, $clear);
+        @include animation.fade(transparent, transparent);
+    }
+}
+
+@keyframes fade {
+    from {
+        @include animation.fade(color("primary"), white);
+    }
+    to {
+        @include animation.fade(transparent, transparent);
+    }
+}
+
+@-webkit-keyframes set-score {
+    15% {
+        @include animation.set-score();
+    }
+    30% {
+        -webkit-transform: initial;
+        transform: initial;
+    }
+    45% {
+        @include animation.set-score();
+    }
+}
+
+@keyframes set-score {
+    15% {
+        @include animation.set-score();
+    }
+    30% {
+        -webkit-transform: initial;
+        transform: initial;
+    }
+    45% {
+        @include animation.set-score();
+    }
+}
+
+a {
+    @extend %no-decoration;
+}
+
+button {
+    &:disabled {
+        opacity: 1 !important;
     }
 }
 
@@ -58,10 +164,6 @@ $clear: transparent;
     }
 }
 
-%number-clear {
-    color: $white;
-}
-
 .confirm-clear-history {
     @extend %number-clear;
 }
@@ -71,5 +173,65 @@ $clear: transparent;
 }
 
 .btn-link {
-    color: $primary !important;
+    @extend %no-decoration;
+    color: color("primary") !important;
+}
+
+.mobile {
+    font-size: 1.5rem;
+}
+
+.eye {
+    @include position(fixed, top, 1rem, right, 1rem, scale(1.2), 1);
+}
+
+.nav-link {
+    &:hover {
+        background-color: color("a-hover");
+    }
+}
+
+.progress {
+    position: relative;
+    height: 1px;
+    overflow: visible;
+    span {
+        @include position(absolute, top, 50%, left, 50%, translate(-50%, -50%));
+    }
+}
+
+.tab-roman {
+    .card-text {
+        -webkit-transform: translateX(27px);
+        transform: translateX(27px);
+    }
+}
+
+.btn-history {
+    z-index: 1;
+}
+
+.input-container {
+    &::before {
+        @include input("Roman numerals e.g. 'CD'", color("roman-input"), 0.8rem);
+    }
+    &::after {
+        @include input("Arabic numerals 1 - 3999", color("roman-output"), 0.8rem);
+    }
+}
+
+:-ms-input-placeholder {
+    @include placeholder();
+}
+
+:-moz-placeholder {
+    @include placeholder();
+}
+
+::-webkit-input-placeholder {
+    @include placeholder();
+}
+
+::-moz-placeholder {
+    @include placeholder();
 }
