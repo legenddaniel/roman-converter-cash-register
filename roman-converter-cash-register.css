@@ -272,7 +272,7 @@ button:disabled {
     /* Bootstrap predefines overlap styles for <img> only */
     opacity: 0.5;
     color: #000;
-}
+}                                           
 
 .icon-banknote {
     background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;

@@ -6,7 +6,9 @@
         "primary": #007bff,
         "a-hover": lightslategray,
         "roman-input": aqua,
-        "roman-output": bisque
+        "roman-output": bisque,
+        "denom-odd": lavenderblush,
+        "denom-even": ivory
     );
     @return map.get($color-map, $color);
 }
@@ -20,24 +22,44 @@
     z-index: $z-index;
 }
 
-@mixin input($content, $color, $font-size) {
-    content: $content;
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin text($color, $font-size, $font-weight: null, $line-height: null) {
     color: $color;
     font-size: $font-size;
+    font-weight: $font-weight;
+    $line-height: $line-height;
+}
+
+@mixin input($content, $color, $font-size) {
+    content: $content;
+    @include text($color, $font-size);
 }
 
 @mixin placeholder {
-    text-align: center;
-    font-size: 0.8rem;
+    $prefixes: -ms-input, -moz, #{":"}-webkit-input, #{":"}-moz;
+    @each $prefix in $prefixes {
+        #{":"}#{$prefix}-placeholder {
+            text-align: center;
+            font-size: 0.8rem;
+        }
+    }
 }
 
-%number-clear {
-    color: white;
-}
-
-%no-decoration {
-    text-decoration: none !important;
-    outline: none;
+@mixin background-denom($height) {
+    $odevities: odd, even;
+    li {
+        padding-top: 0.5rem;
+        height: $height;
+        @each $odevity in $odevities {
+            &:nth-of-type(#{$odevity}) {
+                background-color: color("denom-#{$odevity}");
+            }
+        }
+    }
 }
 
 @-webkit-keyframes wave {
@@ -138,8 +160,10 @@
     }
 }
 
-a {
-    @extend %no-decoration;
+a,
+.btn-link {
+    text-decoration: none !important;
+    outline: none;
 }
 
 button {
@@ -154,6 +178,7 @@ button {
 
 .popover-body {
     div {
+        // @mixin flex()
         display: -webkit-box;
         display: flex;
         -webkit-box-align: baseline;
@@ -164,16 +189,12 @@ button {
     }
 }
 
+.confirm-clear-history,
 .confirm-clear-history {
-    @extend %number-clear;
-}
-
-.confirm-clear-score {
-    @extend %number-clear;
+    color: white;
 }
 
 .btn-link {
-    @extend %no-decoration;
     color: color("primary") !important;
 }
 
@@ -220,18 +241,55 @@ button {
     }
 }
 
-:-ms-input-placeholder {
-    @include placeholder();
+@include placeholder();
+
+.btn-set {
+    &:hover {
+        i {
+            -webkit-animation: set-score 1.5s infinite;
+            animation: set-score 1.5s infinite;
+        }
+    }
 }
 
-:-moz-placeholder {
-    @include placeholder();
+.btn-score {
+    width: 8rem;
+    height: 3rem;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+    &:hover {
+        &::before {
+            content: "\d7";
+        }
+        span {
+            display: none;
+        }
+    }
 }
 
-::-webkit-input-placeholder {
-    @include placeholder();
+.ul-banknotes {
+    @include background-denom(6rem);
+}
+.ul-coins {
+    @include background-denom(4rem);
 }
 
-::-moz-placeholder {
-    @include placeholder();
+.icon-banknote,
+.icon-coin {
+    @include size(3rem, 3rem);
+    @include text(transparent, 1.5rem, bold, 3rem);
+    display: inline-block;
+    border-radius: 50%;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    &:hover {
+        /* Bootstrap predefines overlap styles for <img> only */
+        opacity: 0.5;
+        color: #000;
+    }
+}
+
+.icon-banknote {
+    background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
+    margin: 1rem 0;
 }
