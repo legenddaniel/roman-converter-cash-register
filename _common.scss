@@ -1,0 +1,72 @@
+@use 'sass:map';
+
+@function color($color) {
+    $color-map: (
+        "primary": #007bff,
+        "a-hover": lightslategray,
+        "roman-input": aqua,
+        "roman-output": bisque,
+        "denom-odd": lavenderblush,
+        "denom-even": ivory
+    );
+    @return map.get($color-map, $color);
+}
+
+@mixin position($position, $vertical, $vertical-val, $horizontal, $horizontal-val, $transform: null, $z-index: null) {
+    position: $position;
+    #{$vertical}: $vertical-val;
+    #{$horizontal}: $horizontal-val;
+    -webkit-transform: $transform;
+    transform: $transform;
+    z-index: $z-index;
+}
+
+@mixin size($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin text($color, $font-size, $font-weight: null, $line-height: null) {
+    color: $color;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    $line-height: $line-height;
+}
+
+@mixin input($content, $color, $font-size) {
+    content: $content;
+    @include text($color, $font-size);
+}
+
+@mixin placeholder {
+    $prefixes: -ms-input, -moz, #{":"}-webkit-input, #{":"}-moz;
+    @each $prefix in $prefixes {
+        #{":"}#{$prefix}-placeholder {
+            text-align: center;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+@mixin background-denom($height) {
+    $odevities: odd, even;
+    li {
+        padding-top: 0.5rem;
+        height: $height;
+        @each $odevity in $odevities {
+            &:nth-of-type(#{$odevity}) {
+                background-color: color("denom-#{$odevity}");
+            }
+        }
+    }
+}
+
+@mixin sprite($type, $nth, $bg-position) {
+    li {
+        &:nth-of-type(#{$nth}) {
+            .icon-#{$type} {
+                background-position: $bg-position;
+            }
+        }
+    }
+}

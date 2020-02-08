@@ -354,7 +354,7 @@ li:nth-of-type(6) .icon-coin {
 }
 
 @media screen and (max-width: 576px) {
-    ul.nav {
+    .nav {
         border-radius: 4px;
     }
 }

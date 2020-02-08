@@ -1,4 +1,5 @@
 @use 'sass:list';
+@use 'common';
 
 @function background($step) {
     $bg-list: rgb(255, 215, 215), rgb(254, 234, 217), rgb(252, 255, 219), rgb(236, 253, 236), rgb(218, 251, 255),
@@ -6,10 +7,10 @@
     $result: ();
     @if $step != 0 {
         @for $i from -$step through -1 {
-            $result: append($result, nth($bg-list, $i));
+            $result: append($result, nth($bg-list, $i), $separator: comma);
         }
         @for $i from 1 through length($bg-list) - $step {
-            $result: append($result, nth($bg-list, $i));
+            $result: append($result, nth($bg-list, $i), $separator: comma);
         }
         @return $result;
     } @else {
@@ -29,4 +30,102 @@
 @mixin set-score($rotate: -45deg, $scale: 1.2) {
     -webkit-transform: rotate($rotate) scale($scale);
     transform: rotate($rotate) scale($scale);
+}
+
+@-webkit-keyframes wave {
+    0% {
+        @include wave(0);
+    }
+    14.29% {
+        @include wave(1);
+    }
+    28.57% {
+        @include wave(2);
+    }
+    42.86% {
+        @include wave(3);
+    }
+    57.14% {
+        @include wave(4);
+    }
+    71.43% {
+        @include wave(5);
+    }
+    85.71% {
+        @include wave(6);
+    }
+    100% {
+        @include wave(0);
+    }
+}
+
+@keyframes wave {
+    0% {
+        @include wave(0);
+    }
+    14.29% {
+        @include wave(1);
+    }
+    28.57% {
+        @include wave(2);
+    }
+    42.86% {
+        @include wave(3);
+    }
+    57.14% {
+        @include wave(4);
+    }
+    71.43% {
+        @include wave(5);
+    }
+    85.71% {
+        @include wave(6);
+    }
+    100% {
+        @include wave(0);
+    }
+}
+
+@-webkit-keyframes fade {
+    from {
+        @include fade(common.color("primary"), white);
+    }
+    to {
+        @include fade(transparent, transparent);
+    }
+}
+
+@keyframes fade {
+    from {
+        @include fade(common.color("primary"), white);
+    }
+    to {
+        @include fade(transparent, transparent);
+    }
+}
+
+@-webkit-keyframes set-score {
+    15% {
+        @include set-score();
+    }
+    30% {
+        -webkit-transform: initial;
+        transform: initial;
+    }
+    45% {
+        @include set-score();
+    }
+}
+
+@keyframes set-score {
+    15% {
+        @include set-score();
+    }
+    30% {
+        -webkit-transform: initial;
+        transform: initial;
+    }
+    45% {
+        @include set-score();
+    }
 }
