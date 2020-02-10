@@ -1,3 +1,5 @@
+// Cash register core functions
+
 const currency = {
     // For simpler calculation we bring penny which has been discontinued back here
 
@@ -15,7 +17,7 @@ const currency = {
 
 (() => {
     return checkCashRegister = (price, cash, cid) => {
-        // greedy algorithm
+        // Greedy algorithm
 
         let [cacheChange, changeDue, change] = [cid, cash - price, []];
         cid.reverse();

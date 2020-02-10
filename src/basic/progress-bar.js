@@ -5,10 +5,10 @@
 $(() => {
     let progress = 0;
 
-    // If .js not loaded properly we can still see the disabled tabs
+    // If .js not ifLoaded properly we can still see the disabled tabs
     $('.nav-link.disabled').css('opacity', '0');
 
-    const fnLoading = () => {
+    const ifLoading = () => {
         const interval = Math.random() * 500;
         const increment = Math.floor(Math.random() * 3) + 3;
         const opacity = progress < 100 ? progress / 100 : 1;
@@ -17,11 +17,10 @@ $(() => {
         $('.progress span').text(`${progress}%`);
         $('.nav-link.disabled').css('opacity', `${opacity}`);
 
-        // For increment/interval with real-time change a recursive setTimeout() works better than setInterval() for each time
-        const fnTimer = setTimeout(fnLoading, interval);
+        const timer = setTimeout(ifLoading, interval);
 
-        const fnLoaded = () => {
-            clearTimeout(fnTimer);
+        const ifLoaded = () => {
+            clearTimeout(timer);
             $('.progress-bar').css('width', '100%');
             $('.progress span').text('100%');
 
@@ -40,7 +39,7 @@ $(() => {
             }, 3000);
         };
 
-        progress >= 100 ? fnLoaded() : progress += increment;
+        progress >= 100 ? ifLoaded() : progress += increment;
     };
-    return fnLoading();
+    return ifLoading();
 })

@@ -1,4 +1,4 @@
-// Roman converter main functions
+// Roman converter core functions
 
 (() => {
     return convertToRoman = num => {
