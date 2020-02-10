@@ -30,7 +30,7 @@
     color: $color;
     font-size: $font-size;
     font-weight: $font-weight;
-    $line-height: $line-height;
+    line-height: $line-height;
 }
 
 @mixin input($content, $color, $font-size) {

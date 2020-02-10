@@ -34,7 +34,7 @@ button {
 
 .confirm-clear-history,
 .confirm-clear-score {
-    color: white !important;
+    color: #fff !important;
 }
 
 .btn-link {
@@ -149,7 +149,7 @@ button {
 }
 
 .icon-banknote {
-    background: url(img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
+    background: url(../img/sprite-banknotes.png) 40% 100% / 500% no-repeat;
     margin: 1rem 0;
 }
 @include common.sprite("banknote", 2, 70% 52%);
@@ -157,7 +157,7 @@ button {
 @include common.sprite("banknote", 4, 70% 5%);
 
 .icon-coin {
-    background: url(img/sprite-coins.jpg) right bottom / 300% no-repeat;
+    background: url(../img/sprite-coins.jpg) right bottom / 300% no-repeat;
 }
 @include common.sprite("coin", 2, center bottom);
 @include common.sprite("coin", 3, left bottom);
