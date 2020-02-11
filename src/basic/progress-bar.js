@@ -25,14 +25,12 @@ $(() => {
             $('.progress span').text('100%');
 
             setTimeout(() => {
-                if (methodsMenu.isXs()) {
-                    methodsAnimation.setAnimation('.navbar-brand', 'fade 1.5s forwards')
-                    $('.navbar-brand').one('animationend', (e) => {
-                        $(e.currentTarget).addClass('disabled');
-                    });
-                }
-                methodsAnimation.setAnimation('.nav-link:not(.nav-brand)', 'fade 1.5s ease-in-out infinite');
-                $('.nav-link:not(.nav-brand)').removeClass('disabled');
+                methodsAnimation.setAnimation('.navbar-brand', 'fade 1.5s forwards')
+                $('.navbar-brand').one('animationend', e => {
+                    $(e.currentTarget).addClass('disabled');
+                });
+                methodsAnimation.setAnimation('.nav-link:not(.navbar-brand)', 'fade 1.5s ease-in-out infinite');
+                $('.nav-link:not(.navbar-brand)').removeClass('disabled');
 
                 methodsMenu.setStyle('.progress span', '', 'text-warning bg-info px-2', { 'font-size': '1rem' });
                 $('.progress span').text('Click either tab to start');

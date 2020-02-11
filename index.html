@@ -17,7 +17,11 @@
 
 <body>
 
-    <!-- edge问题：score无效，windows动画不停 -->
+    <!-- 不要fade reverse了 -->
+
+    <!-- edge不支持本地文件localstorage，edge79不知解决否 -->
+
+    <!-- 不同条件调用相同方法的提取参数 -->
 
     <div class="modal fade github text-center" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -113,10 +117,7 @@
                                 <span class="browser bg-warning"><strong>Are you using browsers from Microsoft? Try the
                                         latest version
                                         of Chrome/Firefox/Safari/Opera. No offense but IE/Edge has bad support on ES6+
-                                        features.</strong><br><br><em class="bg-light">Update: The new Chromium
-                                        Microsoft Edge was
-                                        released on Jan 15 2020, ummmmmm
-                                        well...</em></span><br><br>
+                                        features.</strong><br><br><em class="bg-light">IE & Edge do not support localstorage on local files. Please open this file on a server. Not sure if the latest Chromium Edge solves this problem</em></span><br><br>
                                 This page has two modules: a roman numerals converter and a cash register simulation.
                                 Both are small projects from my self-learning tutorial. <br><br>You can click <button
                                     type="button" class="btn btn-sm btn-info" disabled tabindex="-1"><i
