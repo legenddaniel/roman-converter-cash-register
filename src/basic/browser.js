@@ -6,7 +6,6 @@ $(() => {
     const getVersion = navigator.userAgent;
     const browsers = {
 
-        // Few browsers support lookbehinds
         _android: {
             regex: /Android\s(\d{1,2})/,
             version: '4.4',
