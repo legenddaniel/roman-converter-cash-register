@@ -20,4 +20,4 @@ _"Oldest versions only"_
 - ~~Trident~~ [^1]
    - ~~IE 11.592.18362.0~~
 
-[^1]: _Since IEs do not support arrow functions without Babel so this page cannot be loaded on IE_ 
+^[1]: Since IEs do not support arrow functions without Babel so this page cannot be loaded on IE
