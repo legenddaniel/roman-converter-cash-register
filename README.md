@@ -11,8 +11,11 @@ _"Oldest versions only"_
 - Chromium
     - Chrome 70.0.3538.25
     - Opera 66.0.3515.72
+    - Android 5.0 (Chrome Dev tools)
 - Gecko
     - Firefox 72.0.2
+- Webkit
+    - Safari 10.0 (Chrome Dev tools)
 - EdgeHTML
     - Edge 44.18362.449.0
 - ~~Trident~~ <a href="#note1"><sup>1</sup></a>
