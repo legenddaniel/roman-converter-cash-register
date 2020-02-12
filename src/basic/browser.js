@@ -33,7 +33,7 @@ $(() => {
 
         'compatible': "Your browser looks cool. Let's kick it off!",
 
-        'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.'
+        'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.',
     };
     const checkCompatibility = () => {
         for (let browser in browsers) {
