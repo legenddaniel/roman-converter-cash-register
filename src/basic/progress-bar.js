@@ -29,7 +29,6 @@ $(() => {
                 $('.navbar-brand').one('animationend', e => {
                     $(e.currentTarget).addClass('disabled');
                 });
-                
                 methodsAnimation.setAnimation('.nav-link:not(.navbar-brand)', 'fade 1.5s ease-in-out infinite');
                 $('.nav-link:not(.navbar-brand)').removeClass('disabled');
 
