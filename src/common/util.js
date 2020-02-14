@@ -1,13 +1,19 @@
 // Public methods
 
 const methodsMain = {
+    _init: {
+        'historyRoman': {
+            value: { "input": [], "output": [] },
+            methodClearProp: () => ifNoHistory,
+        },
+        'scoreCash': {
+            value: { "correct": 0, "total": 0, "score": 0 },
+            methodClearProp: () => ifNoScore,
+        },
+    },
 
     initCache: function (item) {
-        if (item === 'historyRoman') {
-            return this.getProp('historyRoman') || { "input": [], "output": [] };
-        } else if (item === 'scoreCash') {
-            return this.getProp('scoreCash') || { "correct": 0, "total": 0, "score": 0 }
-        }
+        return this.getProp(item) || this._init[item].value;
     },
 
     getProp: (item, prop) => {
@@ -28,19 +34,18 @@ const methodsMain = {
         return localStorage.setItem(item, JSON.stringify(val));
     },
 
-    clearProp: item => {
-        if (item === 'historyRoman') {
-            ifNoHistory();
-        } else if (item === 'scoreCash') {
-            ifNoScore();
-        }
+    clearProp: function (item) {
+        const clear = this._init[item].methodClearProp();
+
+        clear();
         localStorage.removeItem(item);
     },
 
-    setScoreHtml: () => {
+    setScoreHtml: function() {
+        const setItem = item => this.getProp('scoreCash', item);
         return (
             `Current:<br>
-            { "correct": ${methodsMain.getProp('scoreCash', 'correct')}, "total": ${methodsMain.getProp('scoreCash', 'total')}, "score": ${methodsMain.getProp('scoreCash', 'score')}% }`
+            { "correct": ${setItem('correct')}, "total": ${setItem('total')}, "score": ${setItem('score')}% }`
         );
     },
 

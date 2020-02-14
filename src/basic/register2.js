@@ -12,7 +12,8 @@
     const cacheScoreCash = methodsMain.initCache('scoreCash');
 
     $('#answer').on('change', e => {
-        $(e.currentTarget).is(':checked') ? $('.answer label').text('Yes') : $('.answer label').text('No');
+        const text = $(e.currentTarget).is(':checked') ? 'Yes' : 'No';
+        $('.answer label').text(text);
     });
 
     $('.answer button').on('click', () => {

@@ -1,5 +1,5 @@
+// Roman coverter history
 {
-    // Roman coverter history
     const cacheHistoryRoman = methodsMain.initCache('historyRoman');
     const setHistoryRoman = (() => {
         return ifNoHistory = () => {
@@ -11,19 +11,24 @@
     })();
 
     $('.get-roman').on('click', () => {
-        if (getValid() && $('.input-roman').val() !== [...cacheHistoryRoman['input']].pop()) {
-            cacheHistoryRoman['input'].push($('.input-roman').val());
-            cacheHistoryRoman['output'].push($('#output-roman').val());
+        const isdifferentVal = $('.input-roman').val() !== [...cacheHistoryRoman['input']].pop();
+        const addVal = (i, selector) => {
+            cacheHistoryRoman[i].push($(selector).val());
+        };
+        if (valid() && isdifferentVal) {
+            addVal('input', '.input-roman');
+            addVal('output', '#output-roman');
             methodsMain.setVal('historyRoman', cacheHistoryRoman);
         }
     })
     $('.btn-history button').on('click', () => {
+        const $tbody = $('.history-roman tbody');
         if (!cacheHistoryRoman['input'].length) {
             ifNoHistory();
         } else {
-            $('.history-roman tbody').empty();
+            $tbody.empty();
             for (let i = 0; i < cacheHistoryRoman['input'].length; i++) {
-                $('.history-roman tbody')
+                $tbody
                     .append('<tr></tr>')
                     .children('tr').eq(i).append(
                         `<td>${cacheHistoryRoman['input'][i]}</td>
@@ -32,9 +37,4 @@
             }
         }
     })
-    $('body').on('shown.bs.popover', () => {
-        $('.confirm-clear-history').on('click', () => {
-            methodsMain.clearProp('historyRoman');
-        })
-    });
 }

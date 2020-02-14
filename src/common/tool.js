@@ -3,17 +3,13 @@
 $(() => {
 
     const setMenu = () => {
+        const [ifXs, style, mr] = methodsMenu.isXs() ?
+            [methodsMenu.setIfXs, ['_offset', '_other', '_css1'], 0] :
+            [methodsMenu.setUnlessXs, ['_other', '_offset', '_css2'], '1rem'];
 
-        // It is better to set style in .css by media query, but here we can use public method to set the style with other preseted Bootstrap styles together which is more convenient
-        if (methodsMenu.isXs()) {
-            methodsMenu.setIfXs();
-            methodsMenu.setStyle('_selector', '_offset', '_other', '_css1');
-            methodsMenu.setMr('.navbar-brand', 0);
-        } else {
-            methodsMenu.setUnlessXs();
-            methodsMenu.setStyle('_selector', '_other', '_offset', '_css2');
-            methodsMenu.setMr('.navbar-brand', '1rem');
-        }
+        ifXs();
+        methodsMenu.setStyle('_selector', ...style);
+        methodsMenu.setMr('.navbar-brand', mr);
     };
 
     $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
