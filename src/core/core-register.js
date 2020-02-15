@@ -1,6 +1,8 @@
 // Cash register core functions
 
 const currency = {
+    // Global variable
+
     // For simpler calculation we bring penny which has been discontinued back here
 
     'PENNY': 0.01,
@@ -29,7 +31,8 @@ const currency = {
             changeDue = Math.round((changeDue - cacheChange[unit][1] * currency[cid[unit][0]]) * 100) / 100;
         }
 
-        const flatten = arr => arr.join(',').split(',').map(num => +num);
+        // Due to bad support of Array.prototype.flat()
+        const flatten = arr => arr.join(',').split(',').map(num => +num); 
         change = changeDue ? [] : flatten(cacheChange.reverse());
 
         return change.filter(i => +i >= 0);
