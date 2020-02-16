@@ -5,7 +5,9 @@ Cash register system is based on greedy algorithm which is more efficient than D
 
 I am considering this to be a React project since React is more friendly to SPA which requires lots of DOM manipulation.
 
-Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes.
+Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes, or you can scan the QR code below to open it on your phone.
+
+<img src="img/qr.png" title="github.com/legenddaniel" alt="Maybe you cannot use this shortcut somehow..." style="width: 20%">
 
 ---
 
