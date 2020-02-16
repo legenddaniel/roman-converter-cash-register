@@ -7,7 +7,7 @@ I am considering this to be a React project since React is more friendly to SPA 
 
 Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes, or you can scan the QR code below to open it on your phone.
 
-<img src="img/qr.png" title="github.com/legenddaniel" alt="Maybe you cannot use this shortcut somehow..." style="width: 10rem">
+<img src="img/qr.png" title="github.com/legenddaniel" alt="Maybe you cannot use this shortcut somehow..." style="max-width: 8rem">
 
 ---
 
