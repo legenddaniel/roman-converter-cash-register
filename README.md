@@ -3,7 +3,7 @@ This small demo contains a simple roman converter and a simple cash register bas
 
 Cash register system is based on greedy algorithm which is more efficient than DP when the face values of cash are regular ones (e.g. 1, 5, 10 as most types of currencies are). Also the quantity of the cash in the cash register is limited which makes it a little bit complicated.
 
-I am considering this to be a React project since React is more friendly to SPA which requires lots of DOM manipulation.
+I am considering this to be a modularized React project which is better for a SPA that requires lots of DOM manipulation.
 
 Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes, or you can scan the QR code below to open it on your phone.
 

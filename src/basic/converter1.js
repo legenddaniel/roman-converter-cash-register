@@ -10,9 +10,14 @@
         const regNum = /^[1-3]\d{0,3}$|^[4-9]\d{0,2}$/; // 1-3999
         const regRoman = /^m{0,3}(cd|cm|d?c{0,3})(xl|xc|l?x{0,3})(iv|ix|v?i{0,3})$/i;
 
+        const isValid = inputVal.length && (testVal(regNum) || testVal(regRoman));
+        const validVal = convertToRoman(inputVal) || convertToNum(inputVal);
+
         const ifValid = () => {
             clickCount = 0;
-            $outputRoman.addClass('bg-light');
+            $outputRoman
+                .val(validVal)
+                .addClass('bg-light');
         };
         const ifInvalid = () => {
             const tooMany = clickCount >= 2;
@@ -25,14 +30,7 @@
                 .prop('placeholder', placeholder);
         };
 
-        const isValid = inputVal.length && (testVal(regNum) || testVal(regRoman));
-        const validVal = convertToRoman(inputVal) || convertToNum(inputVal);
-        if (isValid) {
-            $outputRoman.val(validVal);
-            ifValid();
-        } else {
-            ifInvalid();
-        }
+        isValid ? ifValid() : ifInvalid();
 
         return valid = () => isValid;
     });

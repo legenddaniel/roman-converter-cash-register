@@ -19,7 +19,6 @@ const currency = {
 
 (() => {
     return checkCashRegister = (price, cash, cid) => {
-        // Greedy algorithm
 
         let [cacheChange, changeDue, change] = [cid, cash - price, []];
         cid.reverse();

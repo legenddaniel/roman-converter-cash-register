@@ -1,4 +1,4 @@
-// Public methods
+// Public methods namespaces
 
 const methodsMain = {
     _init: {

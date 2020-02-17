@@ -5,24 +5,21 @@
 $(() => {
     let progress = 0;
 
-    // If .js not ifLoaded properly we can still see the disabled tabs
-    $('.nav-link.disabled').css('opacity', '0');
-
     const ifLoading = () => {
-        const interval = Math.random() * 500;
+        const interval = Math.random() * 500
         const increment = Math.floor(Math.random() * 3) + 3;
-        const opacity = progress < 100 ? progress / 100 : 1;
 
-        $('.progress-bar').css('width', `${progress}%`);
-        $('.progress span').text(`${progress}%`);
+        const opacity = Math.min(progress / 100, 1);
+        const result = Math.min(progress, 100);
+
+        $('.progress-bar').css('width', `${result}%`);
+        $('.progress span').text(`${result}%`);
         $('.nav-link.disabled').css('opacity', `${opacity}`);
 
         const timer = setTimeout(ifLoading, interval);
 
         const ifLoaded = () => {
             clearTimeout(timer);
-            $('.progress-bar').css('width', '100%');
-            $('.progress span').text('100%');
 
             setTimeout(() => {
                 methodsAnimation.setAnimation('.navbar-brand', 'fade 1.5s forwards')
