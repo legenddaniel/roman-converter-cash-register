@@ -7,7 +7,7 @@ I am considering this to be a modularized React project which is better for a SP
 
 Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes, or you can scan the QR code below to open it on your phone.
 
-![](img/qr.png "github.com/legenddaniel")
+<img src="img/qr.png" title="github.com/legenddaniel" alt="something wrong happened"></img>
 
 ---
 
