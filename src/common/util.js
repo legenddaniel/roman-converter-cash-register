@@ -48,11 +48,6 @@ const methodsMain = {
             { "correct": ${setItem('correct')}, "total": ${setItem('total')}, "score": ${setItem('score')}% }`
         );
     },
-
-    ifResize: fn => {
-        fn();
-        $(window).on('resize', fn);
-    },
 };
 
 const methodsMenu = {

@@ -1,4 +1,4 @@
-// Nav-tabs show and hide on the index
+// Nav-tabs toggle() and resize event on the index
 
 $('.nav-link').not('.navbar-brand').one('click', () => {
 
@@ -10,3 +10,30 @@ $('.nav-link').not('.navbar-brand').one('click', () => {
         .prop('tabindex', '0');
     $('.progress span').text('Loaded');
 });
+
+$(() => {
+    const ifResize = fn => {
+        fn();
+
+        let timer;
+        $(window).on('resize', () => {
+            if (timer) {
+                window.cancelAnimationFrame(timer);
+            }
+            timer = window.requestAnimationFrame(fn);
+        });
+    };
+    const setMenu = () => {
+        const [ifXs, style, mr] = methodsMenu.isXs() ?
+            [methodsMenu.setIfXs, ['_offset', '_other', '_css1'], 0] :
+            [methodsMenu.setUnlessXs, ['_other', '_offset', '_css2'], '1rem'];
+
+        ifXs();
+        methodsMenu.setStyle('_selector', ...style);
+        methodsMenu.setMr('.navbar-brand', mr);
+    };
+    
+    ifResize(setMenu);
+})
+
+

@@ -2,16 +2,6 @@
 
 $(() => {
 
-    const setMenu = () => {
-        const [ifXs, style, mr] = methodsMenu.isXs() ?
-            [methodsMenu.setIfXs, ['_offset', '_other', '_css1'], 0] :
-            [methodsMenu.setUnlessXs, ['_other', '_offset', '_css2'], '1rem'];
-
-        ifXs();
-        methodsMenu.setStyle('_selector', ...style);
-        methodsMenu.setMr('.navbar-brand', mr);
-    };
-
     $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
 
     $('.eye, .btn-history button').tooltip();
@@ -49,8 +39,6 @@ $(() => {
             $('.clear-history, .btn-score').popover('hide');
         })
     })
-
-    methodsMain.ifResize(setMenu);
 
     $('.mobile').on('click', e => {
         $('nav ul').toggle();

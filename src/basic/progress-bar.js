@@ -16,22 +16,24 @@ $(() => {
         $('.progress span').text(`${result}%`);
         $('.nav-link.disabled').css('opacity', `${opacity}`);
 
-        const timer = setTimeout(ifLoading, interval);
+        const timerLoading = setTimeout(ifLoading, interval);
 
         const ifLoaded = () => {
-            clearTimeout(timer);
+            clearTimeout(timerLoading);
 
-            setTimeout(() => {
+            const timerLoaded = setTimeout(() => {
                 methodsAnimation.setAnimation('.navbar-brand', 'fade 1.5s forwards')
                 $('.navbar-brand').one('animationend', e => {
                     $(e.currentTarget).addClass('disabled');
                 });
-                
+
                 methodsAnimation.setAnimation('.nav-link:not(.navbar-brand)', 'fade 1.5s ease-in-out infinite');
                 $('.nav-link:not(.navbar-brand)').removeClass('disabled');
 
                 methodsMenu.setStyle('.progress span', '', 'text-warning bg-info px-2', { 'font-size': '1rem' });
                 $('.progress span').text('Click either tab to start');
+
+                clearTimeout(timerLoaded);
             }, 3000);
         };
 
