@@ -13,27 +13,8 @@ Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register 
 
 <h2>Table of Contents</h2>
 
-[toc]
-1. Introduction
-    1. General
-        1. Single-page Application
-        1. Responsive Design
-        1. Basic Modularization
-    1. Roman Converter
-    1. Cash Register
-    1. Tech Stacks
-        1. HTML5 + CSS3 + Vanilla Javascript (& ES6+)
-        1. jQuery 3
-        1. Bootstrap 4
-        1. Dart Sass
-1. Features
-    1. Common
-        1. Background
-        1. Progress Bar
-        1. History
-        1. Responsive Nav
-    1. Roman Converter
-    1. Cash Register
+- [Roman Converter Cash Register](#roman-converter-cash-register)
+    - [Browser test](#browser-test)
 
 ---
 ### Browser test
