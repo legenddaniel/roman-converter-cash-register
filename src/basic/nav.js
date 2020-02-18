@@ -1,4 +1,4 @@
-// Nav-tabs toggle() and resize event on the index
+// Nav-tabs toggle() and resize event listener (debounced) on the index
 
 $('.nav-link').not('.navbar-brand').one('click', () => {
 
@@ -32,7 +32,7 @@ $(() => {
         methodsMenu.setStyle('_selector', ...style);
         methodsMenu.setMr('.navbar-brand', mr);
     };
-    
+
     ifResize(setMenu);
 })
 

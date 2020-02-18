@@ -7,7 +7,8 @@ I am considering this to be a modularized React project which is better for a SP
 
 Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes, or you can scan the QR code below to open it on your phone.
 
-<img src="img/qr.png" title="github.com/legenddaniel" alt="something wrong happened"></img>
+<!-- <img src="img/qr.png" title="github.com/legenddaniel" alt="something wrong happened"></img> -->
+![](img/qr.png "github.com/legenddaniel")
 
 ---
 
@@ -15,6 +16,29 @@ Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register 
 
 - [Roman Converter Cash Register](#roman-converter-cash-register)
     - [Browser test](#browser-test)
+
+---
+
+- Introduction
+    - General
+    - Single-page Application
+    - Responsive Design
+    - Basic Modularization
+    - Roman Converter
+    - Cash Register
+    - Tech Stacks
+        - HTML5 + CSS3 + Vanilla Javascript (& ES6+)
+        - jQuery 3
+        - Bootstrap 4
+        - Dart Sass
+- Features
+    - Common
+    - Background
+    - Progress Bar
+    - History
+    - Responsive Nav Bar
+- Roman Converter
+- Cash Register
 
 ---
 ### Browser test
