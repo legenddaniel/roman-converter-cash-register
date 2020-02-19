@@ -21,11 +21,11 @@ Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register 
 
 - Introduction
     - General
-    - Single-page Application
-    - Responsive Design
-    - Basic Modularization
     - Roman Converter
     - Cash Register
+    - Responsive Design
+    - Basic Modularization
+    - Performance
     - Tech Stacks
         - HTML5 + CSS3 + Vanilla Javascript (& ES6+)
         - jQuery 3

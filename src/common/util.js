@@ -18,11 +18,13 @@ const methodsMain = {
 
     getProp: (item, prop) => {
         try {
-            const cacheProp = JSON.parse(localStorage.getItem(item))[prop];
+            const cacheItem = JSON.parse(localStorage.getItem(item));
+            const cacheProp = cacheItem[prop];
+            
             if (prop && cacheProp) {
                 return cacheProp;
             } else if (!prop) {
-                return JSON.parse(localStorage.getItem(item));
+                return cacheItem;
             }
             return 0;
         } catch (e) { // Identifier 'e' only for IE/Edge support
@@ -31,7 +33,8 @@ const methodsMain = {
     },
 
     setVal: (item, val) => {
-        return localStorage.setItem(item, JSON.stringify(val));
+        const valToSet = JSON.stringify(val);
+        localStorage.setItem(item, valToSet);
     },
 
     clearProp: function (item) {

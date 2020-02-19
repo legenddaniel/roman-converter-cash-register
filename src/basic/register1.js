@@ -21,6 +21,8 @@ $('.btn-set').on('click', () => {
     const qty = generator(faceValue);
 
     const setDenom = () => {
+
+        // Even if it will change the DOM for i*j times but it won't trigger the reflow so document fragment is not being used here
         const moneyType = ['.ul-banknotes', '.ul-coins'];
         for (let i = 0; i < moneyType.length; i++) {
             for (let j = 0; j < qty[i].length; j++) {

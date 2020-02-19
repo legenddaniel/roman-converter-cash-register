@@ -26,16 +26,22 @@
         }
     })
     $('.btn-history button').on('click', () => {
-        if (!getVal('input').length) {
+        const l = getVal('input').length;
+        
+        if (!l) {
             ifNoHistory();
         } else {
+            //document.createDocumentFragment()
+
             const $tbody = $('.history-roman tbody');
             const setHtml = () => {
                 let html = '';
-                for (let i = 0; i < getVal('input').length; i++) {
+                const [input, output] = [getVal('input'), getVal('output')];
+               
+                for (let i = 0; i < l; i++) {
                     html += '<tr>';
-                    html += `<td>${getVal('input')[i]}</td>
-                    <td>${getVal('output')[i]}</td>`;
+                    html += `<td>${input[i]}</td>
+                    <td>${output[i]}</td>`;
                     html += '</tr>';
                 }
                 return html;
