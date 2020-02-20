@@ -9,9 +9,12 @@
         };
     })();
 
+    const $checkbox = $('#answer');
+    const $answerBar = $('.answer');
+
     const cacheScoreCash = methodsMain.initCache('scoreCash');
 
-    $('#answer').on('change', e => {
+    $checkbox.on('change', e => {
         const text = $(e.currentTarget).is(':checked') ? 'Yes' : 'No';
         $('.answer label').text(text);
     });
@@ -31,7 +34,7 @@
 
         // The order of the denomination is the same as on the webpage
         const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)];
-        const isChecked = $('#answer').prop('checked');
+        const isChecked = $checkbox.prop('checked');
         const changeDue = result.some(i => i);
 
         const setResult = () => {
@@ -48,7 +51,7 @@
             $('.alert span').text(text);
             methodsMenu.setStyle('.alert', ...setPropParameters, { 'visibility': 'visible' });
         };
-        if ($('.answer').attr('data-text') === 'Do you think we can make this?') {
+        if ($answerBar.attr('data-text') === 'Do you think we can make this?') {
             if (!(isChecked ^ changeDue)) {
                 cacheScoreCash.correct++;
                 setAlert('You got it!', 'alert-danger alert-warning', 'alert-success');
@@ -63,8 +66,8 @@
         methodsMain.setVal('scoreCash', cacheScoreCash);
 
         $('.btn-score span').text(`Score: ${cacheScoreCash.score}%`);
-        $('#answer').prop({ 'disabled': true, 'tabindex': '-1' });
-        $('.answer').attr('data-text', '(Re)set the values to continue');
+        $checkbox.prop({ 'disabled': true, 'tabindex': '-1' });
+        $answerBar.attr('data-text', '(Re)set the values to continue');
         $('.current-score').html(methodsMain.setScoreHtml());
     });
 

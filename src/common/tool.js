@@ -2,11 +2,12 @@
 
 $(() => {
 
-    $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
-
-    $('.eye, .btn-history button').tooltip();
-
-    $('.clear-history').popover({
+    const setPopover = (selector, parameter) => {
+        selector.popover(parameter);
+    };
+    const $history = $('.clear-history');
+    const $score = $('.btn-score');
+    const popoverHistory = {
         placement: 'bottom',
         html: true,
         title: 'You are cleaning the history',
@@ -17,8 +18,8 @@ $(() => {
             <a class="btn btn-sm btn-link">No</a>
         </div>
     `
-    })
-    $('.btn-score').popover({
+    };
+    const popoverScore = {
         placement: 'bottom',
         html: true,
         title: 'You are resetting the score',
@@ -33,10 +34,19 @@ $(() => {
                 `
             );
         },
-    });
+    };
+
+    $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
+
+    $('.eye, .btn-history button').tooltip();
+
+    setPopover($history, popoverHistory);
+    setPopover($score, popoverScore);
+
     $('body').on('shown.bs.popover', () => {
         $('.popover-body a').on('click', () => {
-            $('.clear-history, .btn-score').popover('hide');
+            setPopover($history, 'hide');
+            setPopover($score, 'hide');
         })
     })
 

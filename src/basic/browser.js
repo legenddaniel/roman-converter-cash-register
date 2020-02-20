@@ -33,7 +33,7 @@ $(() => {
 
         'compatible': "Your browser looks cool. Let's kick it off!",
 
-        'localstorage': 'It is detected that localStorage cannot be loaded. \n You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing, or the history as well as score functions will not be working. \n The data between regular browsing and private-style browsing may not be sharing.',
+        'localstorage': '<strong>It is detected that localStorage cannot be loaded. <br>You may update your browser to the latest version or check if you are in private/anonymous/incognito browsing or open files locally by Edge/IE, otherwise the history as well as score functions will not be working. <br>The data between regular browsing and private-style browsing may not be sharing.</strong><br><br><em class="bg-light">IE & Edge do not support localstorage on local files. Please open this file on a server. Not sure if the latest Chromium Edge solves this problem</em>',
     };
     const checkCompatibility = () => {
         for (let browser in browsers) {
@@ -58,16 +58,18 @@ $(() => {
         return false;
     };
     const setAbout = (selector, text, remove, add) => {
-        $(selector).text(text).removeClass(remove).addClass(add);
+        $(selector).html(text).removeClass(remove).addClass(add);
     };
 
-    if (localStorage) {
-        if (checkCompatibility()) {
-            setAbout('.browser', text.compatible, 'bg-warning', 'bg-success');
-        } else if (!checkCompatibility() && !regMS.test(getVersion)) {
-            setAbout('.browser', text.incompatible, 'bg-success', 'bg-warning');
+    try {
+        if (localStorage) {
+            if (checkCompatibility()) {
+                setAbout('.browser', text.compatible, 'bg-warning', 'bg-success');
+            } else if (!checkCompatibility() && !regMS.test(getVersion)) {
+                setAbout('.browser', text.incompatible, 'bg-success', 'bg-warning');
+            }
         }
-    } else {
+    } catch (e) {
         setAbout('.browser', text.localstorage, 'bg-success', 'bg-warning');
     }
 });

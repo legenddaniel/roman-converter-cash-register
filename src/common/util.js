@@ -20,7 +20,7 @@ const methodsMain = {
         try {
             const cacheItem = JSON.parse(localStorage.getItem(item));
             const cacheProp = cacheItem[prop];
-            
+
             if (prop && cacheProp) {
                 return cacheProp;
             } else if (!prop) {
@@ -44,7 +44,7 @@ const methodsMain = {
         localStorage.removeItem(item);
     },
 
-    setScoreHtml: function() {
+    setScoreHtml: function () {
         const setItem = item => this.getProp('scoreCash', item);
         const [correct, total, score] = [setItem('correct'), setItem('total'), setItem('score')];
         return (
@@ -76,11 +76,8 @@ const methodsMenu = {
     _cssNav: 'flex-column align-items-start',
     isXs: () => $(window).width() < 576,
     setStyle: function (selector, remove, add, css) {
-        try {
-            $(this[selector]).removeClass(this[remove]).addClass(this[add]).css(this[css]);
-        } catch (e) { // Identifier 'e' only for IE/Edge support
-            $(selector).removeClass(remove).addClass(add).css(css);
-        }
+        const [_selector, _remove, _add, _css] = [this[selector] || selector, this[remove] || remove, this[add] || add, this[css] || css];
+        $(_selector).removeClass(_remove).addClass(_add).css(_css);
     },
     setMr: (selector, mr) => {
         $(selector).css('margin-right', mr);

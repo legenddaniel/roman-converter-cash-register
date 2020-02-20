@@ -6,14 +6,17 @@ $(() => {
     let progress = 0;
 
     const ifLoading = () => {
+        const $progressBar = $('.progress-bar');
+        const $progressSpan = $('.progress span');
+        
         const interval = Math.random() * 500
         const increment = Math.floor(Math.random() * 3) + 3;
 
         const opacity = Math.min(progress / 100, 1);
         const result = Math.min(progress, 100);
 
-        $('.progress-bar').css('width', `${result}%`);
-        $('.progress span').text(`${result}%`);
+        $progressBar.css('width', `${result}%`);
+        $progressSpan.text(`${result}%`);
         $('.nav-link.disabled').css('opacity', `${opacity}`);
 
         const timerLoading = setTimeout(ifLoading, interval);
@@ -31,7 +34,7 @@ $(() => {
                 $('.nav-link:not(.navbar-brand)').removeClass('disabled');
 
                 methodsMenu.setStyle('.progress span', '', 'text-warning bg-info px-2', { 'font-size': '1rem' });
-                $('.progress span').text('Click either tab to start');
+                $progressSpan.text('Click either tab to start');
 
                 clearTimeout(timerLoaded);
             }, 3000);
