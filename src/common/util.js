@@ -46,9 +46,10 @@ const methodsMain = {
 
     setScoreHtml: function() {
         const setItem = item => this.getProp('scoreCash', item);
+        const [correct, total, score] = [setItem('correct'), setItem('total'), setItem('score')];
         return (
             `Current:<br>
-            { "correct": ${setItem('correct')}, "total": ${setItem('total')}, "score": ${setItem('score')}% }`
+            { "correct": ${correct}, "total": ${total}, "score": ${score}% }`
         );
     },
 };
