@@ -62,7 +62,7 @@ Some basic works were done for SEO such as Crawl accessibility increase (e.g. `<
 ### Performance
 
 Even though for small-size app like this, performance is not that serious issue, codes were modified to improve the performance according to the result of the load speed provided by the Console, by:
-- ~~Reducing HTTP request~~ <a href="#performance1"><sup>1</sup></a><sup>, </sup><a href="#performance2"><sup>2</sup></a>
+- ~~Reducing HTTP request~~ <a href="#performance1"><sup>1</sup></a><sup>, </sup><a href="#performance2"><sup>2</sup></a><sup>, </sup><a href="#performance3"><sup>3</sup></a>
 - Reducing stack usage
 - Reducing reflow
 
@@ -70,6 +70,8 @@ Even though for small-size app like this, performance is not that serious issue,
     <sup id="performance1">1</sup> Bundler or task runner is required. Also, for better code display code compressor was not used, either.
     <br>
     <sup id="performance2">2</sup> Traditional scripts instead of modules.
+    <br>
+    <sup id="performance3">3</sup> Sprites were used.
 </div>
 
 ---
