@@ -1,3 +1,10 @@
+<style>
+    .footnote {
+        font-size: 12px;
+        line-height: 12px;
+    }
+</style>
+
 # Roman Converter + Cash Register
 
 - [Introduction](#introduction)
@@ -65,7 +72,7 @@ Even though for small-size app like this, performance is not that serious issue,
 - Reducing stack usage
 - Reducing reflow
 
-<div style="font-size: 12px!important; line-height: 12px!important;">
+<div class="footnote">
     <sup id="performance1">1</sup> Bundler or task runner is required. Also, for better code display code compressor was not used, either. 
     <br>
     <sup id="performance2">2</sup> Traditional scripts instead of modules.
