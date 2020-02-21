@@ -1,9 +1,3 @@
-<style>
-    .footnote {
-        font-size: 12px !important;
-        line-height: 12px !important;
-    }
-</style>
 
 # Roman Converter + Cash Register
 
@@ -72,7 +66,7 @@ Even though for small-size app like this, performance is not that serious issue,
 - Reducing stack usage
 - Reducing reflow
 
-<div class="footnote">
+<div style="font-size:12px;liine-height:12px;">
     <sup id="performance1">1</sup> Bundler or task runner is required. Also, for better code display code compressor was not used, either.
     <br>
     <sup id="performance2">2</sup> Traditional scripts instead of modules.
@@ -97,7 +91,7 @@ Tested on these browsers: _(Oldest versions only)_
 - ~~Trident~~ <a href="#browser-test2"><sup>2</sup></a>
    - ~~IE 11.592.18362.0~~
 
-<div style="font-size: 12px; line-height: 12px;">
+<div style="font-size:12px; line-height:12px;">
     <sup id="browser-test1">1</sup> Tested (simple running, not Mocha) on local server (IIS).
     <br>
     <sup id="browser-test2">2</sup> Since IEs do not support arrow functions without Babel so this page cannot be loaded on IE.
