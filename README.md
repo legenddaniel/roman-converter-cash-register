@@ -1,5 +1,5 @@
 <style>
-    .footnote {
+    div span {
         font-size: 12px;
         line-height: 12px;
     }
@@ -72,11 +72,11 @@ Even though for small-size app like this, performance is not that serious issue,
 - Reducing stack usage
 - Reducing reflow
 
-<p class="footnote">
-    <sup id="performance1">1</sup> Bundler or task runner is required. Also, for better code display code compressor was not used, either. 
+<div>
+    <span><sup id="performance1">1</sup> Bundler or task runner is required. Also, for better code display code compressor was not used, either. </span>
     <br>
-    <sup id="performance2">2</sup> Traditional scripts instead of modules.
-</p>
+    <span><sup id="performance2">2</sup> Traditional scripts instead of modules.</span>
+</div>
 
 ---
 
