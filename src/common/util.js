@@ -114,3 +114,5 @@ const freeze = (...objects) => {
 };
 
 freeze(methodsMenu, methodsMain, methodsAnimation);
+
+// We can even use Proxy to cut the access to the private props
