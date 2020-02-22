@@ -22,7 +22,7 @@
     - [Roman Converter](#roman-converter)
     - [Cash Register](#cash-register)
 
-I am a new bie with passion to code, willing to improve myself and show my talent in this industry. If you have any questions or suggestions or anything else please send me email via zuosiyuan001@gmail.com
+I am a novice with passion of coding and always try to make it better. I am willing to improve myself and show my talent in this industry. If you have any questions or suggestions or anything else please send me email via zuosiyuan001@gmail.com
 
 ---
 
@@ -113,7 +113,7 @@ Tested on these browsers: _(Oldest versions only)_
 
 JQuery was used mainly for DOM manipulation and event listening. 
 
-Even though now javascript can do most of the things jQuery could do, also virtual DOM dominates the front-end dev, some APIs as well as chaining of jQuery is still handy. 
+Even though now javascript can do most of the things jQuery could do, also virtual DOM dominates the front-end dev, some APIs as well as chaining of jQuery are still handy. 
 
 Since this page cannot be loaded on IEs, the latest jQuery 3 rather than 1.x was used.
 
