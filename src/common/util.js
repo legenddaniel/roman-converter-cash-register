@@ -1,4 +1,4 @@
-// Public methods namespaces
+// Immutable public methods
 
 const methodsMain = {
     _init: {
@@ -108,3 +108,9 @@ const methodsAnimation = {
         $(selector).css({ 'animation-play-state': status, '-webkit-animation-play-state': status });
     },
 };
+
+const freeze = (...objects) => {
+    objects.forEach(object => Object.freeze(object));
+};
+
+freeze(methodsMenu, methodsMain, methodsAnimation);
