@@ -109,10 +109,8 @@ const methodsAnimation = {
     },
 };
 
-const freeze = (...objects) => {
+((...objects) => {
     objects.forEach(object => Object.freeze(object));
-};
+}) (methodsMenu, methodsMain, methodsAnimation)
 
-freeze(methodsMenu, methodsMain, methodsAnimation);
-
-// We can even use Proxy to cut the access to the private props
+// We can even use Proxy to cut the access to the private props from the outside

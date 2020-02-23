@@ -1,10 +1,6 @@
 // Cash register core functions
 
 const currency = {
-    // Global variable
-
-    // For simpler calculation we bring penny which has been discontinued back here
-
     'PENNY': 0.01,
     'NICKEL': 0.05,
     'DIME': 0.1,
@@ -16,6 +12,7 @@ const currency = {
     'TWENTY': 20,
     'FIFTY': 50
 };
+Object.freeze(currency);
 
 (() => {
     return checkCashRegister = (price, cash, cid) => {
