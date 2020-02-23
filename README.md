@@ -38,8 +38,11 @@ More information in the following parts.
 
 Visit my [Github](https://github.com/legenddaniel/roman-converter-cash-register "github.com/legenddaniel") to see the codes, or you can scan the QR code below to open it on your phone.
 
-<!-- <img src="img/qr.png" title="github.com/legenddaniel" alt="something wrong happened"></img> -->
-![](img/qr.png "github.com/legenddaniel")
+![](img/qr-code.png "github.com/legenddaniel")
+
+For the page preview please see [github.io](https://legenddaniel.github.io/roman-converter-cash-register/ "github.io/roman-converter-cash-register"), or you can also scan the QR code to open it on your phone.
+
+![](img/qr-page.png "github.io/roman-converter-cash-register")
 
 ### Responsive Design
 
