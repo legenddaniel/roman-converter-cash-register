@@ -7,7 +7,8 @@ $('.nav-link').not('.navbar-brand').one('click', () => {
     $('.navbar-brand')
         .html('<i class="fab fa-windows"></i>')
         .removeClass('disabled')
-        .prop('tabindex', '0');
+        .prop('tabindex', '0')
+        .css('visibility', 'visible');
     $('.progress span').text('Loaded');
 });
 

@@ -27,7 +27,7 @@ $(() => {
             const timerLoaded = setTimeout(() => {
                 methodsAnimation.setAnimation('.navbar-brand', 'fade 1.5s forwards')
                 $('.navbar-brand').one('animationend', e => {
-                    $(e.currentTarget).addClass('disabled');
+                    $(e.currentTarget).addClass('disabled').css('visibility', 'hidden');
                 });
 
                 methodsAnimation.setAnimation('.nav-link:not(.navbar-brand)', 'fade 1.5s ease-in-out infinite');
