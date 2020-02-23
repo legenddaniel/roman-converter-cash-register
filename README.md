@@ -151,7 +151,7 @@ As the width of the window becomes less than 576px the navigation bar will be re
 
 - Browser Test
 
-The text below the progress bar will change according to which browser you are using, and also that if your browser support localStorage.
+The text below the progress bar will change according to which browser you are using, and also that if your browser supports localStorage.
 
 ### Roman Converter
 
