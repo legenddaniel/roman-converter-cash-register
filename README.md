@@ -19,6 +19,7 @@
         - Background Animation
         - Progress Bar
         - Responsive Navigation Bar
+        - Browser test
     - [Roman Converter](#roman-converter)
     - [Cash Register](#cash-register)
 
@@ -147,6 +148,10 @@ The progress bar progresses at random steps and intervals and 3s after loaded yo
 - Responsive Navigation Bar
 
 As the width of the window becomes less than 576px the navigation bar will be replaced by a hamburger menu which is commonly seen on mobile Apps.
+
+- Browser Test
+
+The text below the progress bar will change according to which browser you are using, and also that if your browser support localStorage.
 
 ### Roman Converter
 
