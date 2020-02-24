@@ -74,14 +74,18 @@ const methodsMenu = {
         'z-index': ''
     },
     _cssNav: 'flex-column align-items-start',
+
     isXs: () => $(window).width() < 576,
+
     setStyle: function (selector, remove, add, css) {
         const [_selector, _remove, _add, _css] = [this[selector] || selector, this[remove] || remove, this[add] || add, this[css] || css];
         $(_selector).removeClass(_remove).addClass(_add).css(_css);
     },
+
     setMr: (selector, mr) => {
         $(selector).css('margin-right', mr);
     },
+
     setIfXs: function () {
         const hide = () => {
             $('nav ul').hide();
@@ -93,6 +97,7 @@ const methodsMenu = {
             $(e.currentTarget).css('background-color', 'steelblue');
         });
     },
+
     setUnlessXs: function () {
         $('.mobile').hide();
         $('nav').removeClass(this._cssNav);
@@ -104,6 +109,7 @@ const methodsAnimation = {
     setAnimation: (selector, animation) => {
         $(selector).css({ 'animation': animation, '-webkit-animation': animation })
     },
+    
     animationCtrl: (selector, status) => {
         $(selector).css({ 'animation-play-state': status, '-webkit-animation-play-state': status });
     },

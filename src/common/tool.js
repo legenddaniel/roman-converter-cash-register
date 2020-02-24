@@ -37,7 +37,7 @@ $(() => {
     }
 
     const popoverHistory = new Popover('bottom', true, 'You are cleaning the history', popoverContentHistory);
-    const popoverScore = new Popover('bottom', true, 'You are resetting the score', popoverContentScore);
+    const popoverScore = new Popover('bottom', true, 'You are resetting the score', popoverContentScore());
     setPopover($history, popoverHistory);
     setPopover($score, popoverScore);
 

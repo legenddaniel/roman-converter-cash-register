@@ -34,9 +34,9 @@
             'DCD': 'CM'
         }
 
-        const Roman = cacheRoman.join('').replace(/IIII|XXXX|CCCC/g, item => replace[item]).replace(/VIV|LXL|DCD/g, item => replace[item])
+        const roman = cacheRoman.join('').replace(/IIII|XXXX|CCCC/g, item => replace[item]).replace(/VIV|LXL|DCD/g, item => replace[item])
 
-        return Roman;
+        return roman;
     };
 }) ();
 
@@ -64,7 +64,8 @@
         };
 
         // reverseReplace: swap the keys and values of replace {}
-        const reverseReplace = Object.keys(replace).reduce((reverseReplace, key) => {
+        const valPre = Object.keys(replace);
+        const reverseReplace = valPre.reduce((reverseReplace, key) => {
             reverseReplace[replace[key]] = key;
             return reverseReplace;
         }, {})

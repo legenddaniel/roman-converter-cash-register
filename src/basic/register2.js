@@ -30,7 +30,11 @@
             }
             return cid;
         };
-        const cacheResult = checkCashRegister($('#total').val(), $('#received').val(), setCid());
+        const cid = setCid();
+        const $total = $('#total').val();
+        const $received = $('#received').val();
+        
+        const cacheResult = checkCashRegister($total, $received, cid);
 
         // The order of the denomination is the same as on the webpage
         const result = [...cacheResult.slice(6), ...cacheResult.slice(0, 6)];
