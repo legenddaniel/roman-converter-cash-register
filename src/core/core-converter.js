@@ -18,10 +18,10 @@
 
         // Iterate and decompose the numbers and convert them to roman numerals
         for (let i of converter) {
-            const reference = Object.values(i)[0];
-            while (cacheNum >= reference) {
-                cacheRoman.push(Object.keys(i)[0]);
-                cacheNum -= reference;
+            const reference = Object.entries(i)[0];
+            while (cacheNum >= reference[1]) {
+                cacheRoman.push(reference[0]);
+                cacheNum -= reference[1];
             }
         }
 
@@ -72,7 +72,7 @@
 
         const cacheRoman = roman.toUpperCase().replace(/IX|XC|CM/g, item => reverseReplace[item]).replace(/IV|XL|CD/g, item => reverseReplace[item]).split('');
 
-        const num = cacheRoman.map(digit => converter[digit]).reduce((a, b) => a + b, '');
+        const num = cacheRoman.map(digit => converter[digit]).reduce((a, b) => a + b);
 
         return num;
     };
