@@ -1,7 +1,7 @@
 // Roman converter core functions
 
 (() => {
-    return function convertToRoman(num) {
+    return convertToRoman = num => {
 
         const converter = [
             { 'M': 1000 },
@@ -41,7 +41,7 @@
 }) ();
 
 (() => {
-    return function convertToNum(roman) {
+    return convertToNum = roman => {
 
         // The restriction to the input value will be added during DOM manipulation, here we assume the user has input a valid value
         const converter = {
@@ -71,7 +71,7 @@
 
         const cacheRoman = roman.toUpperCase().replace(/IX|XC|CM/g, item => reverseReplace[item]).replace(/IV|XL|CD/g, item => reverseReplace[item]).split('');
 
-        const num = cacheRoman.map(digit => converter[digit]).reduce((a, b) => a + b);
+        const num = cacheRoman.map(digit => converter[digit]).reduce((a, b) => a + b, '');
 
         return num;
     };

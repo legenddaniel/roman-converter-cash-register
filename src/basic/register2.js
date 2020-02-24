@@ -1,7 +1,7 @@
 {
     //Cash register answer part
     (() => {
-        return function ifNoScore() {
+        return ifNoScore = () => {
             for (let i in cacheScoreCash) {
                 cacheScoreCash[i] = 0;
             }

@@ -33,8 +33,6 @@ $('.btn-set').on('click', () => {
     };
     setDenom();
 
-    return function getQty() {
-        return [...qty[1], ...qty[0]];
-    }
+    return getQty = () => [...qty[1], ...qty[0]];
 })
 

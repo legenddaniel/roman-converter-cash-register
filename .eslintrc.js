@@ -17,13 +17,13 @@ module.exports = {
         "currency": "readonly",
 
         // Closures
-        "convertToRoman": "readonly",
-        "convertToNum": "readonly",
-        "checkCashRegister": "readonly",
-        "valid": "readonly",
-        "ifNoHistory": "readonly",
-        "ifNoScore": "readonly",
-        "getQty": "readonly",
+        "convertToRoman": true,
+        "convertToNum": true,
+        "checkCashRegister": true,
+        "valid": true,
+        "ifNoHistory": true,
+        "ifNoScore": true,
+        "getQty": true,
     },
     "parserOptions": {
         "ecmaVersion": 2018
