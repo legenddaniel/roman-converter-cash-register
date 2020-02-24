@@ -29,7 +29,7 @@ const methodsMain = {
             return 0;
         } catch (e) { // Identifier 'e' only for IE/Edge support
             return 0;
-        };
+        }
     },
 
     setVal: (item, val) => {

@@ -3,8 +3,8 @@
     const cacheHistoryRoman = methodsMain.initCache('historyRoman');
     const getVal = val => cacheHistoryRoman[val];
 
-    const setHistoryRoman = (() => {
-        return ifNoHistory = () => {
+    (() => {
+        return function ifNoHistory() {
             const text = '<tr><td colspan="2" class="text-center">No history</td></tr>';
 
             $('.history-roman tbody').html(text);
@@ -27,7 +27,7 @@
     })
     $('.btn-history button').on('click', () => {
         const l = getVal('input').length;
-        
+
         if (!l) {
             ifNoHistory();
         } else {
@@ -37,7 +37,7 @@
             const setHtml = () => {
                 let html = '';
                 const [input, output] = [getVal('input'), getVal('output')];
-               
+
                 for (let i = 0; i < l; i++) {
                     html += '<tr>';
                     html += `<td>${input[i]}</td>

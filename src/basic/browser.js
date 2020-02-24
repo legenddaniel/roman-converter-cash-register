@@ -49,7 +49,7 @@ $(() => {
                     }
                 })(),
             });
-        };
+        }
         for (let browser in browsers) {
             if (browsers[browser].compatibility) {
                 return true;

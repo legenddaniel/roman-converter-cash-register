@@ -15,7 +15,7 @@ const currency = {
 Object.freeze(currency);
 
 (() => {
-    return checkCashRegister = (price, cash, cid) => {
+    return function checkCashRegister(price, cash, cid) {
 
         let [cacheChange, changeDue, change] = [cid, cash - price, []];
         cid.reverse();

@@ -16,5 +16,7 @@
     "url": "https://github.com/legenddaniel/Roman-Converter-Cash-Register/issues"
   },
   "homepage": "https://github.com/legenddaniel/Roman-Converter-Cash-Register#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
 }

@@ -1,7 +1,7 @@
 // Roman converter core functions
 
 (() => {
-    return convertToRoman = num => {
+    return function convertToRoman(num) {
 
         const converter = [
             { 'M': 1000 },
@@ -41,7 +41,7 @@
 }) ();
 
 (() => {
-    return convertToNum = roman => {
+    return function convertToNum(roman) {
 
         // The restriction to the input value will be added during DOM manipulation, here we assume the user has input a valid value
         const converter = {

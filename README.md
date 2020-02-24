@@ -133,6 +133,7 @@ Please see the codes
 #### Others
 
 - Npm for package management
+- ESlint for code linting
 - IIS for a simple local server environment
 
 ## Features

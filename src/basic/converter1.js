@@ -32,6 +32,8 @@
 
         isValid ? ifValid() : ifInvalid();
 
-        return valid = () => isValid;
+        return function valid() {
+            return isValid;
+        }
     });
 }
