@@ -1,6 +1,6 @@
 {
   "name": "roman-converter-cash-register",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Containing a simple roman converter and a simple cash register from the online tutorials for my self-learning.",
   "main": "cash-register-new.js",
   "scripts": {
