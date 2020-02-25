@@ -34,7 +34,7 @@ $(() => {
                 $('.nav-link:not(.navbar-brand)').removeClass('disabled');
 
                 methodsMenu.setStyle('.progress span', '', 'text-warning bg-info px-2', { 'font-size': '1rem' });
-                $progressSpan.text('Click either tab to start');
+                methodsMenu.setProgressBarText();
 
                 clearTimeout(timerLoaded);
             }, 3000);

@@ -103,13 +103,21 @@ const methodsMenu = {
         $('nav').removeClass(this._cssNav);
         $('body').off('click');
     },
+
+    setProgressBarText: function () {
+        const $progressSpan = $('.progress span');
+        const progressSpanText = this.isXs() ? 'Click ☰ to start' : 'Click either tab to start';
+        
+        $progressSpan.text(progressSpanText);
+    },
+
 };
 
 const methodsAnimation = {
     setAnimation: (selector, animation) => {
         $(selector).css({ 'animation': animation, '-webkit-animation': animation })
     },
-    
+
     animationCtrl: (selector, status) => {
         $(selector).css({ 'animation-play-state': status, '-webkit-animation-play-state': status });
     },
@@ -117,6 +125,6 @@ const methodsAnimation = {
 
 ((...objects) => {
     objects.forEach(object => Object.freeze(object));
-}) (methodsMenu, methodsMain, methodsAnimation)
+})(methodsMenu, methodsMain, methodsAnimation)
 
 // We can even use Proxy to cut the access to the private props from the outside

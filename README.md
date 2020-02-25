@@ -94,7 +94,7 @@ Tested on these browsers: _(Oldest versions only)_
    - ~~IE 11.592.18362.0~~
 
 <div>
-    <sup id="browser-test1">1</sup><sub>Tested (simple running, not Mocha) on local server (IIS).</sub>
+    <sup id="browser-test1">1</sup><sub>Tested (simple running, not TDD/BDD) on local server (IIS).</sub>
     <br>
     <sup id="browser-test2">2</sup><sub>Since IEs do not support arrow functions without Babel so this page cannot be loaded on IE.</sub>
 </div>

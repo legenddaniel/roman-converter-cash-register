@@ -24,6 +24,7 @@ $(() => {
             timer = window.requestAnimationFrame(fn);
         });
     };
+    
     const setMenu = () => {
         const [ifXs, style, mr] = methodsMenu.isXs() ?
             [methodsMenu.setIfXs, ['_offset', '_other', '_css1'], 0] :
@@ -35,6 +36,12 @@ $(() => {
     };
 
     ifResize(setMenu);
+
+    const $progressSpan = $('.progress span');
+    const setProgressBarText = methodsMenu.setProgressBarText.bind(methodsMenu);
+    if ($progressSpan.text() !== 'Loaded') {
+        ifResize(setProgressBarText);
+    }
 })
 
 
