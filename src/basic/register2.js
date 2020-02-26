@@ -1,5 +1,8 @@
+//Cash register answer part
+
+//StorageEvent can be used for the DOM update
 {
-    //Cash register answer part
+
     (() => {
         return ifNoScore = () => {
             for (let i in cacheScoreCash) {
@@ -33,7 +36,7 @@
         const cid = setCid();
         const $total = $('#total').val();
         const $received = $('#received').val();
-        
+
         const cacheResult = checkCashRegister($total, $received, cid);
 
         // The order of the denomination is the same as on the webpage

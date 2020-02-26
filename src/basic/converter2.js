@@ -1,4 +1,6 @@
 // Roman coverter history
+
+//StorageEvent can be used for the DOM update
 {
     const cacheHistoryRoman = methodsMain.initCache('historyRoman');
     const getVal = val => cacheHistoryRoman[val];
