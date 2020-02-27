@@ -7,6 +7,7 @@
 
     (() => {
         
+        // Undeclared
         return ifNoHistory = () => {
             const text = '<tr><td colspan="2" class="text-center">No history</td></tr>';
 
