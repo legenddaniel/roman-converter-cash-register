@@ -14,6 +14,7 @@ module.exports = {
         "methodsMain": "readonly",
         "methodsMenu": "readonly",
         "methodsAnimation": "readonly",
+        "methodsResize": "readonly",
         "currency": "readonly",
 
         // Undeclared
