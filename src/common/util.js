@@ -103,14 +103,6 @@ const methodsMenu = {
         $('nav').removeClass(this._cssNav);
         $('body').off('click');
     },
-
-    setProgressBarText: function () {
-        const $progressSpan = $('.progress span');
-        const progressSpanText = this.isXs() ? 'Click ☰ to start' : 'Click either tab to start';
-        
-        $progressSpan.text(progressSpanText);
-    },
-
 };
 
 const methodsAnimation = {
@@ -123,8 +115,29 @@ const methodsAnimation = {
     },
 };
 
+const methodsResize = {
+    setProgressBarText: () => {
+        const $progressSpan = $('.progress span');
+        const progressSpanText = methodsMenu.isXs() ? 'Click ☰ to start' : 'Click either tab to start';
+
+        $progressSpan.text(progressSpanText);
+    },
+
+    ifResize: fn => {
+        fn();
+
+        let timer;
+        $(window).on('resize', () => {
+            if (timer) {
+                window.cancelAnimationFrame(timer);
+            }
+            timer = window.requestAnimationFrame(fn);
+        });
+    },
+};
+
 ((...objects) => {
     objects.forEach(object => Object.freeze(object));
-})(methodsMenu, methodsMain, methodsAnimation)
+})(methodsMenu, methodsMain, methodsAnimation, methodsResize)
 
 // We can even use Proxy to cut the access to the private props from the outside

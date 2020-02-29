@@ -12,18 +12,6 @@ $('.nav-link').not('.navbar-brand').one('click', () => {
 });
 
 $(() => {
-    const ifResize = fn => {
-        fn();
-
-        let timer;
-        $(window).on('resize', () => {
-            if (timer) {
-                window.cancelAnimationFrame(timer);
-            }
-            timer = window.requestAnimationFrame(fn);
-        });
-    };
-
     const setMenu = () => {
         const [ifXs, style, mr] = methodsMenu.isXs() ?
             [methodsMenu.setIfXs, ['_offset', '_other', '_css1'], 0] :
@@ -34,10 +22,7 @@ $(() => {
         methodsMenu.setMr('.navbar-brand', mr);
     };
 
-    ifResize(setMenu);
-
-    const setProgressBarText = methodsMenu.setProgressBarText.bind(methodsMenu);
-    ifResize(setProgressBarText);
+    methodsResize.ifResize(setMenu);
 })
 
 

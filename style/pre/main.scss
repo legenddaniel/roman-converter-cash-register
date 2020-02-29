@@ -10,6 +10,10 @@ a,
     outline: none;
 }
 
+label {
+    margin-bottom: 0;
+}
+
 button {
     &:disabled {
         opacity: 1 !important;
@@ -189,6 +193,11 @@ button {
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+    }
+    button {
+        @media screen and (max-width: 576px) {
+            display: block;
+        }
     }
 }
 

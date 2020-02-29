@@ -105,6 +105,10 @@ a,
   outline: none;
 }
 
+label {
+  margin-bottom: 0;
+}
+
 button:disabled {
   opacity: 1 !important;
 }
@@ -345,6 +349,11 @@ li:nth-of-type(6) .icon-coin {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+@media screen and (max-width: 576px) {
+  .answer button {
+    display: block;
+  }
 }
 
 .alert {

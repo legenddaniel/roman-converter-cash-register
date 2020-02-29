@@ -16,7 +16,7 @@ module.exports = {
         "methodsAnimation": "readonly",
         "currency": "readonly",
 
-        // Closures
+        // Undeclared
         "convertToRoman": true,
         "convertToNum": true,
         "checkCashRegister": true,

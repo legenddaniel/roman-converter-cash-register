@@ -34,7 +34,9 @@ $(() => {
                 $('.nav-link:not(.navbar-brand)').removeClass('disabled');
 
                 methodsMenu.setStyle('.progress span', '', 'text-warning bg-info px-2', { 'font-size': '1rem' });
-                methodsMenu.setProgressBarText();
+
+                const setProgressBarText = methodsResize.setProgressBarText;
+                methodsResize.ifResize(setProgressBarText);
 
                 clearTimeout(timerLoaded);
             }, 3000);
