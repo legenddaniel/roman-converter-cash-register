@@ -225,6 +225,12 @@ button:disabled {
   font-size: 0.8rem;
 }
 
+@media screen and (max-width: 576px) {
+  .tab-cash .form-inline button {
+    margin-top: 1rem;
+  }
+}
+
 .btn-set:hover i {
   -webkit-animation: set-score 1.5s infinite;
   animation: set-score 1.5s infinite;

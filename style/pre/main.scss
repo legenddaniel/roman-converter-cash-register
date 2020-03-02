@@ -107,6 +107,16 @@ button {
 
 @include common.placeholder();
 
+.tab-cash {
+    .form-inline {
+        button {
+            @media screen and (max-width: 576px){
+                margin-top: 1rem;
+            }
+        }
+    }
+}
+
 .btn-set {
     &:hover {
         i {
