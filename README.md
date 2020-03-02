@@ -147,7 +147,7 @@ The background is an animation of a recurrently expansion of a radial gradient o
 
 - Progress bar
 
-The resursive progress bar progresses at random steps and intervals and 3s after loaded you can go on to the converter or the register.
+The recursive progress bar progresses at random steps and intervals and 3s after loaded you can go on to the converter or the register.
 
 - Responsive Navigation Bar
 
