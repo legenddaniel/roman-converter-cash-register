@@ -8,9 +8,10 @@ $('.btn-set').on('click', () => {
     $('#answer').prop({ 'disabled': false, 'tabindex': '0' });
     $('.answer').attr('data-text', 'Do you think we can make this?');
 
-    // For easy calculation we assume the total amount is under $100 and the face value of the received cash is just greater than the total amount
-    $('#total').val((Math.random() * 99.51 + 0.5).toFixed(2));
-    $('#received').val(Object.values(currency).find(denom => denom >= $('#total').val()) || 100);
+    const halfToHundred = (Math.random() * 99.51 + 0.5).toFixed(2);
+    const justGreaterThanTotal = Object.values(currency).find(denom => denom >= $('#total').val()) || 100;
+    $('#total').val(halfToHundred);
+    $('#received').val(justGreaterThanTotal);
 
     // The order of the denomination is per the order of icons (i.e. starting from $5) on the webpage rather than of the Object 'currency' above
     let faceValue = [2, 5, 3, 1, 8, 2, 8, 6, 8, 4];

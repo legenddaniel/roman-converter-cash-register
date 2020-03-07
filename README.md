@@ -64,7 +64,8 @@ Some basic works were done for SEO such as Crawl accessibility increase (e.g. `<
 
 Even though for small-size app like this, performance is not that serious issue, codes were modified to improve the performance according to the result of the load speed provided by the Console, by:
 - ~~Reducing HTTP request~~ <a href="#performance1"><sup>1</sup></a><sup>, </sup><a href="#performance2"><sup>2</sup></a><sup>, </sup><a href="#performance3"><sup>3</sup></a>
-- Reducing stack usage
+- Reducing stack memory usage
+- Reducing lookup along the scope chain
 - Reducing reflow
 
 <div>
@@ -170,7 +171,7 @@ You can also check your i/o, which is stored in the localStorage, in the history
 
 This cash register system was design as a game mode, more details about this game were provided in the [index.html](https://github.com/legenddaniel/roman-converter-cash-register/blob/master/index.html). You can clone it and open it locally.
 
-The money received is the cash whose face value is just above the total (e.g. total 19 received 20) for a purpose of simplification. Also we used the depreciated 1¢ for the same reason.
+The money received is the cash whose face value is just greater than the total (e.g. total 19 received 20) for a purpose of simplification. Also we used the depreciated 1¢ for the same reason.
 
 you can check your score, which is stored in the localStorage, in the score modal by clicing the blue button. Your record will be kept until you delete it.
 
