@@ -115,6 +115,7 @@ const methodsAnimation = {
     },
 };
 
+<<<<<<< HEAD
 const methodsResize = {
     setProgressBarText: () => {
         const $progressSpan = $('.progress span');
@@ -139,5 +140,12 @@ const methodsResize = {
 ((...objects) => {
     objects.forEach(object => Object.freeze(object));
 })(methodsMenu, methodsMain, methodsAnimation, methodsResize)
+=======
+const freeze = (...objects) => {
+    objects.forEach(object => Object.freeze(object));
+};
 
-// We can even use Proxy to cut the access to the private props from the outside
+freeze(methodsMenu, methodsMain, methodsAnimation);
+>>>>>>> parent of 3bb683f... update
+
+// We can even use Proxy to cut the access to the private props
