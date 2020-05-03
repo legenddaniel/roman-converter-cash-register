@@ -38,9 +38,7 @@ $(() => {
 
     $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
     
-    $('.eye, .btn-history button').tooltip({
-        trigger: 'hover'
-    });
+    $('.eye, .btn-history button').tooltip();
 
     setPopover($history, popoverHistory);
     setPopover($score, popoverScore);
@@ -50,10 +48,16 @@ $(() => {
             setPopover($history, 'hide');
             setPopover($score, 'hide');
         })
+    });
+
+    $('.eye').on('shown.bs.tooltip', () => {
+        $('body').on('click', () => {
+            $('.eye').tooltip('hide');
+        })
     })
 
     $('.mobile').on('click', e => {
         $('nav ul').toggle();
         e.stopPropagation();
-    })
+    });
 })
