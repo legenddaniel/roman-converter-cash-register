@@ -38,7 +38,9 @@ $(() => {
 
     $('.btn-score span').text(`Score: ${methodsMain.getProp('scoreCash', 'score')}%`);
     
-    $('.eye, .btn-history button').tooltip();
+    $('.eye, .btn-history button').tooltip({
+        trigger: 'hover'
+    });
 
     setPopover($history, popoverHistory);
     setPopover($score, popoverScore);
