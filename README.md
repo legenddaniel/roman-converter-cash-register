@@ -81,13 +81,13 @@ Even though for small-size app like this, performance is not that serious issue,
 Tested on these browsers: _(Oldest versions only)_
 
 - Chromium
-    - Chrome 70.0.3538.25
+    - Chrome 62.0.3202.97
     - Opera 66.0.3515.72
     - Android 5.0 (Chrome Dev tools)
 - Gecko
     - Firefox 72.0.2
 - Webkit
-    - Safari 10.0 (Chrome Dev tools)
+    - IOS Safari 13
 - EdgeHTML <a href="#browser-test1"><sup>1</sup></a>
     - Edge 44.18362.449.0
 - ~~Trident~~ <a href="#browser-test2"><sup>2</sup></a>
